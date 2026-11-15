@@ -1,14 +1,14 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v0.1／2026-11-15／未レビュー・未承認**  
+> **Draft v0.2／2026-11-15／AIレビュー案作成済・ユーザー未承認**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は設計差分の**起票記録案**であり、変更承認の証跡ではない。既存の`docs/decisions/Decision_Log.md`は本作業で改訂していない。
+> 本書は設計差分の**起票・レビュー管理案**であり、ユーザー変更承認の証跡ではない。既存の`docs/decisions/Decision_Log.md`は本作業で改訂していない。
 
 ## 変更要求一覧
 
 | Change ID | 区分 | 内容 | 状態 | 承認者／承認日 |
 |---|---|---|---|---|
-| **CONS-DD-01** | 重要設計変更／基本・詳細設計の整合 | イベント適用行の生成タイミング差分 | **Pending Review／未承認・未解消** | **未設定／未承認** |
+| **CONS-DD-01** | 重要設計変更／基本・詳細設計の整合 | イベント適用行の生成タイミング差分 | **In Review／採否・承認待ち／未解消** | **未設定／未承認** |
 
 ## CONS-DD-01：イベント適用行の生成タイミング
 
@@ -51,7 +51,16 @@
 | 要件・基本設計・詳細設計への正式反映 | **未実施** |
 | 変更に対する実装・検証 | **Not Started／Not Tested** |
 
-### 5. Gateとの関係
+### 5. 変更レビュー進捗（Draft v0.2追記）
+
+- **レビュー票**：`docs/changes/CONS-DD-01_Change_Review.md`（Review Draft v0.1／2026-11-15）
+- **AI影響分析**：実施済み。3方式の比較・影響範囲・承認後の改訂案を提示した。
+- **AI推奨方式**：**A（詳細Q05を正式採用し、先行基本Q04を変更履歴付きで改訂）**。これをユーザーの承認済み意思決定と混同しない。
+- **ユーザーによる採否**：**未決定**。変更理由のユーザー判断・承認日・承認条件は未設定。
+- **正式文書反映**：**未実施**。Decision Log／MVP Design／REQ-MVP-004等の改訂は承認後に判断・実施する。
+- **次アクション**：ユーザーにA／B／Cの採否判断を依頼。Q01〜Q24の再GrillMeは実施しない。
+
+### 6. Gateとの関係
 
 本変更要求の起票は**CONS-DD-01の解消ではない**。基本設計は未Freeze、基本設計EXIT-06はNot Met、詳細設計EXIT-DD-01〜10はNot Evaluated、詳細設計Gateは未判定を維持する。
 
@@ -59,6 +68,6 @@
 
 ## まとめ / Summary
 
-**日本語：** CONS-DD-01を重要設計変更として起票した。差分・影響を記録したが、採否・変更理由・承認は未確定である。Q01〜Q24の回答は再検討せず、正式な設計・Decision Log更新は承認後に行う。
+**日本語：** CONS-DD-01の変更レビュー票を作成し、AI推奨Aと影響を整理した。採否・ユーザーによる変更理由・承認は未確定である。Q01〜Q24は再検討せず、正式な設計・Decision Log更新は承認後に行う。
 
-**English:** CONS-DD-01 is recorded as an important design change. The difference and its impact are listed, but no option is approved. The 24 design answers remain decided. Formal document updates will follow the change review.
+**English:** The change review for CONS-DD-01 is ready. Option A is recommended, but no option is approved. All 24 design answers remain decided. Formal document updates will follow user approval.
