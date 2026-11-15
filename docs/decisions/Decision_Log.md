@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.2／2026-11-15。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v0.3／2026-11-15。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）およびOPN-DD-10の詳細設計補完判断DD10-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -182,8 +182,29 @@
 
 **決裁の適用境界：** CONS-DD-01の設計上の採否は確定した。受入試験・採番の原子性・マスタ差分同期の部分失敗・保存先技術の成立性は未確定のまま。独立した基本設計書正本が後から提示された場合は、原版を上書き消去せず、本変更IDと承認日を付して整合化する。
 
+## 11. 詳細設計補完の正式採否 — DD10-01（OPN-DD-10）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／Open Item | **DD10-01／OPN-DD-10** |
+| 承認日・承認者 | **2026-11-15／ユーザーの本チャットにおける明示回答**：「OPN-DD-10の設計判断DD10-01はAで進めます」 |
+| 判断結果 | **A：Approved**。案件別マイルストーン、対象別外部証跡、差異案件、差異案件に対する追記専用の再照合履歴という**4テーブル**を採用 |
+| 元の提案 | `docs/design/OPN-DD-10_Data_Model_Review.md`（Review Draft v0.1のA案、§3〜7の論理仕様） |
+| 採否の代替案 | B＝対象別の排他的FK列を保持する4テーブル、C＝3テーブルで現在状態を更新する簡素化。**どちらも不採用** |
+| 選択理由の区分 | **AIの技術評価**：差異案件と再照合履歴を分けることで月次の照合結果を失わずに記録できる。**ユーザー個人の判断理由は未記録**。採用の明示回答のみを事実として記録 |
+| `tblMilestone` | PK=`MilestoneID`、FK=`ProjectID`、UQ(`ProjectID`,`MilestoneTypeCode`)。代表日付は`tblDateHistory`から算出し、この表に独立した現行日付正本を置かない |
+| `tblEvidence` | PK=`EvidenceID`、条件付き論理FK=(`TargetType`,`TargetID`)、許可Type=`Project`／`Occurrence`／`Milestone`。外部ファイルへの参照情報を保持し、実体は社内ファイルサーバー |
+| `tblReconciliation` | PK=`ReconciliationID`、1対象×1比較項目×1公式出典につき差異案件を識別。同じ組の**未解消差異の並立**を禁止。再発は既存案件を再オープン |
+| `tblReconciliationReview` | PK=`ReviewID`、FK=`ReconciliationID`、任意FK=`BasisEvidenceID`（当該差異と同一対象に限定）。追記専用。状態は`要確認`／`差異継続`／`解消`、最新の**正常確定かつ最大ReviewID**から導出。公式値・Excel値は照合時点スナップショットで正本を置き換えない |
+| 保存・整合 | 型別に対象参照を解決して存在を検証。必須列・UQ・FK・照合履歴の不変性・証跡の同一対象・明示解消条件を検証。**Excelは物理FKを自動保証しない**ため保存前／全体整合性チェックを必要とする |
+| 範囲外・未決事項 | `MilestoneTypeCode`／`EvidenceType`／`CompareFieldCode`の**実コード一覧は未提示**（CFG-DD-10-01：実装前初期設定）。ReviewIDの確定順と複数表の原子性はOPN-DD-14、部分失敗はOPN-DD-15、ケース具体化はOPN-DD-13。テストはすべてNot Tested |
+| 履歴・変更管理 | 既存**詳細設計Q01〜Q24（§9、A22件/B2件）**および**CONS-DD-01（§10）**を維持。未承認の旧設計Draftからの重要なデータ構造補完として`Change_Log.md`に`CHG-DD-10-01`を追加（DD10-01とは別の承認を仮定しない） |
+| 判定状態 | **OPN-DD-10 Closed（論理設計の確定）**、基本設計EXIT-06 Not Met／未Freeze、詳細設計EXIT-DD-01〜10 Not Evaluated／Gate未判定、Excel実装・検証Not Started／Not Tested |
+
+**設計反映先：** `docs/design/MVP_Design.md` Draft v0.3 §§4・5・9・10・11・12・13。本決裁はMVP設計書全体の正式承認を意味しない。**次はOPN-DD-11**。
+
 ## まとめ / Summary
 
-**日本語：** 基本設計Q04＝Bと詳細設計Q01〜Q24の回答履歴を維持したまま、CONS-DD-01のA案承認を記録した。現行のイベント適用行は案件登録時に全件未判定で生成する。基本設計Freeze・詳細設計Gate・Excel実装検証は未完了。
+**日本語：** 詳細設計GrillMe Q01〜Q24とCONS-DD-01のA案承認履歴を保全し、DD10-01のA案承認・4テーブル論理設計を追記した。OPN-DD-10は論理設計上Closedとしたが、マスタ初期値と技術検証は未完了。次はOPN-DD-11。
 
-**English:** All original design answers are kept. Option A for CONS-DD-01 is approved. All event rows are now designed to be created when a project is registered. Design approval, build, and testing are not complete.
+**English:** The 24 original answers and CONS-DD-01 are kept. Option A for DD10-01 is approved and recorded. Four tables are now the design. Master setup and testing remain open. Next is OPN-DD-11.

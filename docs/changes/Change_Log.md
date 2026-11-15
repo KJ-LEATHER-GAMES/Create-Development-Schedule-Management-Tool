@@ -1,14 +1,15 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v0.3／2026-11-15／CONS-DD-01：A案のユーザー正式承認を記録**  
+> **Draft v0.4／2026-11-15／CONS-DD-01の承認履歴を保持し、DD10-01（A）の論理設計補完を記録**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01の採否（A案）**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01の採否（A案）およびDD10-01の論理データ設計（A案）**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
 | Change ID | 区分 | 変更対象 | 変更判断・状態 | 承認者／承認日 |
 |---|---|---|---|---|
 | **CONS-DD-01** | 主要設計変更／基本・詳細設計の整合 | イベント適用行の生成タイミング | **Option A Approved／決裁済、指定文書へ反映済（設計レベルで差分解消）** | **ユーザー（本チャットの明示回答）／2026-11-15** |
+| **CHG-DD-10-01** | 重要な詳細設計補完／旧Draftの論理データ構造の改訂 | マイルストーン・証跡・照合差異と追記専用再照合履歴の4テーブル化 | **DD10-01 Option A Approved／設計への反映済**（旧Draftは未承認。新たな独立変更決裁ではない） | **ユーザーによるDD10-01採用／2026-11-15** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -53,20 +54,40 @@
 ## 5. 残る未決事項・Gateとの関係
 
 - **CONS-DD-01の採否**：ユーザー承認済。**設計上の生成タイミング差分は解消**。ただし物理実装・性能の検証は未完了。
-- **OPN-DD-10〜15**：引き続きOpen。未承認の補完仕様は今回承認したことにならない。
+- **OPN-DD-10**：**DD10-01 A案を承認し、論理データ設計をClosed**。実コード一覧はCFG-DD-10-01、原子性はOPN-DD-14、再実行はOPN-DD-15、受入具体化はOPN-DD-13で別管理。
+- **OPN-DD-11〜15**：引き続きOpen。未承認の補完仕様は今回承認したことにならない。
 - **OI-DD-01／02、基本設計EXIT-06**：データ規模・クラウド版履歴の検証は未完了、**Not Met**を維持。
 - **基本設計Freeze**：**未実施**。詳細設計Exit（EXIT-DD-01〜10）：**Not Evaluated**。詳細設計Gate：**未判定**。
 - **Excel実装／Windows・Web・Box／SharePoint／復元・性能検証**：**Not Started／Not Tested**。
 - **正式リポジトリ反映とGit commit**：**未実施**。このパッチはプロジェクト相対パスを示す成果物であり、現地リポジトリの更新完了を意味しない。
 
-## 6. 承認後の次アクション
+## 6. CHG-DD-10-01 — OPN-DD-10論理データ構造の承認済み補完
 
-**OPN-DD-10〜15の補完仕様を順次確定し、詳細設計Exit Reviewの根拠を整備**。Q01〜Q24を再審議しない。実装検証が必要な項目はLater／Not Testedのまま区別する。
+| 項目 | 記録 |
+|---|---|
+| 判断の根拠 | **DD10-01＝A／ユーザー承認（2026-11-15）**。`docs/design/OPN-DD-10_Data_Model_Review.md`のA案（§3〜7）を論理設計として採用 |
+| 変更前 | `MVP_Design.md` Draft v0.2では`tblMilestone`・`tblEvidence`・`tblReconciliation`を中心とする3テーブル案。差異と再照合を1行で管理するか未定（**未承認Draft**） |
+| 変更後 | **4テーブル**：`tblMilestone`／`tblEvidence`／`tblReconciliation`／**`tblReconciliationReview`**。差異案件と個々の照合／解消履歴を分離し、レビューは追記専用 |
+| 外部参照 | 証跡と差異は`TargetType`＋`TargetID`の条件付き論理FK（`Project`／`Occurrence`／`Milestone`）を保存前に検証。レビューに指定された`BasisEvidenceID`は同一対象であることが必須 |
+| 主要制約 | `tblMilestone`のUQ(`ProjectID`,`MilestoneTypeCode`)、同じ対象×比較項目×公式出典の未解消差異の並立禁止、現在照合状態は`ReviewID`最大の正常確定レビューから算出 |
+| 新たな制約・トレードオフ | ExcelのFKは論理制約。レビュー履歴の増加に伴うデータ量／性能負担。照合値は時点スナップショットであり公式正本でもExcel内代表日付正本でもない |
+| 承認理由の区分 | AIは月次の再照合と解消根拠を失わない目的でAを推奨。**ユーザー固有の採用理由は未記録** |
+| 代替案 | B：対象ごとの排他的FK列（未採用）。C：3テーブルの状態更新（未採用） |
+| 既決事項との整合 | **GrillMe Q01〜Q24は変更せず**、`tblDateHistory`が唯一のExcel内代表日付正本であることも維持。**CONS-DD-01のA案承認・原回答Q04=B/Q05=Aも変更なし** |
+| 対象要件・試験 | REQ-MVP-008〜012、TEST-DD-005／007／013。**試験はNot Tested** |
+| 引継ぎ先 | **CFG-DD-10-01**（マスタ種別コード実値の初期設定）、**OPN-DD-13**（受入ケース）、**OPN-DD-14**（ReviewID確定順／原子性）、**OPN-DD-15**（部分失敗／再試行）、**OI-DD-01**（性能） |
+| 承認の境界 | **DD10-01の採否承認を本ログへ転記**。旧未承認Draftの補完であり「既承認データ設計に対する別個の変更承認」を作出しない。MVP設計書全体の承認でもない |
+| 改訂先 | `docs/design/OPN-DD-10_Data_Model_Review.md`（Decision Record v0.2）、`docs/design/MVP_Design.md`（Draft v0.3）、`docs/decisions/Decision_Log.md`（Draft v0.3）、本ログ（Draft v0.4） |
+| ステータス | **Documented／反映済・論理設計上Closed**（技術成立性・運用上の確定は未検証） |
+
+## 7. 承認後の次アクション
+
+**OPN-DD-11〜15の補完仕様を順次確定し、詳細設計Exit Reviewの根拠を整備**。DD10-01の初期コード実値は実装前に別途登録・確認する。Q01〜Q24を再審議しない。実装検証が必要な項目はLater／Not Testedのまま区別する。
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** CONS-DD-01はユーザーがA案を承認し、詳細Q05の方式へ設計を整合化した。基本Q04・詳細Q05を含む過去回答を保持し、Decision LogとMVP Designを更新した。基本設計Freeze・詳細設計Gate・技術検証は未完了。
+**日本語：** CONS-DD-01の承認履歴を維持し、DD10-01 A案に基づく4テーブルへの設計補完（CHG-DD-10-01）を記録した。OPN-DD-10は論理設計上Closed。実データ設定・技術検証・Exit/Gateは未完了。次はOPN-DD-11。
 
-**English:** Option A for CONS-DD-01 is approved. The design now follows detailed design Q05, and the old decisions are kept in the log. Design freeze, Gate approval, and technical tests are not complete.
+**English:** CONS-DD-01 is unchanged. The approved four-table design is recorded as CHG-DD-10-01. OPN-DD-10 is closed for design. Setup, tests, and Gate review remain open. Next is OPN-DD-11.
