@@ -1,6 +1,6 @@
 # MVP Design — 開発プロセス統合管理ブック（詳細設計 Draft）
 
-> **文書ID**：未採番　**版**：Draft v0.1　**作成日**：2026-11-15  
+> **文書ID**：未採番　**版**：Draft v0.2　**作成日**：2026-11-15  
 > **文書状態**：**Draft／未レビュー／未承認／未Freeze**　**フェーズ**：MVP詳細設計（In Progress）  
 > **保存先（プロジェクト内）**：`docs/design/MVP_Design.md`  
 > **直接根拠**：`docs/handoffs/Context_Handoff_2026-11-15_v0.2.md`、`docs/design/Detail_Design_GrillMe_Completion_Report.md`  
@@ -12,12 +12,12 @@
 |---|---|---|
 | 詳細設計GrillMe | **24/24回答確定**（A:22、B:2＝Q06・Q10） | 質問完了は設計書承認ではない |
 | 基本設計Exit | **6/7 Met、EXIT-06 Not Met** | 詳細設計への条件付き移行はユーザー承認済み |
-| 基本設計Freeze | **未実施** | 基本設計Q04の差分は未解消 |
+| 基本設計Freeze | **未実施** | **CONS-DD-01のA案承認で生成時点の差分は設計上解消。Freezeは別判断** |
 | 詳細設計Exit | **EXIT-DD-01〜10すべて Not Evaluated** | 本書内の根拠整理は正式判定ではない |
 | 詳細設計Gate | **未判定** | Met／Conditional／Not Metは今後の正式Exitで評価 |
 | Excel実装／Windows・Web・Box・性能・復元・受入検証 | **Not Started／Not Tested** | 方式の論理設計を機能成立の証明にしない |
 | Overview・Requirements・Decision Log | **整理Draft／未承認** | OverviewのCurrent Focus／Next Actionは古い記述 |
-| 既知の設計整合問題 | **CONS-DD-01：変更管理中・未承認** | 本書で暗黙に解消しない |
+| 既知の設計整合問題 | **CONS-DD-01：A案Approved（2026-11-15）／設計整合化済** | 技術的成立・Gate・Freezeは承認されていない |
 
 **記述の区分**：**[確定判断]**＝過去GrillMe等でユーザーが選択済み、**[Draft補完案]**＝本書で追加した列・式・遷移・処理の提案で未承認、**[Now]**＝詳細設計Exitまでに整合・仕様化が必要、**[Later／未検証]**＝実装時等に成立性を確認、**[Not Now]**＝現MVPに追加しない。テーブルの候補列・物理実現方法を「確定」と誤記しない。
 
@@ -37,7 +37,7 @@
 
 ### 1.3 文書間の権威と差分
 
-正式承認文書がSource of Truthであり、会話・GrillMe報告・本Draftは承認済み正本ではない。本書は**最新Handoff v0.2に基づく作業状態**であり、旧Overviewの「GrillMe開始」を次アクションとしない。先行基本設計と後発詳細設計に不一致がある **CONS-DD-01** は第3章の変更管理を優先し、実装時に無断で一方へ統一しない。
+正式承認文書がSource of Truthであり、会話・GrillMe報告・本Draftは承認済み正本ではない。本書は**最新Handoff v0.2に基づく作業状態**であり、旧Overviewの「GrillMe開始」を次アクションとしない。先行基本設計と後発詳細設計に不一致があった **CONS-DD-01** は**ユーザーがA案を正式承認（2026-11-15）**。第3章に原判断・変更前後・承認の履歴を保持したうえで、§5以降は承認後の設計へ統一する。**本Draft全体の承認を意味しない**。
 
 参照：`docs/requirements/MVP_Requirements.md`、`docs/decisions/Decision_Log.md`、`docs/00_Project_Overview.md`、`docs/design/Detail_Design_GrillMe_Plan.md`、`reference/AI協働開発_基本運用プロセス.md`。GrillMe設計書は**質問前の計画**であり、最終Q番号ごとの意味は完了レポートを優先する。
 
@@ -49,7 +49,7 @@
 | Q02 | A | 不変の単独PK。業務重複は別検出 | §4・5 |
 | Q03 | A | 内部`ProjectID`と外部公式識別情報を同一案件の別列で持つ | §4・10 |
 | Q04 | A | 案件登録時、全標準ステージ適用行を未判定で生成 | §5 |
-| Q05 | A | 案件登録時、全イベント種別適用行を未判定で生成 | **§3 CONS-DD-01：未承認変更** |
+| Q05 | A | 案件登録時、全イベント種別適用行を未判定で生成 | **§3 CONS-DD-01：A案正式承認／原回答は不変** |
 | Q06 | **B** | テーブル別連番、ID再利用・重複禁止 | §4・5、OPN-DD-14 |
 | Q07 | A | 保存時検証＋全体整合性チェック、異常保存拒否 | §5・8 |
 | Q08 | A | マスタ差分同期は管理者が明示操作、既存ID・判定保持 | §5・8 |
@@ -70,38 +70,38 @@
 | Q23 | A | 設計判断から受入ケース・結果まで追跡 | §11 |
 | Q24 | A | Exit別Met／Conditional／Not Metおよび条件付きGate方式 | §12 |
 
-## 3. 変更管理：CONS-DD-01（最優先・未解消）
+## 3. 変更管理：CONS-DD-01（A案正式承認・設計整合済）
 
-### 3.1 変更要求の基本情報
+### 3.1 変更判断・回答履歴・承認記録
 
 | 項目 | 内容 |
 |---|---|
-| 変更管理ID | **CONS-DD-01**（設計整合問題／変更要求の起票対象） |
-| 対象判断 | **基本設計GrillMe Q04（B）** ↔ **詳細設計GrillMe Q05（A）** |
-| 先行判断 | **案件登録時は全ステージ判定行を生成**。イベント適用行は**ステージが「対象」になった後**生成 |
-| 後発判断 | 案件登録時に**全イベント種別適用行も未判定で生成** |
-| 差分 | 案件×イベント適用行の**生成タイミングと未対象／未判定ステージに属する行の存在有無** |
-| 確認済み理由 | **未記録**。技術上の利点は推測可能だが、ユーザーの変更理由として代入しない |
-| ステータス | **Change Review Pending／未承認・未解消**。Q05回答は確定、基本設計の改訂承認ではない |
-| 優先時点 | **Now／詳細設計統合・正式Exitに先立つ整合処置** |
-| 判断・承認者 | **ユーザーが判断**。個人名、承認日、正式採否は未設定 |
-| 改訂対象 | `Decision_Log.md`、本設計書、必要なら`MVP_Requirements.md`中のREQ-MVP-004受入記述・基本設計資料 |
+| 変更管理ID | **CONS-DD-01／主要設計変更** |
+| 先行の回答履歴 | **基本設計GrillMe Q04＝B**：「全ステージ行は案件登録時、イベント適用行は所属ステージが対象になってから生成」。この当時の回答は**Decision Logに保持** |
+| 後発の回答履歴 | **詳細設計GrillMe Q05＝A**：「案件登録時に全イベント種別の適用行を未判定で生成」。Q01〜Q24の判断履歴を変更しない |
+| 差分 | 案件登録時、未判定／対象外のステージに属するイベント適用行が存在するか |
+| 正式決裁 | **2026-11-15／ユーザーがA案を明示承認**（詳細Q05の方式を採用し、先行Q04の**イベント行生成時点のみ**改訂） |
+| 承認理由の区分 | **AIの技術的推奨理由**：イベント適用行の存在と判定を分離し、ステージ対象化時の初回生成を不要とする。**ユーザー固有の採用理由は未記録** |
+| 比較した代替案 | B：先行Q04の対象化後生成を維持／C：第三案を別起票（どちらも不採用） |
+| 設計上の状態 | **Option A Approved／設計上の不整合は解消・指定文書へ反映済**。全体文書承認や実機検証とは別 |
+| 変更記録 | `docs/changes/Change_Log.md`／`docs/changes/CONS-DD-01_Change_Review.md`／`docs/decisions/Decision_Log.md` |
+| 影響範囲 | §4 `tblProjectEvent`、§5案件登録・明示差分同期、§7実効適用、§9抽出、§11テスト、§13未解決項目 |
 
-### 3.2 影響分析（変更評価・Draft）
+### 3.2 採用する現在の仕様（承認済み変更部分）
 
-| 観点 | Q04のまま | Q05を正式採用した場合 |
-|---|---|---|
-| 案件登録時の行生成 | 全ステージのみ。イベントは後工程 | 全ステージ＋全イベント種別。件数が増加 |
-| 「未判定」の管理範囲 | 対象化前はイベント行が不存在 | ステージ未判定でもイベント行を保持。ただし実効状態は親から導出 |
-| ステージ対象化 | イベント行の初回生成が必要 | 既存イベント適用行の判定を継続利用 |
-| マスタ差分同期 | ステージ対象化後の生成と調整 | 案件ごとに追加イベント種別の差分同期が必要 |
-| 表示／抽出 | 不存在イベント行と未判定を区別 | 未判定イベント行を開催予定と誤認しない制御が必要 |
-| 既存文書 | 基本設計Q04と整合 | 既存判断・REQ-MVP-004の説明との整合修正を要する可能性 |
-| データ容量／技術 | 対象時のみレコード増 | 初期行数増。規模未定のため性能影響は**未検証** |
+1. 案件登録時に`tblProject`を登録し、全標準ステージについて`tblProjectStage`を**未判定**で生成する。
+2. **同じ案件登録処理で、登録時点の全イベント種別について`tblProjectEvent`を未判定で生成**する。所属StageIDはイベント種別マスタで固定し、案件×イベント種別の重複を禁止する。
+3. ステージが`対象`・`対象外`・`未判定`に変更されても、**イベント適用行を新規生成・削除しない**。保存済み判定を保持し、実効判定は親ステージ×イベント判定から都度算出する。
+4. **適用行の存在は開催計画の成立を意味しない**。`tblOccurrence`は開催計画時のみ生成し、非適用化しても既存開催回と日付履歴を削除・自動中止しない。
+5. 登録後にイベント種別マスタが追加された場合、管理者の**明示的な差分同期（Q08）**で既存案件に不足分だけ生成する。追加したイベント行も未判定で開始し、既存行と判定を保持する。
 
-**処理保留境界**：§4以降に「全イベント適用行を案件登録時に生成」と書く箇所は**「詳細Q05に基づく実装候補・変更承認待ち」**であり、実装着手の正式指示ではない。条件付きの論理データ設計は継続してよいが、生成タイミングの実装固定・基本設計上書き・要件変更は変更承認を要する。
+### 3.3 未解決事項・承認の限界
 
-**想定される正式処置**（選択未実施）：①後発Q05を採用し先行Q04を変更履歴付き改訂、②先行Q04を維持し詳細設計の整合案を変更、③第三案を起票してユーザー承認。いずれも**このDraftで採否を決めない**。専用記録は `docs/changes/Change_Log.md` のDraftにも起票する。
+- **初期行数増加**：件数の概念値は案件数×登録時点のイベント種別数。想定規模・Excel性能は未検証（**OI-DD-01／基本設計EXIT-06 Not Met**）。
+- **登録処理の原子性と採番競合**：**OPN-DD-14**（方式未確定、実機検証なし）。
+- **マスタ同期の部分失敗・復旧**：**OPN-DD-15**。親が未判定・対象外の際の表示・抽出明細：**OPN-DD-12**。
+- `REQ-MVP-004`は「対象となったときイベント適用行を扱える」と定めるため、**事前生成した行の参照・判定を許す設計で充足可能**。Requirementsの本文を今回は改訂しない。要求文書・本詳細設計全体は依然Draft／未承認。
+- 先行基本設計の回答は変更履歴で整合化したが、**独立した基本設計書正本は提供資料に含まれない**。後日確認された場合は原履歴を保持したままCONS-DD-01を参照して更新する。
 
 ## 4. 論理構成・データ辞書
 
@@ -134,7 +134,7 @@
 | `mstEventType` | イベント種別1種 | `EventTypeID` | `StageID→mstStage` | イベント所属固定は確定 |
 | `tblProject` | 機種×開発案件の1案件 | `ProjectID` | 公式案件情報を別列に保持 | 主要テーブル確定 |
 | `tblProjectStage` | 案件×標準ステージの判定1件 | `ProjectStageID` | `ProjectID`、`StageID` | 主要テーブル確定 |
-| `tblProjectEvent` | 案件×イベント種別の判定1件 | `ProjectEventID` | `ProjectID`、`EventTypeID`、対応`ProjectStageID` | 主要テーブル確定。**生成時点はCONS-DD-01** |
+| `tblProjectEvent` | 案件×イベント種別の判定1件 | `ProjectEventID` | `ProjectID`、`EventTypeID`、対応`ProjectStageID` | 主要テーブル確定。**案件登録時に全イベント種別を生成（CONS-DD-01 A承認）** |
 | `tblOccurrence` | イベント開催計画／再開催1回 | `OccurrenceID` | `ProjectEventID` | 主要テーブル確定 |
 | `tblMilestone` | 案件の開発マイルストーン1件 | `MilestoneID` | `ProjectID`（型マスタ参照は要確定） | **Draft補完案／OPN-DD-10** |
 | `tblDateHistory` | 開催回またはマイルストーンの日付操作1記録 | `HistoryID` | `(TargetType, TargetID)`で該当対象を特定 | 共通化確定。列詳細はDraft |
@@ -153,7 +153,7 @@
 | `mstEventType` | `EventTypeID`(PK)、`StageID`(FK)*、`OfficialEventName`*、`IsActive`*（案） | `StageID`所属固定。名称変更・改廃の扱いはマスタ同期で管理 |
 | `tblProject` | `ProjectID`(PK)、`ModelCode`*、`ProjectCode`*、`OfficialProjectKey`、`ManagementApplicability`*、`Memo` | `ProjectID`は内部ID、公式キーと混用しない。機種×案件の重複検出。公式列の正確な名称・複合キー仕様は未定 |
 | `tblProjectStage` | `ProjectStageID`(PK)、`ProjectID`(FK)*、`StageID`(FK)*、`StageApplicability`*、`JudgmentBasis`（案） | UQ(`ProjectID`,`StageID`)。新規は全ステージ`未判定` |
-| `tblProjectEvent` | `ProjectEventID`(PK)、`ProjectID`(FK)*、`EventTypeID`(FK)*、`ProjectStageID`(FK)*、`EventApplicability`*、`JudgmentBasis`（案） | UQ(`ProjectID`,`EventTypeID`)。親行の`StageID`と`mstEventType.StageID`一致必須。**生成時点未整合** |
+| `tblProjectEvent` | `ProjectEventID`(PK)、`ProjectID`(FK)*、`EventTypeID`(FK)*、`ProjectStageID`(FK)*、`EventApplicability`*、`JudgmentBasis`（案） | UQ(`ProjectID`,`EventTypeID`)。親行の`StageID`と`mstEventType.StageID`一致必須。**案件登録時に全種別を未判定生成（A承認）**。登録後の新マスタ追加は明示同期で補う |
 | `tblOccurrence` | `OccurrenceID`(PK)、`ProjectEventID`(FK)*、`OccurrenceNo`*、`OccurrenceStatus`*、`CreatedAt`（案） | UQ(`ProjectEventID`,`OccurrenceNo`)。`OccurrenceNo`はイベント別回次、変更で再番号付けしない |
 | `tblMilestone` | `MilestoneID`(PK)、`ProjectID`(FK)*、`MilestoneTypeCode`*、`MilestoneName`*、`SourceReference`（案） | 型辞書・同名重複・案件×種別の一意性は**OPN-DD-10**。代表日付を正本として直書きしない |
 | `tblDateHistory` | `HistoryID`(PK)、`TargetType`*、`TargetID`*、`ChangeType`*、`AfterDate`、`DateClass`、`Reason`*、`RecordedBy`*、`RecordedAt`*、`CommitStatus`（案） | `TargetType`は`Occurrence`／`Milestone`を候補とする。取消なら`AfterDate`空欄。正常確定条件の実装は未確定 |
@@ -195,17 +195,17 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 4. 登録失敗・通信切断・再試行で同一要求が二重登録されないことを検証する。実現方式が未定なら**自動採番の成立を宣言しない**。
 5. 連番管理をどのExcel機構で安全に行うか、複数端末の排他・再送、同時編集の許容有無、操作権限は**OPN-DD-14（Now）／RISK-DD-04（Later実機検証）**。
 
-### 5.2 案件登録とイベント適用行の条件付き設計
+### 5.2 案件登録とイベント適用行の生成（CONS-DD-01 A承認）
 
 1. 管理者が機種・案件・外部公式識別情報を入力し、既存の機種×案件と照合（重複時は保存拒否）。
 2. `tblProject`の不変`ProjectID`を確定し、全標準ステージについて`tblProjectStage`を`未判定`で生成（**Q04確定**）。
-3. **イベント適用行生成：CONS-DD-01による変更承認待ち**。詳細Q05の案では全イベント種別について`tblProjectEvent`を`未判定`で生成する。一方、先行基本設計Q04の生成条件は依然として変更管理未解消。**双方を同時に実装しない**。
-4. 親子FK・UQ・初期判定・件数を一括検証し、不整合な**登録を正常確定させない**。失敗時の原子性と復旧方式は**OPN-DD-14**。
-5. 作成された適用判定は管理者操作で更新し、機種開発責任者の最終判断を業務上の根拠とする。判定値が`未判定`の間も**開催回を機械的に生成しない**。
+3. **イベント適用行生成（CONS-DD-01 A承認）**：同じ登録処理で、**その時点の全イベント種別**について`tblProjectEvent`を`未判定`で生成する。各`ProjectEventID`は不変、UQ(`ProjectID`,`EventTypeID`)で二重生成を禁止。親ステージが`未判定`でもイベント適用行は生成するが、実効対象として扱わない。
+4. 親子FK・UQ・初期判定・**登録時点の全ステージ／全イベント種別の生成件数**を一括検証し、不整合な**登録を正常確定させない**。失敗時の原子性と復旧方式は**OPN-DD-14**。
+5. 作成された適用判定は管理者操作で更新し、機種開発責任者の最終判断を業務上の根拠とする。ステージが`対象`へ変わっても**イベント適用行を再生成しない**。`対象外`／`未判定`への変更でも既存判定を消さない。判定値が`未判定`の間も**開催回を機械的に生成しない**。
 
 ### 5.3 マスタ差分同期（Q08）
 
-管理者が明示実行するまで、マスタ追加を既存案件へ無条件反映しない。実行時は**新規StageID／EventTypeIDと既存案件別行との差分**を検出し、必要な追加行だけ生成する（イベント行生成条件はCONS-DD-01の承認結果に従う）。既存の`ProjectStageID`／`ProjectEventID`と判定値、開催回・履歴は保持。同期処理失敗時は「未完了／要確認」を表示し、再実行時にUQによる二重追加を防止する。**差分の再実行・部分失敗の扱いはOPN-DD-15（Now）**。
+管理者が明示実行するまで、**登録後に追加されたマスタを既存案件へ自動反映しない**。実行時は新規StageID／EventTypeIDと既存案件別行の差分を検出し、**追加ステージについて全既存案件に未判定のステージ行を、追加イベント種別について全既存案件に未判定のイベント行を不足分だけ生成**する（所属ステージ参照の整合を検証）。ステージが`対象`となった時点ではイベント行を生成しない。既存の`ProjectStageID`／`ProjectEventID`と判定値、開催回・履歴は保持。同期処理失敗時は「未完了／要確認」を表示し、再実行時にUQによる二重追加を防止する。**差分の再実行・部分失敗の扱いはOPN-DD-15（Now）**。
 
 ### 5.4 保存前／全体整合性検証（Q07）
 
@@ -262,11 +262,13 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 | 親ステージ判定 | 保存済みイベント判定 | 実効イベント判定（Draftとしての明文化） |
 |---|---|---|
 | 対象外 | 対象／対象外／未判定 | **対象外**（保存値は維持） |
-| 未判定 | 対象／対象外／未判定／未作成 | **未判定**（親未決を優先する案） |
+| 未判定 | 対象／対象外／未判定 | **未判定**（親未決を優先する案。**行は存在**） |
 | 対象 | 対象 | **対象** |
 | 対象 | 対象外 | **対象外** |
 | 対象 | 未判定 | **未判定** |
-| 対象 | 未作成 | **適用行未生成／要確認**（基本Q04が有効な場合の取り扱いはCONS-DD-01に従う） |
+| 対象／未判定／対象外 | 未作成（同期待ち・異常を含む） | **正常な新規案件では発生しない**。登録後の新マスタ未同期、またはデータ不整合を検出・管理者へ通知（原因別の表示・阻止はOPN-DD-12／15） |
+
+**[CONS-DD-01承認に伴う表示上の不変条件]** `tblProjectEvent`行の存在を実効`対象`や「開催回あり」と誤判定しない。親が未判定／対象外の場合は§7.1で実効判定を求め、閲覧向け開催予定・期限超過への混入を防ぐ（正確な例外包含条件はOPN-DD-12）。
 
 **[確定判断＋粒度の整理]** `未計画`は**実効適用＝対象のイベントで開催回が1件もない**状態を導出する（架空開催回を作らない）。要件の4状態「未計画／計画済／開催済／中止」は業務表示上保持。開催回の記録状態は別粒度で「開催予定／開催済／中止」。**Draft表示マッピング**として「開催回なし＝未計画」「開催回あり＋開催予定＝計画済」を対応付ける。ただし**複数開催回が異なる状態のときイベント単位で何を代表表示するかはOPN-DD-11**で確定し、勝手に過去回を潰さない。
 
@@ -380,8 +382,8 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 
 | テストID | 主要ケース（実施時の入力と期待結果） | 対象要件 | 判定／実施状態 |
 |---|---|---|---|
-| TEST-DD-001 | 案件登録→`ProjectID`一意・全標準ステージ`未判定`、公式案件ID別列。イベント行は**CONS-DD-01承認方式に従う** | REQ-MVP-001〜004 | Not Tested／一部Blocked |
-| TEST-DD-002 | ステージ判定を対象→対象外→対象へ戻す。保存済みイベント判定は保持、実効値だけ変化 | REQ-MVP-003〜005 | Not Tested |
+| TEST-DD-001 | 案件登録→`ProjectID`一意、全標準ステージ行＋**登録時点の全イベント種別行を`未判定`で生成**、親StageID整合、案件×イベント種別UQ、公式案件ID別列。**開催回は0件** | REQ-MVP-001〜004 | **Not Tested**／原子性OPN-DD-14 |
+| TEST-DD-002 | ステージ判定を未判定→対象→対象外→対象へ変更。**イベント行は作り直さず**既存`ProjectEventID`・保存判定値・開催回・履歴を保持。実効値のみ変わり、未判定・対象外では行存在だけで予定抽出しない | REQ-MVP-003〜005 | **Not Tested**／画面除外明細OPN-DD-12 |
 | TEST-DD-003 | 開催計画で1回生成、同じ予定日の訂正は同回の履歴追加、再開催は新回次・新ID | REQ-MVP-006・031 | Not Tested |
 | TEST-DD-004 | 初回設定→変更→訂正→取消。最大の**正常確定HistoryID**で現行日付を取得、取消後空欄、先行行を保持 | REQ-MVP-008〜010・031 | Not Tested |
 | TEST-DD-005 | マイルストーン代表日付も共通履歴から取得、暫定／正式／実績区分を追跡 | REQ-MVP-008〜010 | Not Tested／OPN-DD-10/11 |
@@ -391,7 +393,7 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 | TEST-DD-009 | G01〜G03の固定列数・粒度・適用既定除外・全名称改行、G04の旬／日切替と詳細参照 | REQ-MVP-015〜022・027・033 | Not Tested／OPN-DD-12 |
 | TEST-DD-010 | L01はシステム当日基準で過去未開催、L02は任意基準日〜翌々月末、OccurrenceID重複なし。未計画は管理画面のみ | REQ-MVP-014・023〜025 | Not Tested／OPN-DD-12 |
 | TEST-DD-011 | 閲覧者A/B、画面G01/G02で独立絞り込み。原本・他者に影響しない。開始期間は管理者のみ変更 | REQ-MVP-019・026・028〜030 | Not Tested／RISK-DD-01/03 |
-| TEST-DD-012 | 新マスタ追加後に管理者が差分同期。既存ID・判定が変わらず二重登録もない | REQ-MVP-003〜005・031 | Not Tested／CONS-DD-01 |
+| TEST-DD-012 | 追加イベント種別は**明示同期前には既存案件へ行追加されず**、管理者の明示差分同期後に各案件へ不足イベント行を`未判定`で1件ずつ生成。既存ID・判定・履歴不変、再実行で二重登録なし。追加ステージも不足行を同期 | REQ-MVP-003〜005・031 | **Not Tested**／部分失敗OPN-DD-15 |
 | TEST-DD-013 | 不正FK／二重PK／重複回次／不正履歴が正常保存されない。同時採番・確定順序競合を実装環境で確認 | REQ-MVP-006・010・031 | Not Tested／OPN-DD-14・RISK-DD-04 |
 | TEST-DD-014 | Box／SharePoint候補環境のWindows・Web動作、90列全文表示・性能・版履歴からの復元を検証 | REQ-MVP-028〜033 | Not Tested／**Later、EXIT-06** |
 
@@ -416,7 +418,7 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 |---|---|---|---|
 | EXIT-DD-01 | §4 テーブル一覧・粒度・関係 | `Milestone/Evidence/Reconciliation`辞書・PK/FK確定 | **Not Evaluated** |
 | EXIT-DD-02 | §4〜5 ID／UQ／FK案 | 採番の確定順・競合の不変条件と方式明文化 | **Not Evaluated** |
-| EXIT-DD-03 | §3・7 適用と未計画・再開催 | **CONS-DD-01正式変更処置**、複数回・例外状態 | **Not Evaluated** |
+| EXIT-DD-03 | §3・7 適用と未計画・再開催 | **CONS-DD-01 A承認・設計反映は完了**。複数回・例外状態等の補完は未確定 | **Not Evaluated** |
 | EXIT-DD-04 | §6 共通履歴・代表日付 | 正常確定判定、取消後再設定、区分の必須条件 | **Not Evaluated** |
 | EXIT-DD-05 | §4・10 証跡と公式差異案 | 対象ID・解消履歴・参照項目 | **Not Evaluated** |
 | EXIT-DD-06 | §8〜9 編集・4ガント・2一覧 | 画面出力列・G04行粒度・除外条件・復旧ルール | **Not Evaluated** |
@@ -433,14 +435,14 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 
 | ID | 未定義・変更点 | 次に必要な成果 | 状態 |
 |---|---|---|---|
-| **CONS-DD-01** | 基本Q04と詳細Q05の生成タイミング差分 | 変更理由・影響・採否・正式承認・文書改訂関係の記録 | **Pending Review** |
+| **CONS-DD-01** | 基本Q04と詳細Q05の生成タイミング差分 | **A案承認（2026-11-15）**。原判断を保持してChange Log／Decision Log／MVP Designへ反映 | **Approved／設計整合化済（技術未検証）** |
 | OPN-DD-10 | マイルストーン／証跡／差異のテーブル列・FK | 最小データ辞書・正本／参照整合の確定 | Open（本書は案） |
 | OPN-DD-11 | 許可状態遷移・複数回・取消後再設定・日付属性 | 許可／禁止と例外の表、入力制約 | Open（本書は案） |
 | OPN-DD-12 | G01〜G04とL01/L02、要対応の出力明細 | 画面項目・抽出・状態別除外・表示重複ルール | Open（本書は案） |
 | OPN-DD-13 | 主要正常系の受入ケースと要件→設計→テスト対応 | ケース入力・期待結果・担当・結果欄 | Open（本書は案） |
 | OPN-DD-14 | 採番競合・HistoryID確定順・失敗確定の保証 | 実装前の不変条件／検証条件、実装時成立性確認 | Open（本書は案） |
 | OPN-DD-15 | 表示再生成／同期失敗の鮮度判定・復旧 | エラー遷移、再試行・部分失敗の最小手順 | Open（本書は案） |
-| OPN-DOC | Overviewの古いNext Action、Decision Logに詳細24判断未反映 | 最新の進捗説明へ更新、確定Q01〜24をログへ追記 | Open（既存文書未編集） |
+| OPN-DOC | Overviewの古いNext Action／旧進行記述 | **Decision Logへの詳細24判断追記は完了**。Overview等の旧進行記述は未更新 | **一部完了／Overview更新はOpen** |
 
 *本書で提案内容を追加しても、Open Itemが正式解消したことにはならない。責任者や承認日を推測で設定しない。*
 
@@ -462,7 +464,7 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 
 ### 13.4 次アクション（本書作成後）
 
-**最優先**：**CONS-DD-01の変更理由・影響・採用方式／承認の正式記録**（詳細Q05を再質問するのではなく、先行基本設計との変更管理を処置する）。その結果を`Decision_Log.md`／必要な要件・基本設計記録へ反映し、§4〜11の未承認補完案をNow項目単位で仕上げる。次に正式詳細設計Exit Reviewを実施し、Gate判断はユーザーが行う。
+**次アクション**：**CONS-DD-01のA案決裁およびChange Log／Decision Log／本Draftへの設計反映は完了**。**OPN-DD-10〜15の未承認補完案をNow項目単位で判断・確定**し、その後、正式詳細設計Exit Reviewを実施する。Gate判断はユーザーが行う。要件・基本設計の独立正本は提示された場合に変更ID付きで履歴を保持しながら整合化する。
 
 **本Draft作成の完了条件（文書作成と正式承認を分離）**：Q01〜Q24の対応、CONS-DD-01の変更管理、テーブル・PK/FK・履歴・状態・入出力の最小案、4ガント＋2一覧、主要受入ID、Now／Later／旧EXIT-06が記録されている。正式な合格・実装可能性は**未判定**。
 
@@ -470,6 +472,6 @@ Evidence / Reconciliation ── 対象種別＋対象ID（紐付け対象とル
 
 ## まとめ / Summary
 
-**日本語：** 詳細設計Q01〜Q24を再検討せずMVP詳細設計Draftへ統合した。基本設計Q04と詳細Q05の差分CONS-DD-01は未承認の変更管理対象であり、関連する行生成処理の実装を固定しない。データ辞書、履歴、状態、4ガント・2一覧、受入テストは確定判断と補完案を区別して整理した。基本設計EXIT-06はNot Met、基本設計は未Freeze、詳細設計Exit/Gateは未判定、実装・検証は未実施。
+**日本語：** 詳細設計Q01〜Q24の回答履歴を維持し、CONS-DD-01 A案のユーザー承認によってイベント適用行は案件登録時に全件未判定生成する設計へ整合化した。変更履歴はDecision Log／Change Logに記録。その他の補完案は未承認であり、基本設計EXIT-06はNot Met、基本設計は未Freeze、詳細設計Exit/Gateは未判定、実装・検証は未実施。
 
-**English:** The draft design includes all 24 decided design answers without reopening them. CONS-DD-01 is an open change request and is not approved. The data, date history, states, four Gantt views, two lists, and test ideas are organized. Basic design EXIT-06 is still not met. The basic design is not frozen. The detailed design review, approval, build, and tests are not complete.
+**English:** All 24 detailed design answers are kept. Option A for CONS-DD-01 is approved, so all event rows are designed to be created when a project is registered. Other design items are still open. Basic design EXIT-06 is not met. Design freeze, Gate approval, build, and tests are not complete.
