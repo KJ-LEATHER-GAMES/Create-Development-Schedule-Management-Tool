@@ -1,6 +1,6 @@
 # 詳細設計 Exit — 未完了条件・責任割当・停止ゲート台帳
 
-> **文書版**：Conditions Register Draft v0.1（2026-11-17）  
+> **文書版**：Conditions Register Draft v0.2（2026-11-17）  
 > **状態**：Exit Reviewの引継ぎ条件案／**Owner・期限・合否条件は未承認の欄を保持**  
 > **保存先**：`docs/reviews/Detail_Design_Exit_Conditions_Register.md`  
 > **条件IDは本レビュー用の新規管理ID**。既存の要求・判断・テストIDや変更管理番号とは別物であり、新しい機能・テストを自動承認しない。
@@ -70,6 +70,25 @@
 ## 6. 既存判断・状態の固定
 
 詳細設計Q01〜Q24、CONS-DD-01、DD10-01〜DD15-02、OPS11-01、CFG10-01の採否・履歴に変更なし。CFG-DD-10-01とOPS-TECH-01、OI-DD-01/02、RISK-DD-01〜04、OPN-DOCは既存扱いどおり。**基本EXIT-06 Not Met、Freeze未実施、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定、41正式テストNot Tested、Excel実装Not Started**を維持する。
+
+## 7. EXIT-DD-07／09／10：引継ぎ条件の具体化（決裁前の提案）
+
+> 2026-11-17追補。**本節は新たな提案であって、Owner任命や条件付きGate承認の記録ではない**。原条件COND-DD-01〜10と既存判断の状態は変えない。具体案・停止ルールは `EXIT-DD-07_09_10_Handoff_Review.md`、決裁欄は `EXIT-DD-07_09_10_Decision_Sheet.md` を参照。
+
+| 条件ID | 引継ぎ期限の案 | 正式Exit前に確定する事項 | 後工程へ引継ぐ実測証跡 | 禁止ゲート案 | 現在 |
+|---|---|---|---|---|---|
+| COND-DD-01 | M0で責任指名／M1で収集計画 | コード別業務Owner・承認者・実値入手期限 | 実コード・対象許容表の承認証跡 | STOP-02 | Open |
+| COND-DD-02 | M2（対象保存前） | 初期登録Owner・環境・検証計画 | CFG-R05〜07・TV-09 Pass | STOP-02 | Open |
+| COND-DD-03 | M0でTV計画受入／M2（書込前） | 技術Owner・試験環境の決定責任・未達差戻し | TV-01〜03・対応T15のPass | STOP-01 | Open |
+| COND-DD-04 | M2（例外保守前） | 保守技術Owner・権限管理者・受入者 | OPS外部記録・TV-05 Pass | STOP-03 | Open |
+| COND-DD-05 | M2（表示公開前） | 表示技術Owner・閲覧受入者 | TV-04/06 Pass | STOP-04 | Open |
+| COND-DD-06 | M0で数値閾値決定責任／M1で閾値承認／M3（運用前） | 業務規模の責任者、数値承認者、期限 | TV-07実測Pass | STOP-05 | Open |
+| COND-DD-07 | M0で保存先決定責任／M1で保存先／M3（運用前） | 保存先管理Owner・版履歴受入者・決定期限 | TV-08復元・高水位実測Pass | STOP-05 | Open |
+| COND-DD-08 | M0（正式Exit評価開始前） | TV-01〜09の正式Owner、Executor、Approver、環境・日程・証跡先 | TVごとの実施結果 | 全STOPを統括 | Open |
+| COND-DD-09 | M0（正式Exit評価開始前） | 全Openの受入者・期限・差戻し先 | 条件解消・変更管理証跡 | 条件未決なら引継ぎ保留 | Open |
+| COND-DD-10 | M0（正式Exit評価開始前） | 正式文書管理Owner・参照版 | Requirements等の版照合結果 | 版不明ExitのMet禁止 | Open |
+
+ここでいうM0〜M3は**客観的マイルストーンの提案**。実行日・担当者・承認者は未入力のまま。条件付き評価への移行には正式指名と期限決裁が必要。実行中の未検証項目はPassにならず、正式41件は全件Not Testedのまま。
 
 ---
 
