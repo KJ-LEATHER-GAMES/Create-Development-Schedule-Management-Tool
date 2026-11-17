@@ -1,6 +1,6 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v1.3／2026-11-17／既存変更履歴を保持し、EXIT-HO-01 Aの引継ぎ方式承認を追加**  
+> **Draft v1.4／2026-11-17／既存変更履歴を保持し、EXIT-HO-01 Aの引継ぎ方式承認を追加**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
 > 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）・OPS11-01（A案）・CFG10-01（A案）の個別設計等の判断、ならびにEXIT-HO-01（A案：引継ぎ管理方式）の判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
@@ -261,3 +261,23 @@
 **日本語：** CHG-CFG10-01に管理方式Aの正式採用を記録。実コード・責任者・登録・検証は未完了でCFG-DD-10-01はOpen。正式41テストは全件Not Tested、詳細Exit/Gateは未判定。
 
 **English:** CHG-CFG10-01 records the approved setup process. Code values and owners are still open. All 41 tests are not tested. The design gate is not decided.
+
+## 17. CHG-EXIT-HO-02-SA-01 — COND-DD-03の証跡条件付き自己承認方式
+
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **EXIT-HO-02-SA-01／2026-11-17 ユーザー明示判断**「客観的なテスト証跡を残すことで自己承認を許容する」 |
+| 変更前 | COND-DD-03の仮Owner・Executor・Approverはユーザー本人であるが、自己承認の代替統制は提案段階。正式任命・兼務決裁は未了 |
+| 変更後 | 客観的な合否基準、実機の正常系・異常系・故障注入、版・OperationKey・高水位・再読込・期待/実際行集合等の再現可能な**実測証跡を必須**にした自己承認方式を運用方針として採用。第三者レビューは原則必須としない（社内規程に従う） |
+| 対象範囲 | **COND-DD-03のみ**。TV-01〜03と既存T15-01〜07等の検証・受入・証跡統制の具体化。業務テーブル・ID構成・正式テスト41件数は変更しない |
+| 未承認・残条件 | 組織上の正式な兼務許可・本人受入権限、Owner／Executor／Approverの正式任命、期限、STOP解除権限、実測環境、証跡保管先は未決 |
+| 停止と不合格 | 必須サブケースのFail／Blocked／Not Tested／根拠のないN/A、証跡欠落、原本再読込不整合ならPass不可、Fail-closedおよびSTOP-01維持。証跡作成をテスト合格や原本利用許可と混同しない |
+| 既存判断の保全 | 詳細Q01〜Q24、CONS-DD-01、DD10-01〜DD15-02、OPS11-01、CFG10-01、EXIT-HO-01の既決判断に変更なし。COND-DD-07具体担当者は未定 |
+| 決裁の境界 | 本項は**自己承認方式を採用したユーザー判断の記録**。この記録によって別途正式な組織人事・兼務権限の決裁が存在すると捏造しない |
+| 状態 | EXIT-HO-02 Open／正式任命0/10、正式41テスト全件Not Tested、詳細Exit10件Not Evaluated、Gate未判定、STOP-01継続 |
+
+## まとめ / Summary（自己承認方式の変更記録）
+
+**日本語：** 自己承認の条件となる客観的証跡をCHG-EXIT-HO-02-SA-01に記録した。正式兼務決裁や実機Passは未完了。
+
+**English:** This change records evidence-based self-approval rules. Formal role approval and tests are still open.

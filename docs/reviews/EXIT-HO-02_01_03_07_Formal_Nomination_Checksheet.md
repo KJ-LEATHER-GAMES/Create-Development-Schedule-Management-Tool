@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.9（2026-11-17）  
-> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Owner・Excel実装Executor・最終Approverの仮候補はユーザー本人（3役兼務未承認）と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v1.0（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Owner・Excel実装Executor・最終Approverの仮候補はユーザー本人（3役兼務の組織的な正式決裁は未完了）と確認済み。**客観的証跡を必須とする自己承認方式はEXIT-HO-02-SA-01で採用済み**。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.3、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.4、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -246,3 +246,29 @@
 **日本語：** Excel実装の担当者候補もユーザー本人と確認した。Owner／Executor／Approverの3役兼務は正式未承認。
 
 **English:** The user is also the proposed Excel developer. The three-role assignment is not formally approved.
+
+## 14. COND-DD-03の自己承認を許容する証跡・判定条件（2026-11-17）
+
+**判断：EXIT-HO-02-SA-01／方式採用済み**。ユーザー明示判断「客観的なテスト証跡を残すことで自己承認を許容する」に従い、Owner／Executor／Approverを本人が兼務する条件下でも、**事前固定した合否基準と再現可能な実測証跡によって結果を判断できる仕組み**を採用する。第三者レビューは原則必須としないが、**社内規程による独立承認と本人の承認権限の確認は省略しない**。
+
+### 必須確認チェック（未実施。完了を装ってチェックしない）
+
+- [ ] 試験の開始前に、各正式テストID・必須サブケース・期待結果・判定基準の版を確定し、更新履歴を残した。
+- [ ] Windows/Webと採用保存先を明記し、隔離試験ブック（原本ではない）で実施した。
+- [ ] TV-01〜03に対応するT15-01〜07等を紐付け、競合／確定順／部分保存／結果不明／高水位の個別実測とログを保管した。
+- [ ] 期待行集合・実際行集合・原本/版・`OperationKey`・ID高水位・再読込結果の一致を確認した。
+- [ ] 必須サブケースは全件Passであり、Fail／Blocked／Not Tested／未承認のN/Aを残していない。
+- [ ] 不合格・データ不整合・証跡不足の場合のFail-closed停止が実測され、差戻し先を記録した。
+- [ ] 本人が試験結果を自動的に合格扱いせず、結果と証跡へのリンク・自己承認の日時を記録した。
+- [ ] 社内規程で自己承認が許容されること、本人の承認権限、3役兼務の**正式決裁者**・決裁日を別途確認した。
+- [ ] 正式Owner／Executor／Approver、期限、STOP解除権限と差戻し先を正式割当台帳に記録した。
+
+**判定の区分**：方式＝**採用済み**／正式な3役兼務と本人の承認権限＝**未決**／実測とPass＝**Not Tested**／STOP-01＝**維持**。
+
+**使用する記録**：`docs/test/COND-DD-03_Self_Approval_Test_Evidence_Template.md`。既存の正式41テストIDは増減しない。COND-DD-04／05や他の条件へ無承認で横展開しない。
+
+## まとめ / Summary（自己承認条件）
+
+**日本語：** 客観的証跡による自己承認方式を採用し、事前合否基準・異常系実測・追跡可能な結果を必須にした。正式な権限確認と試験は未完了。
+
+**English:** The self-approval method needs clear test rules and saved results. Formal authority and testing are still open.

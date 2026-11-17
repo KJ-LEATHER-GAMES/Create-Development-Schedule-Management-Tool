@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.9（2026-11-17）  
+> **版**：Decision Roadmap Draft v1.0（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.3（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.4（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -192,3 +192,22 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-03の3役すべてをユーザー本人の仮候補として整理した。正式任命・兼務承認・期限は未決。
 
 **English:** The user is the proposed owner, developer, and approver. Formal role approval and deadlines are still open.
+
+## 15. S1／S2追補：COND-DD-03の自己承認方式を条件付き採用（2026-11-17）
+
+**確認された運用方針**：Owner／Executor／Approverを本人が担う仮配置に対して、**事前固定した合否基準と再現可能な実測・異常系の証跡を必須とする自己承認**を許容する（`EXIT-HO-02-SA-01`）。第三者レビューは原則必須にしない。ただし社内規程で独立承認が求められる場合はその規程を優先し、本人の決裁権限・正式兼務承認は個別に確認する。
+
+**S1／S2の今後の入力**：
+
+1. COND-DD-03の仮3役＝ユーザー本人を維持し、**社内の自己承認権限・正式任命決裁者・期限・STOP解除権限・差戻し先**を特定する。
+2. TV-01〜03と関連T15必須サブケースの事前合否基準、証跡格納先、隔離試験環境を定義する。記録テンプレート：`docs/test/COND-DD-03_Self_Approval_Test_Evidence_Template.md`。
+3. 実機テストの証跡に基づいて各ケースを別途判定する。Fail／Blocked／Not Tested／根拠のないN/Aがあれば自動Passを禁止し、STOP-01を継続する。
+4. COND-DD-07の情報システム部門の具体担当者は未定のまま保持し、他条件へ自己承認方式を自動展開しない。
+
+**重要な線引き**：**方式採用**は今回完了したが、**正式任命・組織的兼務承認・期限決裁はすべて未了**。正式割当0/10、正式41テスト全件Not Tested、詳細Exit10項目全件Not Evaluated、Gate未判定、STOP-01維持。S4の決裁とEXIT-HO-03/04の判定は先取りしない。
+
+## まとめ / Summary（自己承認方式）
+
+**日本語：** 客観的証跡を条件とするCOND-DD-03の自己承認方式を採用。本人の正式な承認権限・任命・検証・STOP解除は未完了。
+
+**English:** Evidence-based self-approval is the chosen method for condition 03. Formal authority, tests, and STOP release are still open.

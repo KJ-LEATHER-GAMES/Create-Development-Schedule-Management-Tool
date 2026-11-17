@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v1.3（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）、Excel実装Executor仮候補＝ユーザー本人（3役兼務の正式承認なし）。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v1.4（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）、Excel実装Executor仮候補＝ユーザー本人（3役兼務の正式承認なし）。**COND-DD-03の客観的テスト証跡を条件とする自己承認方式はEXIT-HO-02-SA-01として採用（正式な組織的兼務承認・任命は未了）**。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -395,3 +395,28 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-03のOwner・Executor・Approver候補をユーザー本人に仮設定した。3役兼務の正式承認、任命、期限、技術検証は未完了。
 
 **English:** The user is the proposed owner, executor, and approver for COND-DD-03. Formal role approval, deadlines, and technical tests are still open.
+
+## 19. COND-DD-03 客観的証跡を条件とする自己承認方式の採用（2026-11-17／方式判断のみ）
+
+**判断ID：EXIT-HO-02-SA-01（COND-DD-03に限定）**。ユーザーは、3役を本人が担う前提に対して**「客観的なテスト証跡を残すことで自己承認を許容する」**と明示した。これは**条件付き自己承認方式の採用判断**であり、組織上の正式兼務決裁、社内承認権限の証明、任命、検証PassまたはSTOP解除ではない。§16・18にある「自己受入案未承認」は**当時の経過**であり、方式については本§19が最新判断となる。
+
+| 確認項目 | 採用した管理条件 | 現在の達成状態 |
+|---|---|---|
+| ロール配置案 | Owner・Executor・Approverの仮候補はすべてユーザー本人（開発プロセス統括係） | 仮候補3役確認済み／正式任命なし |
+| 事前合否基準 | 試験ID・必須サブケースごとに入力、期待結果、判定閾値、適用環境、判定方法を**実行前**に版固定 | 未設定・未承認 |
+| 実測証跡 | 実施者、時刻、Excel Windows/Web・採用保存先、原本/試験版、`OperationKey`、`BaseRevision`、発番高水位、保存後再読込、期待行集合と実際行集合、操作ログ、結果を再現可能に残す（該当しないフィールドは理由を記載） | 未実施 |
+| 必須検証の網羅 | **TV-01〜03**に対応する既存の**T15-01〜07**の必須サブケース（T15-07の復元試験はCOND-DD-07/TV-08とも連動）および関連正式親テストをIDで参照し、各ケースを個別判定 | 全件Not Tested |
+| 自己承認の許容判定 | 必須ケースにFail／Blocked／Not Tested／根拠なきN/Aがなく、証跡が追跡可能で、異常系の停止とデータ保全が確認できる場合に限り、本人が結果・理由・参照証跡・決裁日時を記録できる | **許容ルールのみ採用／実行・判定なし** |
+| 第三者レビュー | 本案件の自己承認方式の**原則必須要件としない**。ただし社内規程・任命権限・監査要件に独立承認が必要ならその要件を優先 | 社内規程・正式受入権限は未確認 |
+| 異常・証跡欠落・環境不成立 | Pass不成立。Fail／Blocked／判定不能として原本更新を停止し、再検証または変更管理に差戻す。証跡作成のみをPassとみなさない | STOP-01維持 |
+| 正式化要件 | 社内権限確認、3役の本人引受と正式任命、兼務の組織上の決裁、正式期限、証跡格納先、STOP解除権限者・差戻し先を個別に記録 | **すべて未決／正式0/10** |
+
+**実行用様式**：`docs/test/COND-DD-03_Self_Approval_Test_Evidence_Template.md`（証跡記録テンプレート）。**既存41件の正式テストIDとTV-01〜09の枠組みは不変更**。テンプレート作成は試験実施・Pass認定を意味しない。
+
+**制限・整合性**：正式権限確認と実機の必須Passが揃うまで**STOP-01（原本書込禁止）継続**。COND-DD-04／05／07／08〜10への自己承認方式の自動適用なし。COND-DD-07の個人担当者は未定、保存先はBox第一候補／SharePoint Online代替のまま。正式割当**0/10**、正式41テスト**全件Not Tested**、EXIT-DD-01〜10**全件Not Evaluated**、Gate**未判定**、基本設計EXIT-06**Not Met**、Excel実装**Not Started**。過去の判断本文を上書きしない。
+
+## まとめ / Summary（COND-DD-03自己承認方式）
+
+**日本語：** 客観的な実測証跡を条件にCOND-DD-03の自己承認方式を採用した。正式任命・兼務権限・期限・実測は未完了で、STOP-01継続。
+
+**English:** Self-approval is allowed as a planned method only with clear test evidence. Formal roles and tests are still open. STOP-01 remains active.

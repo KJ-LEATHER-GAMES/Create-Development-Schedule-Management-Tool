@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v1.2／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）とEXIT-HO-01（A：詳細設計Exitの条件付き引継ぎ方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v1.3／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）とEXIT-HO-01（A：詳細設計Exitの条件付き引継ぎ方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -379,3 +379,25 @@
 **日本語：** CFG10-01 Aの管理方式承認を追加記録した。実コード・責任者・初期登録は未完了でCFG-DD-10-01はOpen。正式41テストは全件Not Tested、Exit/Gateは未判定。
 
 **English:** CFG10-01 Option A is approved for the setup process. Code values and owners are still open. All 41 tests are not tested. The exit gate is not decided.
+
+## 21. EXIT-HO-02-SA-01 — COND-DD-03 自己承認方式の条件付き採用
+
+| 項目 | 判断記録 |
+|---|---|
+| 判断ID／対象 | **EXIT-HO-02-SA-01／COND-DD-03（Excel採番・排他・確定順・保存整合性）** |
+| 受領した判断 | **2026-11-17／ユーザー「客観的なテスト証跡を残すことで自己承認を許容する」** |
+| 採用した方式 | **客観的・再現可能な試験証跡を必須とする自己承認の運用方針**。仮Owner・Executor・Approver＝ユーザー本人の3役兼務に適用する。第三者レビューは原則必須としない（社内規程が優先） |
+| 受入の最低条件 | 事前に版固定した期待結果／合否基準、Windows/Web・保存先の実測、TV-01〜03・T15-01〜07等の必須サブケース個別Pass、競合・発番・確定順・部分保存・結果不明・再読込・高水位のログ・照合、証跡へのリンク・判定理由・日時の保存。欠落時はPass不可 |
+| 正式決裁との境界 | **方式判断は採用済み**。ただし**組織上の兼務許可、本人の正式Approver権限、Owner／Executor／Approverの任命、期限・STOP解除権限はすべて別途未決**。社内規程に独立承認が必要なら自己承認方式より優先 |
+| 技術保証との境界 | 正式41テスト全件Not Tested、TV-01〜09もNot Tested。既存41正式IDは不変更、結果未取得。STOP-01（原本書込禁止）維持。Fail／Blocked／Not Testedで自己承認Pass不可 |
+| 非適用範囲 | COND-DD-04／05／07／08〜10への自動拡張なし。RISK／OPS-TECH／CFGやGate判断の解除なし |
+| 文書反映 | `EXIT-HO-02_Assignment_Register.md` v1.4、`EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md` v1.0、`EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md` v1.0、`docs/test/COND-DD-03_Self_Approval_Test_Evidence_Template.md`、変更記録`CHG-EXIT-HO-02-SA-01` |
+| 不変の状態 | EXIT-HO-02 Open／正式割当**0/10**、基本設計EXIT-06 Not Met・Freezeなし、詳細EXIT-DD-01〜10 Not Evaluated・Gate未判定、Excel実装Not Started |
+
+**前記§1〜20の判断履歴は保全する。今回の判断は自己承認方式の管理条件の採用であり、独立した組織上の正式任命決裁が行われたことにはならない。**
+
+## まとめ / Summary（自己承認方式）
+
+**日本語：** COND-DD-03における客観的証跡を条件とした自己承認方式を採用。正式な兼務・任命・検証は未了。
+
+**English:** Self-approval is permitted in principle when clear test evidence is saved. Formal roles and testing are not complete.
