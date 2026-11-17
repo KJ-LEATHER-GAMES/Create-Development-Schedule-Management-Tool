@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.3（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.4（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.7（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.8（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -105,3 +105,18 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-01の3コードの最終承認者候補をユーザー本人とした。正式任命は未完了。
 
 **English:** The user is the proposed approver for the three code types. Formal appointment is not complete.
+
+
+## 9. S1進捗：COND-DD-03のExcel設計・実装部門の特定（2026-11-17）
+
+- **確認内容**：ユーザー回答「Yes」により、Excelシステムの**設計・実装を開発プロセス統括係が担当予定**と確認。
+- **S1の現在地**：COND-DD-01はマスタコード管理部門を確認済み、コード内容の最終Approver仮候補はユーザー本人。COND-DD-03はExcel設計・実装部門を確認済み。COND-DD-07のBox／SharePoint運用組織は未特定のため**S1未完了**。
+- **COND-DD-03で残る決定**：技術Owner・Executor個人／役職・最終Approver、Windows/Webの責任範囲、引受、期限、兼務、技術検証環境、STOP解除・差戻し権限。
+- **制約**：Excelの技術的成立・実機検証をPassとは扱わずSTOP-01を維持。COND-DD-04／05の正式割当は自動更新しない。
+- **全体状態**：仮割当方針10/10、正式任命0/10、41テストNot Tested、Exit10項目Not Evaluated、Gate未判定。既決判断はすべて維持。
+
+## まとめ / Summary（S1進捗追補）
+
+**日本語：** COND-DD-03の設計・実装部門を確認した。次はCOND-DD-07の保存先管理組織を確認し、正式責任者と期限を決める。
+
+**English:** The Excel design and build team is confirmed. Next, confirm the cloud storage team. Formal owners and dates are still open.

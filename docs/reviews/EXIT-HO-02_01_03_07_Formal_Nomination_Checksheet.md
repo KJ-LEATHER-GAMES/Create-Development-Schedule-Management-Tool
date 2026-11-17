@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.3（2026-11-17）  
-> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03・07の担当組織は未特定。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v0.4（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係と確認済み、07の運用部門は未特定。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.7、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.8、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -151,3 +151,22 @@
 **日本語：** 開発プロセス統括係の3コードの最終承認者候補はユーザー本人。正式任命と期限は未決。
 
 **English:** The user is the proposed approver for the three code types. Formal assignments and dates are still open.
+
+
+## 8. COND-DD-03の設計・実装部門の確認（2026-11-17）
+
+- **確認根拠**：ユーザーへの質問「Excelシステムの設計・実装は、開発プロセス統括係で担当する予定ですか？」に対する回答「Yes」。
+- **実担当部門（設計・実装）**：**開発プロセス統括係**（ユーザー回答により確認）。
+- **仮Executor候補**：開発プロセス統括係内のExcel実装担当。個人・正式役職は未指名で、引受証跡なし。
+- **仮Owner候補**：Excel技術責任者。部門内の該当責任者と権限は未確認。
+- **仮Approver候補**：技術検証の受入責任者。技術検証者との独立性・兼務可否は未確認。
+- **未確定**：Windows／Webでの具体的な開発体制、実行環境、TV-01〜03の実測計画、担当者の正式任命、期限、承認権限、STOP解除権限、未達時差戻し先。
+- **技術保証の扱い**：採番・HistoryID／ReviewID確定順・直列保存・部分保存・復旧は**Not Tested**。技術成立が立証されるまで**STOP-01継続**。
+- **他条件**：COND-DD-01の管理部門と最終承認者候補、COND-DD-08〜10の本人仮指名を維持。COND-DD-04／05の人員配置を自動決定しない。COND-DD-07の保存先管理組織は未特定。
+- **正式状態**：EXIT-HO-02 0/10件正式任命、41テストNot Tested、Exit10項目Not Evaluated、Gate未判定。
+
+## まとめ / Summary（COND-DD-03確認）
+
+**日本語：** Excel設計・実装の担当部門を開発プロセス統括係として確認。担当者の正式任命と技術検証は未完了。
+
+**English:** The Excel design and development team is confirmed. Formal roles and technical tests are not complete.

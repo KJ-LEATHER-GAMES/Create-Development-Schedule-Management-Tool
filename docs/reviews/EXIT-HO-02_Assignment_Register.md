@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.7（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係（ユーザー回答により特定）、各コード最終承認者の仮候補＝ユーザー本人（今回の「OK」による確認）**。正式任命・承認権限・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v0.8（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係（ユーザー回答「Yes」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -247,3 +247,27 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-01の3コード最終承認者候補をユーザー本人として記録した。正式任命とコード実値の承認は未決で、正式割当は0/10。
 
 **English:** The user is the proposed final approver for all three master code types. Formal approval and code values are still open. Official assignments remain 0 of 10.
+
+
+## 13. COND-DD-03 Excel設計・実装部門の確認（2026-11-17／正式任命なし）
+
+**確認した発言**：「Excelシステムの設計・実装は、開発プロセス統括係で担当する予定ですか？」という直前の質問に対するユーザー回答「Yes」。この回答の対象は**設計・実装の実担当部門**であり、技術Owner・最終Approverの正式任命ではない。
+
+| 項目 | 現在の位置付け | 記録状態 |
+|---|---|---|
+| Excelシステムの設計・実装担当部門 | **開発プロセス統括係** | ユーザー回答により確認済み |
+| COND-DD-03 仮Owner | Excel技術責任者（担当部門内の具体的な責任者は未指定） | 候補維持・未任命 |
+| COND-DD-03 仮Executor | **開発プロセス統括係内のExcel実装担当** | 候補の所属先を具体化・実施者未指名 |
+| COND-DD-03 仮Approver | 技術検証受入責任者（必要な独立確認は未審査） | 候補維持・未任命 |
+| Windows/Webでの実装可否と技術的成立性 | TV-01〜03、T15関連ケース等で実測が必要 | **Not Tested** |
+| 正式Owner・Executor・Approver／引受・兼務承認／期限 | 適格者と社内決裁が必要 | **全件未決** |
+
+**境界・影響**：COND-DD-03のSTOP-01（必要な安全性が立証されるまで原本書込禁止）は維持し、DD14-01／DD15-01のFail-closedと確定順保証を緩和しない。部門が設計・実装を担当しても、採番競合・原子的保存・同時編集の技術保証を自動的に満たしたとは扱わない。関連のCOND-DD-04／05の正式な責任分担も自動変更しない。COND-DD-07のBox／SharePoint運用管理組織は**未特定**で継続。
+
+**履歴・状態保持**：§1〜12の原記録を保持。COND-DD-08〜10のユーザー本人仮指名も不変。EXIT-HO-02は仮割当10/10、正式任命**0/10**、正式41テストは全件`Not Tested`、詳細設計EXIT-DD-01〜10は全件`Not Evaluated`、Gate未判定、基本設計EXIT-06 `Not Met`。既承認のQ01〜Q24・CONS-DD-01・DD10-01〜DD15-02・OPS11-01・CFG10-01・EXIT-HO-01は不変。
+
+## まとめ / Summary（COND-DD-03担当部門確認）
+
+**日本語：** COND-DD-03のExcel設計・実装部門を開発プロセス統括係と確認した。技術責任者・受入承認者・期限は未決で、正式割当は0/10のまま。
+
+**English:** The Development Process Coordination Section will design and build the Excel system. Technical owners, approvers, and deadlines are still open. Formal assignments remain 0 of 10.
