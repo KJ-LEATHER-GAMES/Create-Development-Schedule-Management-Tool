@@ -1,6 +1,6 @@
 # 詳細設計 Exit Review — 根拠評価・正式判定準備票
 
-> **文書版**：Assessment Draft v0.2（2026-11-17）  
+> **文書版**：Assessment Draft v0.3（2026-11-17）  
 > **状態**：**正式Exit Reviewの入力資料／正式Exit判定未実施／Gate未判定**  
 > **プロジェクト内保存先**：`docs/reviews/Detail_Design_Exit_Review_Assessment_Draft.md`  
 > **評価の時点**：2026-11-17（JST）。本書の「仮評価」「引継ぎ可否」はAIによる証跡評価案であり、ユーザー決裁ではない。
@@ -125,6 +125,18 @@
 | EXIT-DD-10 | 基本EXIT-06 Not Metを明記し、OI-DD-01/02、COND-DD-06/07/08/09のOwner・数値／保存先決定期限・STOPを承認 | **未充足**。性能値・保存先・Owner未決 | 未割当のまま正式審査すればNot Met候補。条件決裁後はConditional候補 |
 
 **レビュー順**：`EXIT-HO-01`引継ぎ方式採否→`EXIT-HO-02`正式割当→`EXIT-HO-03`条件の期限・環境・数値決定責任→`EXIT-HO-04`10 Exitの正式評価→別途Gate決裁。実装・検証時のPassを設計段階で要求するものではないが、検証無しの機能公開・原本書込・例外保守は許可しない。
+
+
+## 9. EXIT-HO-01承認とEXIT-HO-02の未割当（2026-11-17）
+
+ユーザーが **EXIT-HO-01 A案を正式採用**。M0〜M3の管理節目とSTOP-01〜06の利用停止方針を引継ぎ前提として確定した。技術検証は実装と並行して行い、関連機能の必須検証Pass前は使用不可とする。**決定したのは方式であって、実装・検証のPassや条件付きGate承認ではない**。
+
+- **EXIT-DD-07**：引継ぎ方式は決裁済み。ただしTV-01〜09の正式担当・環境・合否・期限の割当は未決、`COND-DD-08`を中心に未充足。
+- **EXIT-DD-09**：`COND-DD-01〜10`のOwner／Executor／Approverと期限・差戻し先が未決。`COND-DD-09`はOpen。
+- **EXIT-DD-10**：基本設計EXIT-06 Not Met、OI-DD-01/02の性能閾値・保存先／復元条件と正式責任は未決。
+- **次**：`EXIT-HO-02_Assignment_Register.md` を用い10条件を正式割当し、`EXIT-HO-03`で環境・数値・根拠版の確定責任を補完する。その後にのみ正式Exit評価を開始する。
+
+**正式評価の不変値：EXIT-DD-01〜10＝すべてNot Evaluated。Gate＝未判定。全41正式テスト＝Not Tested。**
 
 ---
 

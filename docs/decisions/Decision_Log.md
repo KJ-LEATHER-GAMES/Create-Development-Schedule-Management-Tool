@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v1.1／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v1.2／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）とEXIT-HO-01（A：詳細設計Exitの条件付き引継ぎ方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -353,6 +353,24 @@
 | Open Itemの区別 | **CFG10-01の方式判断はClosed**。**CFG-DD-10-01の実値収集・初期設定・検証はOpen**。OPS-TECH-01もOpen／Not Tested |
 | テスト・Exit | **正式41管理IDすべてNot Tested**。OP11-T01〜05は未採用候補。TV-01〜09は検証計画IDのみ。**EXIT-DD-01〜10すべてNot Evaluated**、基本設計EXIT-06 Not Met、Freeze未実施、詳細Gate未判定 |
 | 保全 | 本書§1〜18の回答・判断本文は維持。詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 A、DD14-01 A、DD15-01 A、DD15-02 A、OPS11-01 Aを再採決しない |
+
+
+## 20. 詳細設計Exitの条件付き引継ぎ方式 — EXIT-HO-01
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| 判断ID・対象 | **EXIT-HO-01／EXIT-DD-07・09・10の条件付き引継ぎ方式** |
+| 承認・日付 | **2026-11-17／ユーザーの明示回答「EXIT-HO-01の引継ぎ方式はA案を採用します」** |
+| 採用判断 | **A Approved**：正式Exit前にOwner・Executor・Approver・期限・証跡・停止・差戻し先を決裁し、検証は実装と並行。必須Pass前は対象機能を利用しない |
+| 採用した管理規則 | **M0〜M3の引継ぎ節目、STOP-01〜06の利用禁止・解除条件**。管理規則の採用と実環境への制御実装は区別する |
+| 不採用案 | B：技術検証がすべて完了するまで正式Exit評価を保留。実装と並行して検証する既決方針に対し採用しない |
+| 理由の区分 | A案の合理性はレビュー資料の**AIによる評価**。ユーザー固有の承認理由は未提示のため補完しない |
+| 未決の割当 | **EXIT-HO-02＝Open／COND-DD-01〜10の正式Owner・Executor・Approver・期限はすべて未決**。役割名の案を指名済みとは扱わない。EXIT-HO-03の環境・性能閾値・根拠版確定も未決 |
+| 保全・境界 | **既存§1〜19の判断履歴は維持**：詳細Q01〜Q24、CONS-DD-01 A、DD10 A、DD11 B、DD12 A、DD13 A、DD14 A、DD15-01/02 A、OPS11 A、CFG10 Aを再審議しない。条件付きExit/Gateや技術検証Passの承認ではない |
+| 不変の状態 | **正式41管理ID全件Not Tested、EXIT-DD-01〜10全件Not Evaluated、Gate未判定、基本設計EXIT-06 Not Met・Freeze未実施、Excel実装Not Started** |
+| 関連記録 | `docs/reviews/EXIT-DD-07_09_10_Handoff_Review.md`、`EXIT-DD-07_09_10_Decision_Sheet.md`、`EXIT-HO-02_Assignment_Register.md`。変更管理 `CHG-EXIT-HO-01` |
+
+**次の判断**：EXIT-HO-02条件別の正式割当 → EXIT-HO-03条件具体化 → EXIT-HO-04正式10 Exit判定 → Gate別決裁。
 
 ---
 

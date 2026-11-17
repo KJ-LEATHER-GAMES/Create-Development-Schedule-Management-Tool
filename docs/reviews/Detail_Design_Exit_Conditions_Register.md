@@ -1,7 +1,7 @@
 # 詳細設計 Exit — 未完了条件・責任割当・停止ゲート台帳
 
-> **文書版**：Conditions Register Draft v0.2（2026-11-17）  
-> **状態**：Exit Reviewの引継ぎ条件案／**Owner・期限・合否条件は未承認の欄を保持**  
+> **文書版**：Conditions Register Draft v0.3（2026-11-17）  
+> **状態**：**EXIT-HO-01 A承認済み（条件付き引継ぎの枠組み）**／**COND-DD-01〜10の正式Owner・Executor・Approver・期限は未割当**。条件の解消証跡・合否は未実施  
 > **保存先**：`docs/reviews/Detail_Design_Exit_Conditions_Register.md`  
 > **条件IDは本レビュー用の新規管理ID**。既存の要求・判断・テストIDや変更管理番号とは別物であり、新しい機能・テストを自動承認しない。
 
@@ -89,6 +89,22 @@
 | COND-DD-10 | M0（正式Exit評価開始前） | 正式文書管理Owner・参照版 | Requirements等の版照合結果 | 版不明ExitのMet禁止 | Open |
 
 ここでいうM0〜M3は**客観的マイルストーンの提案**。実行日・担当者・承認者は未入力のまま。条件付き評価への移行には正式指名と期限決裁が必要。実行中の未検証項目はPassにならず、正式41件は全件Not Testedのまま。
+
+
+## 8. EXIT-HO-01承認後の条件管理・EXIT-HO-02割当状況
+
+**2026-11-17**、ユーザーが **EXIT-HO-01=A** を明示承認した。§7のM0〜M3を管理節目、STOP-01〜06を解除条件付きの利用停止方針として採用する。ただし、**本台帳の§2にある条件別のOwner・Executor・Approver・正式期限は一切承認されていない**。
+
+| 対象 | 件数／状態 | 管理の区別 |
+|---|---|---|
+| 引継ぎ方式 EXIT-HO-01 | **A Approved** | 検証は実装と並行。STOP解除は必須Pass・証跡・受入決裁後 |
+| 正式割当 EXIT-HO-02 | **0/10、Open** | 条件ごとのOwner・Executor・Approver・期限・差戻し先は未決 |
+| COND-DD-01〜10 | **10件Open** | 期限候補M0〜M3と正式期限を混同しない |
+| TV-01〜09 | **Not Tested** | 実行Owner／Executor、検証環境・予定日などは未割当 |
+| 正式受入テスト | **41件 Not Tested** | 実施結果は変更しない |
+| EXIT-DD-01〜10／Gate | **全件Not Evaluated／未判定** | 条件付き引継ぎ方式だけで正式Exitを評価しない |
+
+正式割当の入力は `EXIT-HO-02_Assignment_Register.md` を使用する。割当が欠ける条件の停止規則は維持し、正式な条件付き引継ぎの受入は留保する。
 
 ---
 

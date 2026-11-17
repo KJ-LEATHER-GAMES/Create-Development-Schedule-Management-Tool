@@ -1,6 +1,6 @@
 # 詳細設計Exit Review — 準備状況プレチェック（非正式判定）
 
-> **文書状態**：Readiness Precheck Draft v0.5（2026-11-17）／**正式Exit Reviewではない**  
+> **文書状態**：Readiness Precheck Draft v0.6（2026-11-17）／**正式Exit Reviewではない**  
 > **プロジェクト内保存先**：`docs/reviews/Detail_Design_Exit_Readiness_Precheck.md`  
 > **判定の境界**：EXIT-DD-01〜10の正式ステータスは**すべてNot Evaluated**。基本設計EXIT-06=Not Met、基本設計Freeze未実施、詳細設計Gate未判定、Excel実装Not Started、正式41管理IDすべてNot Tested。
 
@@ -77,6 +77,15 @@
 | **OI-DD-02／TV-08** | 版履歴復元・ID高水位保全 | 保存先・復元権限・保持期間・Owner未確定。復元保証まで運用開始不可 | EXIT-DD-07／10：**Not Evaluated** |
 
 **Gate境界**：本節はExit Reviewの入力資料であり、Met／Conditional／Not Metの正式判定ではない。基本設計EXIT-06はNot Met、基本設計Freezeは未実施、詳細Gateは未判定、正式41テストは全件Not Tested、OP11-T01〜05は候補のまま。誰がいつ実施するか、技術成立しない場合の変更・停止判断は正式Exitで扱う。
+
+
+## 7. EXIT-HO-01 A承認・EXIT-HO-02着手（2026-11-17）
+
+- **EXIT-HO-01 A（条件付き引継ぎ方式）をユーザー承認**。M0〜M3の管理節目、STOP-01〜06の安全利用停止方針を採用。
+- **EXIT-HO-02はOpen**：COND-DD-01〜10のOwner／Executor／Approver／正式期限は**0/10決裁**。役割案は正式割当ではない。
+- **EXIT-DD-07／09／10の仮評価は未変更**。Owner・期限・合否・証跡・差戻し先が未決のためConditionalへ昇格しない。
+- 技術検証TV-01〜09は実施前、正式テスト41件すべてNot Tested、基本設計EXIT-06 Not Met、詳細設計Exit10件Not Evaluated、Gate未判定を維持。
+- 次に `docs/reviews/EXIT-HO-02_Assignment_Register.md` に必要な正式任命・期限を記録し、受入決裁した後 `EXIT-HO-03`→`EXIT-HO-04`→Gateへ進む。
 
 ---
 
