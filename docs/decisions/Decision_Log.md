@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.6／2026-11-16。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v0.7／2026-11-16。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -266,8 +266,27 @@
 | 未実施・未解決 | **31管理IDすべてNot Tested**。OPN-DD-14/15、CFG-DD-10-01、OPS-DD11-01、OI-DD-01/02、RISK-DD-01〜04継続。基本設計EXIT-06 Not Met・未Freeze、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定 |
 | 判定状態 | **OPN-DD-13 Closed（テスト設計のみ）**。Excel実装・技術検証・受入実施・全体文書承認・Freeze・Gateは今回の承認に含まれない |
 
+## 15. 詳細設計補完の正式採否 — DD14-01（OPN-DD-14）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／Open Item | **DD14-01／OPN-DD-14** |
+| 承認者・日付 | **2026-11-16／ユーザーの明示回答**：「OPN-DD-14の設計判断DD14-01はAで進めます」 |
+| 採用判断 | **Option A Approved：単一書込者・直列コミット管理**。`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md` Review Draft v0.1のA案（§4）を採用。**B**＝複数書込者の条件付き更新、**C**＝簡易運用ロックは不採用 |
+| 既決判断との関係 | Q02・Q06・Q07・Q09〜Q14・Q18〜Q22、DD10-01、DD11-01、CONS-DD-01の要件を緩和せず、テーブル別不変連番、`MAX(正常確定HistoryID/ReviewID)`、追記専用、初回行集合整合を維持 |
+| 論理的な採用範囲 | 管理担当者1名・単一書込セッション、テーブル別発番高水位（欠番許容・再利用禁止）、`OperationKey`による同要求の再送照合、`HistoryID`／`ReviewID`の発番と正常確定の順序一致、保存先原本の再読込・期待行集合・版／キー整合の全件検証、結果不明・競合時の**更新停止／Fail-closed** |
+| 技術補助管理 | 論理補助要素の`tblIdSequence`および`tblSaveOperation`をA案の設計に採用。**物理テーブル・列・保存API・ロック方式・原子性は未確定／Not Tested**。補助表自体を新たな業務正本やDBトランザクション保証とは扱わない |
+| 正常確定・復旧の境界 | 自動保存通知だけで正常確定とせず、再読込・照合に失敗すれば新規更新と正常表示への公開を停止する。部分行・再送・復元後の高水位照合、表示再更新の復旧手順は**OPN-DD-15 Open**。保証不成立なら運用開始不可・変更管理再審議 |
+| テスト設計と実施状態を区別 | 既存正式**31管理ID（14親＋16 T12＋1 T13）は全件Not Tested**。レビュー§5の`C14-01〜12`は**未採用の追加候補**であり、今回は正式管理IDを増やさない。各候補の採否は`Test_and_Validation.md` §5.3で追跡し、実施結果は別欄で**Not Tested（候補・未実施）** |
+| 採用理由の区分 | **AI評価**：1名管理のMVP運用との整合と、同時書込み・結果不明時の非再利用／確定順リスクの抑止。**ユーザー固有の選択理由は未提示**。明示したのはA案の採用判断 |
+| 変更管理 | **CHG-DD-14-01**として`docs/changes/Change_Log.md`へ補完履歴を追記。既存の未承認Draftを具体化したものであり、**別の独立変更決裁があったとは扱わない** |
+| 文書反映先 | `docs/design/MVP_Design.md` Draft v0.7、`docs/test/Test_and_Validation.md` Draft v0.3、`docs/changes/Change_Log.md` Draft v0.8、`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md` Decision Record v0.2、本Decision Log Draft v0.7 |
+| 保全 | **§1〜14のQ01〜Q24／CONS-DD-01 A／DD10-01 A／DD11-01 B／DD12-01 A／DD13-01 Aの回答・承認本文を変更しない**。基本設計Q04=Bと詳細設計Q05=Aの過去履歴も維持 |
+| 判定状態 | **OPN-DD-14 Closed（論理制御方式のみ）**。基本設計EXIT-06 Not Met、Freeze未実施、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定。Excel実装Not Started、RISK-DD-04等の技術検証Not Tested、OPN-DD-15・OPS-DD11-01・CFG-DD-10-01はOpen |
+
+
 ## まとめ / Summary
 
-**日本語：** 過去のQ01〜Q24・CONS-DD-01・DD10〜12の決裁記録を維持し、DD13-01 Aのテスト設計承認を追記した。14親・16詳細・T13-01は全件未実施。OPN-DD-13は設計上Closed、次はOPN-DD-14。
+**日本語：** 既存Q01〜Q24およびCONS-DD-01／DD10〜13の判断履歴を保持し、DD14-01 Aの論理制御方式を追加した。31管理IDのテストは全件Not Testedで、C14-01〜12は未正式採用の候補。物理成立性未検証のままOPN-DD-15へ進む。
 
-**English:** Past decisions are kept. DD13-01 Option A is added for test design. All 31 test IDs are not tested. OPN-DD-13 is closed for design only. Next is OPN-DD-14.
+**English:** Past decisions are kept. DD14-01 Option A is approved for logical design. All 31 official tests are not tested. The 12 new cases are still candidates. Next is OPN-DD-15.

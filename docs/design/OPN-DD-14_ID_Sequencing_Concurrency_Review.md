@@ -1,16 +1,16 @@
 # OPN-DD-14 — ID採番・正常確定順・競合制御 詳細設計レビュー
 
-> 文書状態：**Review Draft v0.1／DD14-01 未承認／OPN-DD-14 Open**  
+> 文書状態：**Decision Record v0.2／DD14-01 Option A Approved（2026-11-16）／OPN-DD-14論理制御方式Closed**  
 > 作成日：2026-11-16（JST）  
 > プロジェクト内保存先：`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md`  
-> 参照正本（いずれも現時点の整理Draft）：`docs/design/MVP_Design.md` Draft v0.6、`docs/test/Test_and_Validation.md` Test Design Draft v0.2、`docs/decisions/Decision_Log.md` Draft v0.6、`docs/changes/Change_Log.md` Draft v0.7、`docs/design/OPN-DD-10_Data_Model_Review.md` Decision Record v0.2、`reference/AI協働開発_基本運用プロセス.md`。  
-> 承認履歴の取扱い：**詳細設計Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 Aは不変更**。このレビューは未確定の物理制御・正常確定の論理的保証を補完する案であり、ユーザーの採否前には確定仕様へ反映しない。
+> レビュー時点の参照資料（決裁後は順にDraft v0.7、Test Design Draft v0.3、Decision Draft v0.7、Change Draft v0.8へ更新）：`docs/design/MVP_Design.md` Draft v0.6、`docs/test/Test_and_Validation.md` Test Design Draft v0.2、`docs/decisions/Decision_Log.md` Draft v0.6、`docs/changes/Change_Log.md` Draft v0.7、`docs/design/OPN-DD-10_Data_Model_Review.md` Decision Record v0.2、`reference/AI協働開発_基本運用プロセス.md`。  
+> 承認履歴の取扱い：**詳細設計Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 Aは不変更**。本レビューはDD14-01 Aとして採用した論理制御契約の履歴を保持する。物理制御・実機保証は未検証であり、後工程で確定する。
 
 ## 0. 目的・スコープ
 
 **目的**：複数行を伴うExcel単一原本の書込みに対し、(1) テーブル別連番の一意性・不変性・非再利用、(2) `HistoryID`／`ReviewID`の最大正常確定IDが最新の確定操作に一致すること、(3) 同時操作での競合・上書きを抑止すること、(4) 部分保存／通信断／再試行時に不完全データを正常確定と誤認しないこと、の**レビュー可能な方式を提案**する。
 
-- **Now／DD14-01で判断**：書込主体の直列化方式、発番・確定順の契約、正常確定／曖昧な保存結果の扱い、OPN-DD-15へ引き継ぐ失敗境界。
+- **DD14-01 A承認済（2026-11-16）**：書込主体の直列化方式、発番・確定順の論理契約、正常確定／曖昧な保存結果の扱い、OPN-DD-15へ引き継ぐ失敗境界。
 - **Later／実装と並行して検証**：Excel Windows／Webおよび選定保存先（Box第一候補／SharePoint Online代替）での排他・自動保存・同時操作・保存結果検出・復元可能性。設計承認は機能保証ではない。
 - **Not Now**：新規承認ワークフロー、複数書込者による同時更新の積極対応、外部DBへの正本移行、別系統の定期バックアップ追加、先行独立PoC、VBA／Office Scripts必須化。
 
@@ -45,7 +45,7 @@
 
 **設計上の厳格な限界**：Excelファイルの複数行書込み、自動保存、版履歴復元がDBトランザクションや厳密な排他に相当するとは**確認されていない**。専用のコミット台帳や状態列だけでも物理原子性は成立しない。実装で「上記不変条件を保証できない」場合は**運用不可／Fail-closed**とし、技術方式または運用前提の変更を別途判断する。
 
-## 3. DD14-01の選択肢（採否待ち）
+## 3. DD14-01の選択肢（2026-11-16決裁：A採用、B/C不採用）
 
 | 方式 | 提案仕様 | 長所 | トレードオフ／評価 |
 |---|---|---|---|
@@ -53,9 +53,9 @@
 | **B 複数書込者・排他／版番号条件付き更新** | 各保存で原本版の比較、ロックまたはCAS相当の確定・再試行制御を行う。競合時は再入力/再評価 | 将来複数担当者への拡張余地 | Excel+保存先に必要な**原子的な条件付き更新機能があるか未確認**。複雑化・スコープ増を招く。MVP非推奨 |
 | **C 単一書込者・簡易運用ロック** | 表示上の「編集中」宣言＋連番管理。操作台帳/再送識別は設けず、失敗時に目視復旧 | 実装が最も軽い | 保存結果不明時の二重登録・ID再利用・確定順を機械的に追跡しにくく、Q06/Q11/DD10条件への保証が弱い。非推奨 |
 
-**推奨理由の区分**：A案を薦める理由はAIによる論理整合性・リスク評価である。**ユーザーの選択理由はまだ存在せず、A案承認済みとは記録しない**。
+**推奨理由の区分**：A案を薦める理由はAIによる論理整合性・リスク評価である。**ユーザー固有の選択理由は提示されていない**。2026-11-16のA案明示承認を正式記録し、AI評価と混同しない。
 
-## 4. A案の詳細デザイン（DD14-01で承認する対象／物理方式は条件付き）
+## 4. A案の詳細デザイン（DD14-01 A承認済み／物理方式は未確定）
 
 ### 4.1 書込権限・更新セッション
 
@@ -64,12 +64,12 @@
 3. 編集禁止をExcelのシート保護や「編集中」の表示のみで実現したものとみなさない。**保存先のアクセス権・開き方・共同編集設定を含め、Windows/Webとも実効的な書込制御が成立することを検証**する。
 4. 保存先（Box／SharePoint Online）とExcelクライアントの組み合わせは未選定。**書込排他が立証できなければA案であっても運用開始不可**。VBA/Office Scriptsの採用は必須としない。
 
-### 4.2 技術補助管理（未承認・追加正本ではない）
+### 4.2 技術補助管理（論理要素はA案採用／物理方式未承認・追加業務正本ではない）
 
 | 技術管理要素（仮） | 最小項目／用途 | 境界 |
 |---|---|---|
 | `tblIdSequence`（既存Draftの仮案） | `EntityName` PK／`LastIssuedID`／`UpdatedAt`。主要テーブル単位で**発番済み高水位**を管理（欠番許容） | 専用の**技術管理テーブル案**。`MAX(保存済行ID)+1`のみへの依存は禁止。物理保証未検証 |
-| `tblSaveOperation`（**今回の追加案**） | `OperationKey`（冪等な保存要求の識別子）、`OperationType`、`BaseRevision`、`AllocatedIds`、`ExpectedRowSet`、`SaveState`、`CommittedRevision`、`LastError`等 | 業務データの正本ではなく**正常確定・再送照合の技術管理領域候補**。物理テーブル名/列は採用後の実装補完で調整可 |
+| `tblSaveOperation`（**DD14-01 Aで論理要素として採用**） | `OperationKey`（冪等な保存要求の識別子）、`OperationType`、`BaseRevision`、`AllocatedIds`、`ExpectedRowSet`、`SaveState`、`CommittedRevision`、`LastError`等 | 業務データの正本ではなく**正常確定・再送照合の技術管理領域候補**。物理テーブル名/列は採用後の実装補完で調整可 |
 | レコード側の関連付け | 新規複数行を保存要求`OperationKey`へ紐づける仕組み、正常確定状態/確定版を識別する手段 | `tblDateHistory.CommitStatus`は現行Draft列、`tblReconciliationReview.CommitStatus`はDD10-01で必須。その他のレコードの物理列追加は**今回未確定** |
 
 - `OperationKey`は**再送識別用トークン**であり、テーブル別連番PKの代替ではない。操作を再試行しても同じ保存要求として検索できる必要がある。
@@ -139,9 +139,9 @@ stateDiagram-v2
 - 完了判定を後付けのログセル更新だけに依存しない。**クラウド原本を再取得して、同じ版の期待行集合を検証すること**が不可欠。同期やキャッシュの影響があるならその検知法は実機検証事項。
 - 保存先の版履歴保持、復旧権限、破損時の復旧後整合確認は**OI-DD-02／基本設計EXIT-06 Not Met**のまま。RISK-DD-04は**Not Tested**。
 
-## 5. 受入観点（候補・既存テストを改変しない）
+## 5. 受入観点（12件は引き続き候補・既存31テストを改変しない）
 
-次はレビュー用**候補テスト観点**であり、DD13-01承認済みのテストIDを追加・変更する決裁ではない。DD14-01承認後に`Test_and_Validation.md`へ採用可否と親子関係を記録する。現在の正式管理件数は**31件すべてNot Tested**のまま。
+次はレビュー用**候補テスト観点**であり、DD13-01承認済みのテストIDを追加・変更する決裁ではない。**DD14-01 A承認は方式の採否であり、C14-01〜12の正式採用ではない**。`Test_and_Validation.md` Draft v0.3 §5.3で候補12件の**正式採用状態＝候補・未承認**／**実施状態＝Not Tested**を分離して管理する。正式管理件数は**31件すべてNot Tested**のまま。
 
 | 候補ID | 既存関連親 | 条件・操作 | 合格期待値案 | 実施結果 |
 |---|---|---|---|---|
@@ -158,14 +158,14 @@ stateDiagram-v2
 | C14-11 | TEST-DD-013/014 | Windows/Webと保存先で排他・セッション重複を試す | 排他が証明できなければA案の成立をNot Met／Blocked扱い | Not Tested（候補） |
 | C14-12 | TEST-DD-013 | 取消行の確定後に先行設定行が遅れて確定 | 先行行の後確定を禁止し、代表日付は取消後Null | Not Tested（候補） |
 
-## 6. 承認条件・Exit／変更管理
+## 6. 承認結果・Exit／変更管理
 
 | 項目 | 状態と処置 |
 |---|---|
-| DD14-01 | **採否未決／ユーザーの正式判断待ち**。A/B/Cを選択。設計補完の採否と実機動作保証は別 |
-| OPN-DD-14 | **Open**。DD14-01承認後に論理プロトコルのClosed可否を判定。排他・原子的保存が成立するかは実機で条件付き検証 |
-| Decision Log／Change Log／MVP_Design | **未変更**。採用案の承認後に、判断ID `DD14-01` と変更管理ID案 `CHG-DD-14-01` を追記し、既存判断をそのまま残す |
-| Test_and_Validation | **未変更**。31管理ID全件Not Tested。候補C14-01〜12を既存親へどこまで反映するかは採用判断後の補完作業 |
+| DD14-01 | **2026-11-16／ユーザーがOption Aを明示承認**。論理制御契約のみ採用。B/C不採用。実機保証とは別 |
+| OPN-DD-14 | **Closed（論理制御方式のみ）**。排他・原子的保存が成立するかは実機で条件付き検証、未成立なら再Open／変更管理 |
+| Decision Log／Change Log／MVP_Design | **更新済**。`DD14-01 A` と `CHG-DD-14-01` を追記。既存Q01〜Q24／CONS-DD-01／DD10〜13の判断履歴は保持 |
+| Test_and_Validation | **Draft v0.3に候補／採否／実施の管理欄を追加**。正式31管理IDはNot Tested、C14-01〜12は正式未採用かつNot Tested。ケース正式採用は別判断 |
 | OPN-DD-15 | **Open**。部分失敗・再試行・版履歴復元・表示再生成の詳細な復旧手順と技術試験を担当 |
 | OPS-DD11-01 | **Open**。開催済／中止の誤登録訂正は運用開始前に手順承認が必要。DD11-01 B（状態監査表なし）を変更しない |
 | CFG-DD-10-01 | **Open**。マスタコードの実値・許容範囲は未確定 |
@@ -187,6 +187,6 @@ stateDiagram-v2
 
 ## まとめ / Summary
 
-**日本語：** OPN-DD-14の採番・確定順・競合制御に対しA/B/C案を比較し、単一書込者・直列コミット管理のA案を推奨する。採否未決であり、既存決裁と31件のNot Testedを維持。部分失敗復旧はOPN-DD-15へ引き継ぐ。
+**日本語：** DD14-01 Aを正式採用し、単一書込者・直列コミット論理方式を確定した。既存31管理IDはすべてNot Tested。C14候補12件は正式未採用で実施も未了。物理保証・部分失敗の復旧はOPN-DD-15へ引き継ぐ。
 
-**English:** OPN-DD-14 compares three design options. Option A uses one writer and serial commits. It is recommended but not approved. Past decisions stay the same. All 31 tests are not tested. Failure recovery remains in OPN-DD-15.
+**English:** DD14-01 Option A is approved for logical design. It uses one writer and serial commits. All 31 official tests are not tested. The 12 new test ideas are not approved yet. Recovery work remains in OPN-DD-15.
