@@ -1,6 +1,6 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v1.4（2026-11-17）  
+> **版**：Assignment Register Draft v1.5（2026-11-17）  
 > **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）、Excel実装Executor仮候補＝ユーザー本人（3役兼務の正式承認なし）。**COND-DD-03の客観的テスト証跡を条件とする自己承認方式はEXIT-HO-02-SA-01として採用（正式な組織的兼務承認・任命は未了）**。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
@@ -420,3 +420,26 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** 客観的な実測証跡を条件にCOND-DD-03の自己承認方式を採用した。正式任命・兼務権限・期限・実測は未完了で、STOP-01継続。
 
 **English:** Self-approval is allowed as a planned method only with clear test evidence. Formal roles and tests are still open. STOP-01 remains active.
+
+
+## 20. 開発スケジュール管理表の上長最終承認方針（2026-11-17／承認予定の確認）
+
+**確認内容**：ユーザーは「最終的には上長の承認を得ます」と表明し、直後に「ここでいう成果物はスケジュール表のこと？」と確認した。ここでの成果物は**開発スケジュール管理表（Excelシステム本体・運用対象の管理ブック）**を指す。設計書、試験証跡、運用・復元資料は、原則として当該成果物の承認判断を支える資料である。
+
+| 判定層 | 対象 | 予定する確認・承認者 | 実際の状態 |
+|---|---|---|---|
+| 技術試験の個別合否 | **COND-DD-03** の採番・排他・保存整合、TV-01〜03および関連正式T15等 | ユーザー本人による**客観的実測証跡を条件とする自己承認方式**（EXIT-HO-02-SA-01） | 方式採用のみ。正式権限・兼務決裁・実測は未完了 |
+| 成果物の最終受入 | **Excel開発スケジュール管理表本体**の業務利用・運用適合性（必要な資料を添付） | **上長から最終承認を得る予定**。具体的氏名・役職・決裁権限は未確認 | 取得前／承認範囲・基準・証跡・時期は未決 |
+| 正式Exit／Gate | 詳細設計Exit10項目およびGate判断 | 既定プロセスの正式権限者 | 全項目Not Evaluated／Gate未判定。上長の成果物受入予定と同一決裁とはみなさない |
+
+**解釈の境界**：COND-DD-03の自己承認方式は、スケジュール表全体の正式な利用許可・上長承認を代替しない。逆に上長の最終承認の予定は、現時点で本人の試験Approverを上長へ変更するものでも、3役兼務の組織的承認を得たことでもない。上長承認前に所定の試験・STOP解除条件を省略しない。
+
+**正式化までの未決事項**：(1) 上長の氏名・正式承認権限、(2) 承認対象となる管理ブックの版・機能範囲、(3) 受入基準・提示する設計／テスト／運用証跡、(4) 上長決裁のタイミング・期限・差戻し手順、(5) Exit/Gateとの関係。いずれも勝手に確定せず、後続の正式決裁に回す。
+
+**状態保全**：EXIT-HO-02 Open、正式割当**0/10**、41件の正式テストは全件`Not Tested`、EXIT-DD-01〜10は全件`Not Evaluated`、Gate未判定、STOP-01〜06を維持。COND-DD-07の個人担当者は未定、既決方式と過去の判断履歴を変更しない。
+
+## まとめ / Summary（上長最終承認）
+
+**日本語：** 管理表本体の最終受入について上長承認を取得する予定を記録した。技術試験の自己承認とは分離し、上長決裁と詳細Exit/Gateは未実施。
+
+**English:** Manager approval is planned for the Excel schedule workbook. This is separate from self-approval of technical tests. Formal approval is still open.

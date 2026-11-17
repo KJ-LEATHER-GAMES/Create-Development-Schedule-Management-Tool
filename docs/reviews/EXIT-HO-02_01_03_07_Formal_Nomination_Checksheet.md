@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v1.0（2026-11-17）  
+> **文書版**：Nomination Checksheet Draft v1.1（2026-11-17）  
 > **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Owner・Excel実装Executor・最終Approverの仮候補はユーザー本人（3役兼務の組織的な正式決裁は未完了）と確認済み。**客観的証跡を必須とする自己承認方式はEXIT-HO-02-SA-01で採用済み**。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.4、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.5、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -272,3 +272,28 @@
 **日本語：** 客観的証跡による自己承認方式を採用し、事前合否基準・異常系実測・追跡可能な結果を必須にした。正式な権限確認と試験は未完了。
 
 **English:** The self-approval method needs clear test rules and saved results. Formal authority and testing are still open.
+
+
+## 15. 成果物の上長最終承認とCOND-DD-03試験自己承認の区分（2026-11-17）
+
+- **ユーザーの確認**：「最終的には上長の承認を得ます」。ここでいう成果物は**開発スケジュール管理表のExcel管理ブック本体**。設計書・テスト結果・証跡・運用資料は成果物の承認資料として整理する。
+- **COND-DD-03技術判定**：Owner／Executor／Approverの仮候補はユーザー本人。テストの自己承認はEXIT-HO-02-SA-01に従う**証跡条件付き方式**。正式な組織権限・兼務承認・実測合格は未了。
+- **上長による最終判断**：管理表本体の最終受入は上長承認を取得する予定。これは**現時点の意向・承認ルート候補**であり、上長の実際の承認・委任・役職者指名・期限確定を示さない。
+- **Exit/Gateとの線引き**：上長の成果物承認と、COND-DD-03の条件解消Approver、詳細設計Exit/Gateの正式判断は、権限と範囲の確認なしに同一視しない。
+
+### 上長承認を実施する前に埋める項目（現時点は未決）
+
+- [ ] 上長の氏名／役職／管理表の利用承認権限を確認した。
+- [ ] 対象Excel管理ブックの版と対象機能・利用範囲を明示した。
+- [ ] 設計・運用資料と技術検証の証跡を提出し、必須停止条件を整理した。
+- [ ] 最終受入基準、必要な前提条件、期限と差戻し方法を決定した。
+- [ ] 上長の実承認（決裁日時、対象版、条件、承認記録）を取得した。
+- [ ] 詳細設計Exit／Gateの決裁との対応関係を確認した（必要なら別途決裁）。
+
+**状態**：上記はすべて未完了。正式割当0/10、41正式テスト全件Not Tested、Exit10項目Not Evaluated、Gate未判定、STOP-01継続。
+
+## まとめ / Summary（上長受入）
+
+**日本語：** Excelスケジュール管理表本体の最終受入には上長承認を予定。技術試験の自己承認とは分けて管理する。
+
+**English:** Manager approval is planned for the Excel schedule workbook. It is separate from technical test approval.

@@ -1,6 +1,6 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v1.4／2026-11-17／既存変更履歴を保持し、EXIT-HO-01 Aの引継ぎ方式承認を追加**  
+> **Draft v1.5／2026-11-17／既存変更履歴を保持し、EXIT-HO-01 Aの引継ぎ方式承認を追加**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
 > 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）・OPS11-01（A案）・CFG10-01（A案）の個別設計等の判断、ならびにEXIT-HO-01（A案：引継ぎ管理方式）の判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
@@ -281,3 +281,24 @@
 **日本語：** 自己承認の条件となる客観的証跡をCHG-EXIT-HO-02-SA-01に記録した。正式兼務決裁や実機Passは未完了。
 
 **English:** This change records evidence-based self-approval rules. Formal role approval and tests are still open.
+
+
+## 18. CHG-EXIT-HO-02-MGR-01 — 管理表本体の上長受入予定と技術自己承認の区分
+
+| 項目 | 記録 |
+|---|---|
+| ユーザー発言 | **2026-11-17：「最終的には上長の承認を得ます。ここでいう成果物はスケジュール表のこと？」** |
+| 記録前 | COND-DD-03の自己承認方式（EXIT-HO-02-SA-01）を採用。ただし「成果物の最終受入」と技術試験の個別合否判定の関係は未整理 |
+| 記録後 | **技術試験の自己承認**と**Excel開発スケジュール管理表本体の上長最終受入予定**を別の承認段階として記録。設計・テスト・運用資料は上長の受入判断に使う資料と位置づける |
+| 決裁境界 | 上長の個人・権限・決裁範囲、ブック版・受入基準・期限、正式兼務承認、詳細Exit/Gateとの関係は未決。**上長の実承認があったとは記録しない** |
+| 設計変更範囲 | 技術仕様・業務テーブル・正式41テストのID・STOP制御に変更なし。手続上の承認層の明確化のみ |
+| 現在状態 | EXIT-HO-02 Open、正式任命0/10、41正式テスト全件Not Tested、Exit10項目全件Not Evaluated、Gate未判定、STOP-01〜06維持 |
+| 関連 | 判断記録 `EXIT-HO-02-MGR-01`、`docs/reviews/EXIT-HO-02_Assignment_Register.md` v1.5、同任命確認票 v1.1、同ロードマップ v1.1 |
+
+**注**：本変更IDはユーザーが示した「上長承認を得る予定」を取り扱う管理履歴。正式な組織決裁や成果物リリースを承認したことを意味しない。
+
+## まとめ / Summary（上長承認ルート）
+
+**日本語：** スケジュール表本体の上長受入を予定として追記し、技術試験の自己承認との違いを整理した。正式承認は未了。
+
+**English:** This change records the plan for manager sign-off on the workbook. It is separate from technical test approval. Formal approval is still pending.

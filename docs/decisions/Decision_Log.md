@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v1.3／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）とEXIT-HO-01（A：詳細設計Exitの条件付き引継ぎ方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v1.4／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）とEXIT-HO-01（A：詳細設計Exitの条件付き引継ぎ方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -401,3 +401,24 @@
 **日本語：** COND-DD-03における客観的証跡を条件とした自己承認方式を採用。正式な兼務・任命・検証は未了。
 
 **English:** Self-approval is permitted in principle when clear test evidence is saved. Formal roles and testing are not complete.
+
+
+## 22. EXIT-HO-02-MGR-01 — 開発スケジュール管理表の上長最終受入ルート（予定）
+
+| 項目 | 確認・判断の記録 |
+|---|---|
+| 発言・日付 | **2026-11-17／「最終的には上長の承認を得ます。ここでいう成果物はスケジュール表のこと？」** |
+| 確認した対象 | **Excelの開発スケジュール管理表本体**を成果物の主対象とする。設計書・テスト結果・運用資料は受入審査の資料 |
+| 記録する進め方 | 管理表本体の**最終的な業務利用・受入承認は上長から得る予定**。技術的な検証結果の自己承認（EXIT-HO-02-SA-01）とは区別する |
+| 正式判断の境界 | **上長承認は未取得**。具体的な氏名・役職・承認権限、対象版、受入基準、申請／承認時期、兼務決裁、上長受入とExit/Gateの関係は未決。本人のCOND-DD-03技術Approver候補は維持 |
+| 既存の制御 | 客観的テスト証跡による自己承認ルール、STOP-01〜06、技術的必須Passと正式な権限確認を**省略しない** |
+| 現在状態 | EXIT-HO-02 Open／正式任命0/10、正式41テストすべてNot Tested、EXIT-DD-01〜10すべてNot Evaluated、詳細Gate未判定、基本設計EXIT-06 Not Met |
+| 記録反映 | `docs/reviews/EXIT-HO-02_Assignment_Register.md` v1.5、`EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md` v1.1、`EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md` v1.1、変更記録 `CHG-EXIT-HO-02-MGR-01` |
+
+**本節は上長承認を得るというユーザーの予定・方針の記録であり、上長本人の承認、正式な決裁権限・組織ルールの確認済みを意味しない。過去の判断本文を維持する。**
+
+## まとめ / Summary（上長承認予定）
+
+**日本語：** Excel管理表の最終受入では上長承認を予定し、技術試験の自己承認とは区別する。上長による正式決裁は未了。
+
+**English:** Manager approval is planned for the Excel workbook. It is separate from self-approval of technical tests. The manager has not approved it yet.

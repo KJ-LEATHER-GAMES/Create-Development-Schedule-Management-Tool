@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v1.0（2026-11-17）  
+> **版**：Decision Roadmap Draft v1.1（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.4（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.5（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -211,3 +211,24 @@ Owner・Executor・Approverの引受確認:
 **日本語：** 客観的証跡を条件とするCOND-DD-03の自己承認方式を採用。本人の正式な承認権限・任命・検証・STOP解除は未完了。
 
 **English:** Evidence-based self-approval is the chosen method for condition 03. Formal authority, tests, and STOP release are still open.
+
+
+## 16. 上長によるスケジュール管理表の最終受入を追加（2026-11-17／予定のみ）
+
+**今回の確認**：ユーザーは「最終的には上長の承認を得ます」と述べた。成果物の意味はExcelの**開発スケジュール管理表本体**を主対象として扱う。COND-DD-03の自己承認（技術試験の個別Pass）と上長による成果物の最終受入は異なる判定段階とし、設計書・テスト証跡・運用資料を後者の判断資料にする。
+
+| 進行上の区分 | 必要な入力 | 判断すること | 未決事項 |
+|---|---|---|---|
+| 技術検証 | 版固定の合否基準、TV-01〜03ほか必須試験の実測証跡 | COND-DD-03の技術試験結果を客観的証跡に基づいて自己判定 | 試験・正式な自己承認権限・兼務の組織決裁 |
+| 上長への受入申請 | 提出する管理ブック版、対象範囲、設計・テスト・運用資料 | 上長が管理ブックの最終的な業務利用可否を判断する予定 | 具体的な上長、承認権限、基準、決裁時期、承認記録 |
+| 詳細設計Exit／Gate | EXIT-HO-02/03/04の必要条件と各判断証跡 | 所定のExit／Gate権限者が別途正式判断 | すべて未評価／未判定。上長決裁と自動同一視しない |
+
+**順序・利用禁止**：実際の承認申請と運用開始の具体日程は未決。STOP-01〜06の必要な技術Pass／権限決裁の前に原本運用を許可しない。上長の承認予定をもって条件を解消したと扱わない。
+
+**変えない状態**：正式任命0/10、正式41テスト全件Not Tested、Exit10項目Not Evaluated、Gate未判定、COND-DD-07の個人担当者未定。
+
+## まとめ / Summary（最終受入）
+
+**日本語：** 上長がスケジュール管理表本体の最終承認をする予定を記録。技術試験の自己判定、上長受入、詳細Exit/Gateを区別して進める。
+
+**English:** Manager sign-off is planned for the schedule workbook. Technical tests, manager approval, and the Exit/Gate decision stay separate.
