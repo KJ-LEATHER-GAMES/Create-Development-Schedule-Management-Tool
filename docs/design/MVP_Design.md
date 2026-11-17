@@ -1,7 +1,9 @@
 # MVP Design — 開発プロセス統合管理ブック（詳細設計 Draft）
 
+> **文書版**：Draft v0.4／DD11-01 B承認反映（2026-11-15）
+
 > **文書ID**：未採番　**版**：Draft v0.3　**作成日**：2026-11-15  
-> **文書状態**：**Draft／文書全体は未承認・未Freeze**（CONS-DD-01とDD10-01の個別決裁は反映済）　**フェーズ**：MVP詳細設計（In Progress）  
+> **文書状態**：**Draft／文書全体は未承認・未Freeze**（CONS-DD-01、DD10-01、DD11-01の個別決裁は反映済）　**フェーズ**：MVP詳細設計（In Progress）  
 > **保存先（プロジェクト内）**：`docs/design/MVP_Design.md`  
 > **直接根拠**：`docs/handoffs/Context_Handoff_2026-11-15_v0.2.md`、`docs/design/Detail_Design_GrillMe_Completion_Report.md`  
 > **重要**：詳細設計GrillMe **Q01〜Q24は24/24確定済み**。本書はこれらの判断を**再採決せず設計に統合**する。確定判断と、本書で初めて記述する設計補完案は同一の承認状態ではない。
@@ -19,8 +21,9 @@
 | Overview・Requirements・Decision Log | **整理Draft／未承認** | OverviewのCurrent Focus／Next Actionは古い記述 |
 | 既知の設計整合問題 | **CONS-DD-01：A案Approved（2026-11-15）／設計整合化済** | 技術的成立・Gate・Freezeは承認されていない |
 | OPN-DD-10 データ構造 | **DD10-01：A案Approved（2026-11-15）／論理設計Closed** | コード実値、保存の原子性、受入検証は別項目で継続 |
+| OPN-DD-11 状態遷移・日付取消後再設定 | **DD11-01：B案Approved（2026-11-15）／通常業務の論理設計Closed** | 状態監査表なし。終端状態訂正はOPS-DD11-01 Open（運用開始前）、保存保証・受入は未検証 |
 
-**記述の区分**：**[確定判断]**＝過去GrillMe等でユーザーが選択済み、**[DD10-01承認]**＝A案として承認済みの論理データ設計、**[Draft補完案]**＝本書で追加した未承認の式・遷移・処理の提案、**[Now]**＝詳細設計Exitまでに整合・仕様化が必要、**[Later／未検証]**＝実装時等に成立性を確認、**[Not Now]**＝現MVPに追加しない。テーブルの候補列・物理実現方法を「確定」と誤記しない。
+**記述の区分**：**[確定判断]**＝過去GrillMe等でユーザーが選択済み、**[DD10-01承認]**＝A案として承認済みの論理データ設計、**[DD11-01承認]**＝B案として承認済みの開催回論理ルール、**[Draft補完案]**＝本書で追加した未承認の式・遷移・処理の提案、**[Now]**＝詳細設計Exitまでに整合・仕様化が必要、**[Later／未検証]**＝実装時等に成立性を確認、**[Not Now]**＝現MVPに追加しない。テーブルの候補列・物理実現方法を「確定」と誤記しない。
 
 ## 1. 目的・境界・参照順
 
@@ -38,7 +41,7 @@
 
 ### 1.3 文書間の権威と差分
 
-正式承認文書がSource of Truthであり、会話・GrillMe報告・本Draftは承認済み正本ではない。本書は**最新Handoff v0.2に基づく作業状態**であり、旧Overviewの「GrillMe開始」を次アクションとしない。先行基本設計と後発詳細設計に不一致があった **CONS-DD-01** は**ユーザーがA案を正式承認（2026-11-15）**。**OPN-DD-10のDD10-01もA案をユーザー承認（2026-11-15）し、4テーブルの論理設計を採用した。**第3章に原判断・変更前後・承認の履歴を保持したうえで、§5以降は承認後の設計へ統一する。**本Draft全体の承認を意味しない**。
+正式承認文書がSource of Truthであり、会話・GrillMe報告・本Draftは承認済み正本ではない。本書は**最新Handoff v0.2に基づく作業状態**であり、旧Overviewの「GrillMe開始」を次アクションとしない。先行基本設計と後発詳細設計に不一致があった **CONS-DD-01** は**ユーザーがA案を正式承認（2026-11-15）**。**OPN-DD-10のDD10-01もA案をユーザー承認（2026-11-15）し、4テーブルの論理設計を採用した。DD11-01もB案を承認（2026-11-15）し、追加の状態監査表を設けない通常遷移・再設定規則を採用した。**第3章に原判断・変更前後・承認の履歴を保持したうえで、§5以降は承認後の設計へ統一する。**本Draft全体の承認を意味しない**。
 
 参照：`docs/requirements/MVP_Requirements.md`、`docs/decisions/Decision_Log.md`、`docs/00_Project_Overview.md`、`docs/design/Detail_Design_GrillMe_Plan.md`、`reference/AI協働開発_基本運用プロセス.md`。GrillMe設計書は**質問前の計画**であり、最終Q番号ごとの意味は完了レポートを優先する。
 
@@ -58,10 +61,10 @@
 | Q10 | **B** | **Excel内代表日付**は履歴だけを正本として導出 | §6、外部正本とは別 |
 | Q11 | A | 対象種別×IDの正常確定履歴から最大HistoryIDを選ぶ | §6、OPN-DD-14 |
 | Q12 | A | 変更種別・変更後日付・理由を追記、変更前は先行履歴から導出 | §6 |
-| Q13 | A | 訂正は追記、取消は日付空欄を新規追記 | §6、OPN-DD-11 |
+| Q13 | A | 訂正は追記、取消は日付空欄を新規追記 | §6・7／DD11-01 B承認を補完 |
 | Q14 | A | 記録者・記録日時・変更種別ごとの検証を必須化 | §6 |
 | Q15 | A | 実効適用を親ステージ×イベントの判定から都度算出 | §7 |
-| Q16 | A | 開催状態を開催回に保存し遷移制限 | §7、例外はOPN-DD-11 |
+| Q16 | A | 開催状態を開催回に保存し遷移制限 | §7／DD11-01 B承認。終端誤登録訂正運用はOPS-DD11-01 |
 | Q17 | A | 非適用後も既存開催回保持、警告・操作制限、非自動中止 | §7 |
 | Q18 | A | `OccurrenceID`とイベント別`OccurrenceNo`、疑似重複は確認警告 | §4・5 |
 | Q19 | A | 管理者編集画面に更新を集約、正本直接編集禁止、表示は参照専用 | §8 |
@@ -142,6 +145,8 @@
 | `tblEvidence` | 1対象×1外部参照（同一ファイルの別対象紐付けは別行） | `EvidenceID` | `TargetType`＋`TargetID`の条件付き論理FK | **DD10-01 A承認** |
 | `tblReconciliation` | 1対象×1比較項目×1公式出典の**差異案件** | `ReconciliationID` | `TargetType`＋`TargetID`の条件付き論理FK | **DD10-01 A承認。現在状態は保持しない** |
 | `tblReconciliationReview` | 1差異案件に対する1回の照合／再照合／解消確認 | `ReviewID` | `ReconciliationID→tblReconciliation`、任意の`BasisEvidenceID→tblEvidence` | **DD10-01 A承認。追記専用** |
+
+**[DD11-01 B承認]** `tblOccurrenceStatusHistory`は**不採用・新設しない**。状態の正本は`tblOccurrence.OccurrenceStatus`、日付正本は共通`tblDateHistory`、DD10-01の差異レビュー履歴表は引き続き追記専用で維持する。
 | 採番管理領域（仮`tblIdSequence`） | テーブル別の最終発番状態1件 | `EntityName`（案） | 対象テーブル | **物理方式未選定／OPN-DD-14** |
 | 共通表示データ（仮`viewDisplay`） | 画面に供給する日付／対象／行ID等 | 元の各PKを保持 | 正本の結合・計算結果 | 再生成可能の方針確定。形状はDraft |
 
@@ -156,7 +161,7 @@
 | `tblProject` | `ProjectID`(PK)、`ModelCode`*、`ProjectCode`*、`OfficialProjectKey`、`ManagementApplicability`*、`Memo` | `ProjectID`は内部ID、公式キーと混用しない。機種×案件の重複検出。公式列の正確な名称・複合キー仕様は未定 |
 | `tblProjectStage` | `ProjectStageID`(PK)、`ProjectID`(FK)*、`StageID`(FK)*、`StageApplicability`*、`JudgmentBasis`（案） | UQ(`ProjectID`,`StageID`)。新規は全ステージ`未判定` |
 | `tblProjectEvent` | `ProjectEventID`(PK)、`ProjectID`(FK)*、`EventTypeID`(FK)*、`ProjectStageID`(FK)*、`EventApplicability`*、`JudgmentBasis`（案） | UQ(`ProjectID`,`EventTypeID`)。親行の`StageID`と`mstEventType.StageID`一致必須。**案件登録時に全種別を未判定生成（A承認）**。登録後の新マスタ追加は明示同期で補う |
-| `tblOccurrence` | `OccurrenceID`(PK)、`ProjectEventID`(FK)*、`OccurrenceNo`*、`OccurrenceStatus`*、`CreatedAt`（案） | UQ(`ProjectEventID`,`OccurrenceNo`)。`OccurrenceNo`はイベント別回次、変更で再番号付けしない |
+| `tblOccurrence` | `OccurrenceID`(PK)、`ProjectEventID`(FK)*、`OccurrenceNo`*、`OccurrenceStatus`*、`StatusReason`(条件付)、`StatusChangedBy`(条件付)、`StatusChangedAt`(条件付)、`StatusBasisRef`(任意)、`StatusBasisEvidenceID`(任意FK)、`CreatedAt`（案） | **DD11-01 B承認**：現在状態の根拠・記録情報（履歴表ではない）。開催済への遷移は根拠参照必須、中止は理由必須。同一回次一意、変更で回次再採番しない |
 | `tblMilestone` | `MilestoneID`(PK)、`ProjectID`(FK)*、`MilestoneTypeCode`*、`MilestoneName`*、`IsActive`*、`CreatedAt`*、`CreatedBy`*、`OfficialMilestoneRef`、`Memo` | **DD10-01承認**：UQ(`ProjectID`,`MilestoneTypeCode`)。代表日付は`tblDateHistory`由来。種別コード実値は初期設定で確定 |
 | `tblDateHistory` | `HistoryID`(PK)、`TargetType`*、`TargetID`*、`ChangeType`*、`AfterDate`、`DateClass`、`Reason`*、`RecordedBy`*、`RecordedAt`*、`CommitStatus`（案） | `TargetType`は`Occurrence`／`Milestone`を候補とする。取消なら`AfterDate`空欄。正常確定条件の実装は未確定 |
 | `tblEvidence` | `EvidenceID`(PK)、`TargetType`*、`TargetID`*、`EvidenceType`*、`Title`*、`FileLink`*、`RegisteredAt`*、`RegisteredBy`*、`IsActive`*、`Memo` | **DD10-01承認**：`TargetType`はProject／Occurrence／Milestone。リンクは外部参照、完全重複は警告し一律拒否しない |
@@ -206,7 +211,7 @@ mstStage (1) ─── (N) mstEventType
 - **[確定判断]** 開催回の日付変更は既存`OccurrenceID`に履歴を追加し、再開催は**新`OccurrenceID`と新`OccurrenceNo`**を採番する。開催回の削除・置換で再開催を表現しない。
 - **[DD10-01承認]** 証跡と差異の`TargetType`は`Project`／`Occurrence`／`Milestone`のみ許容。`TargetID`を**指定型の正本表だけで照合**し、不正・不存在の参照を拒否する（Excelに物理FKの自動保証はない）。`BasisEvidenceID`は差異案件と**同一対象**であることを検証する。
 - **[DD10-01承認]** 未解消差異の並立禁止、参照済み証跡・差異・レビュー・マイルストーンの物理削除禁止、レビューの追記専用、マイルストーンの日付正本は共通履歴のみとする。
-- **[Draft補完案]** その他の親参照先が既存履歴・開催回等から参照される場合も物理削除しない基本方針。OPN-DD-11〜15の例外動作は別レビュー。
+- **[Draft補完案]** その他の親参照先が既存履歴・開催回等から参照される場合も物理削除しない基本方針。OPN-DD-12〜15の例外動作は別レビュー。**[DD11-01 B承認]** 通常状態遷移に追加監査表は用いず、終端状態の誤登録訂正は通常操作で不可（OPS-DD11-01へ）。
 
 ## 5. ID採番・生成・同期・整合性
 
@@ -274,10 +279,10 @@ mstStage (1) ─── (N) mstEventType
 | 予定変更 | 新行に変更後日付・理由を記録 | 新しい日付 | 旧日付は先行履歴から導出 |
 | 誤入力訂正 | 正しい日付で新行を追加 | 訂正日付 | 誤入力行も保持 |
 | 設定取消 | `AfterDate`空欄の取消行を追加 | **空欄** | 過去有効日の復活は禁止 |
-| 取消後の再設定 | **新行を追記する方針案** | 新しい日付 | `ChangeType`・必須条件は**OPN-DD-11** |
+| 取消後の再設定 | **[DD11-01 B承認] `ChangeType=設定`の新行を追記** | 新しい日付 | 先行取消行は不変。`OccurrenceID`維持、`DateClass=暫定／正式`必須 |
 | 履歴が存在しない | 追加なし | 空欄（未設定） | 未計画とイコールではない（未計画は開催回なし） |
 
-**[Now／OPN-DD-11、OPN-DD-14]** 「正常確定」の機械判定（確定状態列・確定処理完了順・操作中断時の扱い）、取消行の`DateClass`、取消後の再設定の変更種別、日付・開催状態の同時操作は、確定判断に抵触せず実装前に定義する。`RecordedAt`ではなく**HistoryID最大**で代表を選ぶ判断は変更しない。
+**[DD11-01 B承認]** 開催予定日の取消は`ChangeType=取消`／`AfterDate`空欄／`DateClass`空欄であり、開催回を中止に変更しない。再設定は`ChangeType=設定`を再利用して新しい正常確定行を追記し、代表日付を更新する。**[Now／OPN-DD-14/15]** 正常確定の機械判定、確定処理完了順、日付・状態の同時保存と途中失敗復旧は技術設計・検証に引き継ぐ。`RecordedAt`ではなく**HistoryID最大**で代表を選ぶ既決判断は維持。
 
 ### 6.3 正式／暫定／実績
 
@@ -300,22 +305,33 @@ mstStage (1) ─── (N) mstEventType
 
 **[CONS-DD-01承認に伴う表示上の不変条件]** `tblProjectEvent`行の存在を実効`対象`や「開催回あり」と誤判定しない。親が未判定／対象外の場合は§7.1で実効判定を求め、閲覧向け開催予定・期限超過への混入を防ぐ（正確な例外包含条件はOPN-DD-12）。
 
-**[確定判断＋粒度の整理]** `未計画`は**実効適用＝対象のイベントで開催回が1件もない**状態を導出する（架空開催回を作らない）。要件の4状態「未計画／計画済／開催済／中止」は業務表示上保持。開催回の記録状態は別粒度で「開催予定／開催済／中止」。**Draft表示マッピング**として「開催回なし＝未計画」「開催回あり＋開催予定＝計画済」を対応付ける。ただし**複数開催回が異なる状態のときイベント単位で何を代表表示するかはOPN-DD-11**で確定し、勝手に過去回を潰さない。
+**[確定判断＋粒度の整理]** `未計画`は**実効適用＝対象のイベントで開催回が1件もない**状態を導出する（架空開催回を作らない）。要件の4状態「未計画／計画済／開催済／中止」は業務表示上保持。開催回の記録状態は別粒度で「開催予定／開催済／中止」。**[DD11-01 B承認]** 実効適用=`対象`時のイベント要約は「開催回なし＝未計画」「開催予定が1回以上＝計画済」「予定0・開催済あり＝開催済」「中止のみ＝中止」。開催回の各状態は保持し、実効適用が未判定／対象外なら通常の4値要約は割り当てない。詳細な4ガント・2一覧の採用表示条件はOPN-DD-12。
 
-### 7.2 開催回の状態・遷移（Q16、Q17、Q18）
+### 7.2 開催回の状態・遷移（Q16、Q17、Q18／DD11-01 B承認）
 
-**[確定判断]** `OccurrenceStatus`を各開催回へ保存し、許可された遷移以外は拒否。開催済＝会議開催の事実であり、事後宿題完了ではない。非適用化しても過去開催回・日付履歴を保持し**自動中止しない**。再開催は新開催回として別`OccurrenceID`を発行し、疑似重複を警告・確認する。
+**[確定判断]** 各回の状態正本は`tblOccurrence.OccurrenceStatus`。許可された通常遷移以外は禁止し、日付経過による自動開催済化はしない。非適用化後も旧回・履歴を保持し、自動中止しない。再開催は新`OccurrenceID`・イベント別`OccurrenceNo`。
 
-| 遷移（Draftの原則案） | 扱い | 確定／未決 |
-|---|---|---|
-| 新規開催計画 → 開催予定 | 新`OccurrenceID`と`OccurrenceNo`を付与 | **計画時生成は確定**。初期値・実装はDraft |
-| 開催予定 → 開催済 | 議事録・実施記録等に基づき管理者が明示操作 | **自動開催済にしないことは確定**。証跡必須条件はNow |
-| 開催予定 → 中止 | 管理者が中止理由と根拠を入力する案 | **例外遷移・必須項目はOPN-DD-11** |
-| 開催済／中止 → 他状態 | **自動で許可しない。例外・訂正経路は未定義** | **OPN-DD-11** |
-| 実効適用が対象外になった既存回 | 消去せず履歴参照は可能。警告を表示し変更操作を制限 | 制限操作の明細は**OPN-DD-11** |
-| 同じイベント・同一日で回を追加 | 既存開催回の重複疑いを警告し、確認を要求 | 重複検出の定義は**OPN-DD-11／14** |
+**[DD11-01 B承認]** 状態監査テーブル`tblOccurrenceStatusHistory`は新設しない。`tblOccurrence`の`StatusReason`・`StatusChangedBy`・`StatusChangedAt`・任意の`StatusBasisRef`／`StatusBasisEvidenceID`は**現行状態の根拠・記録情報**であり、過去遷移履歴とは扱わない。
 
-注意：この遷移表は未決の例外経路まで許可したものではない。正式な許可／禁止一覧・エラーコード・取消と状態の連動は詳細設計Exitまでに定義する。
+| 状態遷移・操作 | 許可／禁止と保存条件 |
+|---|---|
+| 新規計画→`開催予定` | 許可。実効対象、初回日付履歴、新ID／回次を整合保存 |
+| 新規計画→`開催済`／`中止` | **禁止**。最初は開催予定 |
+| `開催予定`→`開催済` | 許可。管理者が明示実行し、実施理由＋当該開催回の証跡IDまたは外部根拠参照＋正常確定した`実績`日付履歴を要する |
+| `開催予定`→`中止` | 許可。管理者の明示操作と**中止理由必須**。過去日付履歴を削除・自動取消しない |
+| `開催予定`→同状態 | 状態不変。日付変更・取消・再設定・訂正は`tblDateHistory`で追記 |
+| `開催済`／`中止`→他状態 | **通常操作禁止**。誤登録訂正はMVP通常運用対象外（OPS-DD11-01で復旧・訂正運用を別途確定） |
+
+**[DD11-01 B承認]** 同一日付の別開催回は中止回を含め疑似重複として検知し、警告・明示確認・確認理由を要するが一律禁止しない。イベント内回次重複は保存拒否。実効適用が`対象外`／`未判定`の間は新規回作成・通常状態遷移・予定日編集を禁止し、過去回の閲覧・根拠付き日付誤記訂正・DD10-01の証跡／差異照合は許可。対象復帰時は管理者へ状態・日付の再確認警告を表示する。
+
+### 7.3 DD11-01 B承認：日付取消、複数回要約、リスクの境界
+
+- 日付取消（`ChangeType=取消`）は`AfterDate`・`DateClass`を空欄にした**追記行**とし、`OccurrenceStatus=開催予定`を維持。取消後の再設定は`ChangeType=設定`を再利用し新`HistoryID`行に日付・`暫定`／`正式`を記録する。過去行と`OccurrenceID`は不変。開催済／中止の**事実誤記に限る日付訂正**は管理者が根拠を残して別操作として実行する。
+- イベント単位の優先順位は`開催予定`あり→**計画済**、なければ`開催済`あり→**開催済**、全回中止→**中止**、0回→**未計画**。個別回数・内訳は消さず、日付未設定回も「計画済」だが管理用に未設定表示する。実効適用が対象外／未判定なら通常の4値業務要約は表示しない。G01〜G04・L01/L02への最終出力はOPN-DD-12。
+- **OPS-DD11-01（Open／運用開始前）**：終端状態の誤登録訂正は通常UIに提供しない。申告・権限・根拠の外部保存・影響範囲と復元要否・版履歴を使った場合の他レコード影響・復旧後の整合確認手順を文書化し、運用開始前に別途承認する。**状態監査履歴をアプリ内で再現できないリスク**は残る。OPN-DD-15・OI-DD-02と連携するが、未承認の復旧方式をここで採用済みにしない。
+- **OPN-DD-14／15（Open／Not Tested）**：現行状態と実績日付履歴の整合確定、HistoryID確定順、競合、部分失敗と再試行。**DD11-01 B承認はこれらの技術検証完了を意味しない**。
+
+**詳細レビュー記録：** `docs/design/OPN-DD-11_State_Transition_Review.md`（Decision Record v0.2 §§1〜8）。
 
 ## 8. 管理画面・保存処理・表示更新
 
@@ -421,16 +437,16 @@ mstStage (1) ─── (N) mstEventType
 | TEST-DD-001 | 案件登録→`ProjectID`一意、全標準ステージ行＋**登録時点の全イベント種別行を`未判定`で生成**、親StageID整合、案件×イベント種別UQ、公式案件ID別列。**開催回は0件** | REQ-MVP-001〜004 | **Not Tested**／原子性OPN-DD-14 |
 | TEST-DD-002 | ステージ判定を未判定→対象→対象外→対象へ変更。**イベント行は作り直さず**既存`ProjectEventID`・保存判定値・開催回・履歴を保持。実効値のみ変わり、未判定・対象外では行存在だけで予定抽出しない | REQ-MVP-003〜005 | **Not Tested**／画面除外明細OPN-DD-12 |
 | TEST-DD-003 | 開催計画で1回生成、同じ予定日の訂正は同回の履歴追加、再開催は新回次・新ID | REQ-MVP-006・031 | Not Tested |
-| TEST-DD-004 | 初回設定→変更→訂正→取消。最大の**正常確定HistoryID**で現行日付を取得、取消後空欄、先行行を保持 | REQ-MVP-008〜010・031 | Not Tested |
-| TEST-DD-005 | 既存案件の登録済み`MilestoneTypeCode`でマイルストーン作成→同案件×同コード重複拒否、無効`ProjectID`拒否。`tblDateHistory`に設定→変更→取消を追記し、マイルストーン不変IDのまま代表日付が空欄へ更新されることを確認 | REQ-MVP-008〜010 | **Not Tested**／DD10-01論理設計確定、OPN-DD-11/14へ依存 |
-| TEST-DD-006 | 開催予定→開催済を根拠付きで更新。日付経過だけで開催済にならない。非適用化後の回を保持 | REQ-MVP-005・007・011 | Not Tested／OPN-DD-11 |
+| TEST-DD-004 | 初回設定→変更→訂正→取消→**設定による再設定**。最大の**正常確定HistoryID**で現行日付を取得、取消直後空欄、再設定後新日付、先行行を保持。`OccurrenceStatus`は取消前後で不変 | REQ-MVP-008〜010・031 | Not Tested |
+| TEST-DD-005 | 既存案件の登録済み`MilestoneTypeCode`でマイルストーン作成→同案件×同コード重複拒否、無効`ProjectID`拒否。`tblDateHistory`に設定→変更→取消を追記し、マイルストーン不変IDのまま代表日付が空欄へ更新されることを確認 | REQ-MVP-008〜010 | **Not Tested**／DD10-01・DD11-01論理設計確定、OPN-DD-14へ依存 |
+| TEST-DD-006 | `開催予定→開催済`は理由・同一回の証跡／外部根拠・実績日付と現行状態が整合、`開催予定→中止`は理由必須。終端から通常逆遷移を拒否し、**状態監査表は作らない**。日付経過だけでは開催済化せず、非適用化後も回を保持 | REQ-MVP-005・007・011 | **Not Tested**／DD11-01 B論理設計確定、OPN-DD-13/14/15 |
 | TEST-DD-007 | `Project`／`Occurrence`／`Milestone`別に外部証跡を登録。初回差異＋`要確認`レビュー→月次`差異継続`→明示`解消`→再発`要確認`を同`ReconciliationID`へ追記し、旧Review行を保持、最新状態・根拠・未解消抽出が一致することを確認 | REQ-MVP-011〜012 | **Not Tested**／DD10-01論理設計確定、詳細手順OPN-DD-13 |
 | TEST-DD-008 | 管理者一覧／詳細の入力から正本保存→表示自動更新。失敗時は正本を保持しエラー表示・再更新 | REQ-MVP-013・028〜029 | Not Tested／OPN-DD-15 |
 | TEST-DD-009 | G01〜G03の固定列数・粒度・適用既定除外・全名称改行、G04の旬／日切替と詳細参照 | REQ-MVP-015〜022・027・033 | Not Tested／OPN-DD-12 |
 | TEST-DD-010 | L01はシステム当日基準で過去未開催、L02は任意基準日〜翌々月末、OccurrenceID重複なし。未計画は管理画面のみ | REQ-MVP-014・023〜025 | Not Tested／OPN-DD-12 |
 | TEST-DD-011 | 閲覧者A/B、画面G01/G02で独立絞り込み。原本・他者に影響しない。開始期間は管理者のみ変更 | REQ-MVP-019・026・028〜030 | Not Tested／RISK-DD-01/03 |
 | TEST-DD-012 | 追加イベント種別は**明示同期前には既存案件へ行追加されず**、管理者の明示差分同期後に各案件へ不足イベント行を`未判定`で1件ずつ生成。既存ID・判定・履歴不変、再実行で二重登録なし。追加ステージも不足行を同期 | REQ-MVP-003〜005・031 | **Not Tested**／部分失敗OPN-DD-15 |
-| TEST-DD-013 | 不正FK／二重PK／重複回次／不正履歴に加え、`TargetType`とIDの不一致、同一未解消差異の二重登録、対象不一致の`BasisEvidenceID`、確定済レビュー改変、設定フラグとSnapshotの不一致を拒否。競合は実装環境で確認 | REQ-MVP-006・010〜012・031 | **Not Tested**／DD10-01論理規則確定、OPN-DD-13/14・RISK-DD-04 |
+| TEST-DD-013 | **DD11-01 B**の不正遷移・必須理由／根拠欠落・同一回でない`StatusBasisEvidenceID`、不正FK／二重PK／重複回次／不正履歴に加え、`TargetType`とIDの不一致、同一未解消差異の二重登録、対象不一致の`BasisEvidenceID`、確定済レビュー改変、設定フラグとSnapshotの不一致を拒否。競合は実装環境で確認 | REQ-MVP-006・010〜012・031 | **Not Tested**／DD10-01論理規則確定、OPN-DD-13/14・RISK-DD-04 |
 | TEST-DD-014 | Box／SharePoint候補環境のWindows・Web動作、90列全文表示・性能・版履歴からの復元を検証 | REQ-MVP-028〜033 | Not Tested／**Later、EXIT-06** |
 
 **Q01〜Q22 → Test IDの追跡索引**（**結果はすべてNot Tested**）：
@@ -454,8 +470,8 @@ mstStage (1) ─── (N) mstEventType
 |---|---|---|---|
 | EXIT-DD-01 | §4 DD10-01承認済みの4テーブル・論理辞書・関係 | **OPN-DD-10論理設計確定**。残り主要表の列・採番技術／マスタ初期値の確認 | **Not Evaluated** |
 | EXIT-DD-02 | §4〜5 ID／UQ／FK案 | 採番の確定順・競合の不変条件と方式明文化 | **Not Evaluated** |
-| EXIT-DD-03 | §3・7 適用と未計画・再開催 | **CONS-DD-01 A承認・設計反映は完了**。複数回・例外状態等の補完は未確定 | **Not Evaluated** |
-| EXIT-DD-04 | §6 共通履歴・代表日付 | 正常確定判定、取消後再設定、区分の必須条件 | **Not Evaluated** |
+| EXIT-DD-03 | §3・7 適用と未計画・再開催 | **CONS-DD-01 A、DD11-01 B承認済み**。通常状態遷移・複数回要約は論理仕様確定。OPS-DD11-01の訂正運用、保存保証は別途未完了 | **Not Evaluated** |
+| EXIT-DD-04 | §6 共通履歴・代表日付 | **DD11-01 B承認**：取消区分空欄・再設定=設定を採用。正常確定判定・同時保存はOPN-DD-14／15で検証 | **Not Evaluated** |
 | EXIT-DD-05 | §4・10 DD10-01承認済み証跡／差異／追記レビュー | 論理参照・解消履歴は確定。実コード設定と受入テスト・技術保証は未実施 | **Not Evaluated** |
 | EXIT-DD-06 | §8〜9 編集・4ガント・2一覧 | 画面出力列・G04行粒度・除外条件・復旧ルール | **Not Evaluated** |
 | EXIT-DD-07 | §13 未検証リスク | 確認時期・環境・担当・受入方法をExitへ記載 | **Not Evaluated** |
@@ -474,14 +490,15 @@ mstStage (1) ─── (N) mstEventType
 | **CONS-DD-01** | 基本Q04と詳細Q05の生成タイミング差分 | **A案承認（2026-11-15）**。原判断を保持してChange Log／Decision Log／MVP Designへ反映 | **Approved／設計整合化済（技術未検証）** |
 | **OPN-DD-10** | マイルストーン／証跡／差異・再照合履歴の論理データ設計 | **DD10-01＝Aを承認（2026-11-15）**。4表のPK/FK・列・UQ・論理検証を§4・10に反映 | **Closed（論理設計）／実装未検証** |
 | **CFG-DD-10-01** | `MilestoneTypeCode`／`EvidenceType`／`CompareFieldCode`の実業務コード一覧・対象別許可表 | 業務マスタの値と許容対象を取得・初期登録。未登録コード拒否を実機確認 | **Open（実装前の初期設定）** |
-| OPN-DD-11 | 許可状態遷移・複数回・取消後再設定・日付属性 | 許可／禁止と例外の表、入力制約 | Open（本書は案） |
+| **OPN-DD-11** | 許可状態遷移・複数回・取消後再設定・日付属性 | **DD11-01＝Bを承認（2026-11-15）**。通常状態・代表表示・取消再設定の論理仕様は§6・7で確定 | **Closed（通常業務の論理設計）／実装未検証** |
+| **OPS-DD11-01** | 終端状態の誤登録訂正・復元をMVP通常操作外としたことによる監査・復旧ギャップ | 申告・権限・外部根拠・版履歴による復元影響・整合再確認の手順を運用開始前に別途承認（OPN-DD-15／OI-DD-02連携） | **Open／運用開始前の必須対応** |
 | OPN-DD-12 | G01〜G04とL01/L02、要対応の出力明細 | 画面項目・抽出・状態別除外・表示重複ルール | Open（本書は案） |
 | OPN-DD-13 | 主要正常系の受入ケースと要件→設計→テスト対応 | ケース入力・期待結果・担当・結果欄 | Open（本書は案） |
 | OPN-DD-14 | 採番競合・HistoryID確定順・失敗確定の保証 | 実装前の不変条件／検証条件、実装時成立性確認 | Open（本書は案） |
 | OPN-DD-15 | 表示再生成／同期失敗の鮮度判定・復旧 | エラー遷移、再試行・部分失敗の最小手順 | Open（本書は案） |
 | OPN-DOC | Overviewの古いNext Action／旧進行記述 | **Decision Logへの詳細24判断追記は完了**。Overview等の旧進行記述は未更新 | **一部完了／Overview更新はOpen** |
 
-*OPN-DD-10のみユーザーのDD10-01明示回答を根拠に論理設計としてClosedとした。その他のOpen Itemは本文提案の存在だけで解消したことにしない。責任者や承認日を推測で設定しない。*
+*OPN-DD-10はDD10-01 A、OPN-DD-11はDD11-01 Bの**ユーザー明示回答**を根拠に論理設計としてClosedとした。OPS-DD11-01とOPN-DD-12〜15は未解決。未承認の提案の存在だけで解消としない。責任者・承認日を推測で設定しない。*
 
 ### 13.2 Later（既決の確認時点までに必ず追跡）
 
@@ -501,14 +518,14 @@ mstStage (1) ─── (N) mstEventType
 
 ### 13.4 次アクション（本書作成後）
 
-**次アクション**：**CONS-DD-01のA案決裁、DD10-01のA案決裁と4テーブルの論理設計反映が完了**。**OPN-DD-11（開催状態遷移・取消後再設定）を次に確定**し、その後OPN-DD-12〜15を順次判断・確定する。Gate判断はユーザーが行う。要件・基本設計の独立正本は提示された場合に変更ID付きで履歴を保持しながら整合化する。
+**次アクション**：**CONS-DD-01 A・DD10-01 A・DD11-01 Bの個別決裁と設計反映が完了**。**OPN-DD-12（4ガント・2一覧の出力仕様）を次に確定**し、OPN-DD-13〜15とOPS-DD11-01（運用開始前）を継続管理する。Gate判断はユーザーが行う。要件・基本設計の独立正本は提示された場合に変更ID付きで履歴を保持しながら整合化する。
 
-**本Draft作成の完了条件（文書作成と正式承認を分離）**：Q01〜Q24の対応、CONS-DD-01の変更管理、DD10-01の論理データ設計補完、テーブル・PK/FK・履歴・状態・入出力の最小案、4ガント＋2一覧、主要受入ID、Now／Later／旧EXIT-06が記録されている。正式な合格・実装可能性は**未判定**。
+**本Draft作成の完了条件（文書作成と正式承認を分離）**：Q01〜Q24の対応、CONS-DD-01の変更管理、DD10-01の論理データ設計補完、DD11-01 Bの通常遷移・取消再設定、テーブル・PK/FK・履歴・状態・入出力の最小案、4ガント＋2一覧、主要受入ID、Now／Later／旧EXIT-06が記録されている。正式な合格・実装可能性は**未判定**。
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** 詳細設計Q01〜Q24、CONS-DD-01 A承認を維持し、DD10-01 A承認により4テーブルの論理データ設計を反映した。OPN-DD-10は論理設計上Closed。マスタコード実値と原子性・技術検証は未解決であり、基本設計EXIT-06 Not Met、基本設計未Freeze、詳細設計Exit/Gate未判定は維持する。次はOPN-DD-11。
+**日本語：** 詳細設計Q01〜Q24とCONS-DD-01 A／DD10-01 Aの判断履歴を保持し、DD11-01 B承認の通常状態遷移・取消再設定・複数回要約を設計反映した。OPN-DD-11は通常業務の論理設計上Closed。終端状態の訂正運用OPS-DD11-01、技術検証、基本設計EXIT-06、Exit／Gateは未解決。次はOPN-DD-12。
 
-**English:** All 24 detailed design decisions and CONS-DD-01 are kept. Option A for DD10-01 is approved, and the four-table design is updated. Master codes and technical tests are still pending. Design freeze and Gate review are not complete. Next is OPN-DD-11.
+**English:** All past decisions are kept. Option B for DD11-01 is approved and added to the design. OPN-DD-11 is closed for normal design. Error correction rules, tests, and Gate review are still open. Next is OPN-DD-12.

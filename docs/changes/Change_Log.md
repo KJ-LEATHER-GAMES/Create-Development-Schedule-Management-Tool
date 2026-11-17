@@ -1,8 +1,8 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v0.4／2026-11-15／CONS-DD-01の承認履歴を保持し、DD10-01（A）の論理設計補完を記録**  
+> **Draft v0.5／2026-11-15／CONS-DD-01（A）、DD10-01（A）履歴を保持し、DD11-01（B）の補完を記録**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01の採否（A案）およびDD10-01の論理データ設計（A案）**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01の採否（A案）、DD10-01の論理データ設計（A案）、DD11-01の通常遷移論理設計（B案）**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
@@ -10,6 +10,7 @@
 |---|---|---|---|---|
 | **CONS-DD-01** | 主要設計変更／基本・詳細設計の整合 | イベント適用行の生成タイミング | **Option A Approved／決裁済、指定文書へ反映済（設計レベルで差分解消）** | **ユーザー（本チャットの明示回答）／2026-11-15** |
 | **CHG-DD-10-01** | 重要な詳細設計補完／旧Draftの論理データ構造の改訂 | マイルストーン・証跡・照合差異と追記専用再照合履歴の4テーブル化 | **DD10-01 Option A Approved／設計への反映済**（旧Draftは未承認。新たな独立変更決裁ではない） | **ユーザーによるDD10-01採用／2026-11-15** |
+| **CHG-DD-11-01** | 詳細設計補完／状態履歴表を追加しないB案の採用 | 開催回の通常遷移・代表表示・日付取消後再設定・非適用化制限・終端状態訂正の運用境界 | **DD11-01 Option B Approved／設計反映済**（旧未承認A案からB案への選択。独立した変更決裁ではない） | **ユーザーによるDD11-01採用／2026-11-15** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -55,7 +56,8 @@
 
 - **CONS-DD-01の採否**：ユーザー承認済。**設計上の生成タイミング差分は解消**。ただし物理実装・性能の検証は未完了。
 - **OPN-DD-10**：**DD10-01 A案を承認し、論理データ設計をClosed**。実コード一覧はCFG-DD-10-01、原子性はOPN-DD-14、再実行はOPN-DD-15、受入具体化はOPN-DD-13で別管理。
-- **OPN-DD-11〜15**：引き続きOpen。未承認の補完仕様は今回承認したことにならない。
+- **OPN-DD-11**：**DD11-01 B承認／通常業務の論理設計Closed**。終端状態の誤登録訂正はOPS-DD11-01 Open（運用開始前に手順承認必須）。状態監査表は追加しない。
+- **OPN-DD-12〜15**：引き続きOpen。未承認の補完仕様は今回承認したことにならない。
 - **OI-DD-01／02、基本設計EXIT-06**：データ規模・クラウド版履歴の検証は未完了、**Not Met**を維持。
 - **基本設計Freeze**：**未実施**。詳細設計Exit（EXIT-DD-01〜10）：**Not Evaluated**。詳細設計Gate：**未判定**。
 - **Excel実装／Windows・Web・Box／SharePoint／復元・性能検証**：**Not Started／Not Tested**。
@@ -80,14 +82,32 @@
 | 改訂先 | `docs/design/OPN-DD-10_Data_Model_Review.md`（Decision Record v0.2）、`docs/design/MVP_Design.md`（Draft v0.3）、`docs/decisions/Decision_Log.md`（Draft v0.3）、本ログ（Draft v0.4） |
 | ステータス | **Documented／反映済・論理設計上Closed**（技術成立性・運用上の確定は未検証） |
 
-## 7. 承認後の次アクション
+## 7. CHG-DD-11-01 — DD11-01 B案の正式採否・設計補完
 
-**OPN-DD-11〜15の補完仕様を順次確定し、詳細設計Exit Reviewの根拠を整備**。DD10-01の初期コード実値は実装前に別途登録・確認する。Q01〜Q24を再審議しない。実装検証が必要な項目はLater／Not Testedのまま区別する。
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **DD11-01＝B／ユーザー明示承認（2026-11-15）**。`docs/design/OPN-DD-11_State_Transition_Review.md` Review Draft v0.1 §8のB案を採用 |
+| 改訂対象 | 旧`MVP_Design.md` Draft v0.3／OPN-DD-11未確定の状態遷移・日付再設定・イベント要約・非適用制限 |
+| 承認後仕様 | **`tblOccurrenceStatusHistory`を追加しない**。既存の`tblOccurrence.OccurrenceStatus`が状態正本。`StatusReason`／`StatusChangedBy`／`StatusChangedAt`と任意根拠参照を現在行に補完（変更履歴は保持しない） |
+| 採用する通常遷移 | 新規→開催予定、開催予定→開催済（実績日付・理由・証跡／外部根拠）、開催予定→中止（理由必須）。終端からの通常逆遷移は禁止 |
+| 日付取消／再設定 | `tblDateHistory`の取消は`AfterDate`・`DateClass`空欄。再設定は`ChangeType=設定`の**新履歴**で代表日付を更新。日付取消を開催中止に読み替えない |
+| 複数開催回要約 | 開催予定優先→開催済→中止、0件は未計画。個別回の状態と履歴は不変。非適用化で自動中止・削除せず通常更新を制限 |
+| 不採用案・理由区分 | **A（当初AI推奨）**＝状態監査表と例外訂正UI、**C**＝監査表あり・最大回次状態優先。いずれも不採用。Bの保存構造簡素化はAI評価であり**ユーザー個人の採用理由は未提示** |
+| 重要なトレードオフ | **状態変更前後の監査履歴をアプリ内部で追跡できない**。終端状態誤登録をMVP通常UIで修正不可。事故時の復元が他レコードに影響する可能性は未検証 |
+| 未解決の受入／運用リスク | **OPS-DD11-01 Open（運用開始前）**：申告・権限・外部根拠・版履歴復元時の影響・復旧後整合検証・正式承認。**OPN-DD-13/14/15、OI-DD-02**へ引継ぎ（Not Tested） |
+| 判断履歴・要件の保全 | 詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、基本設計Q04＝B／詳細Q05＝Aの過去の記録を変更しない。日付履歴正本とDD10-01の`tblReconciliationReview`追記専用は維持 |
+| 改訂先 | `docs/design/OPN-DD-11_State_Transition_Review.md` Decision Record v0.2、`docs/design/MVP_Design.md` Draft v0.4、`docs/decisions/Decision_Log.md` Draft v0.4、`docs/changes/Change_Log.md` Draft v0.5 |
+| 承認の限界 | **DD11-01の採否承認を本ログへ転記**。旧Draft補完として記録し、別個のChange承認を作出しない。MVP設計書全体の承認・実装検証・Exit／Gate承認ではない |
+| 状態 | **Documented／OPN-DD-11は通常業務の論理設計としてClosed**。OPS-DD11-01はOpen |
+
+## 8. 承認後の次アクション
+
+**OPN-DD-12（4ガント・2一覧の出力仕様）の補完を次に確定**し、OPN-DD-13〜15を順次レビューする。終端状態訂正の**OPS-DD11-01**は運用開始前に別途手順を承認する。基本設計EXIT-06 Not Met、詳細設計Exit/Gate未判定と実装Not Testedを維持。Q01〜Q24を再審議しない。
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** CONS-DD-01の承認履歴を維持し、DD10-01 A案に基づく4テーブルへの設計補完（CHG-DD-10-01）を記録した。OPN-DD-10は論理設計上Closed。実データ設定・技術検証・Exit/Gateは未完了。次はOPN-DD-11。
+**日本語：** CONS-DD-01 AとDD10-01 Aの承認履歴を維持し、DD11-01 BをCHG-DD-11-01で記録した。OPN-DD-11は通常業務の論理設計上Closed。監査履歴を置かないことによる訂正運用リスクはOPS-DD11-01で継続管理する。技術検証とExit／Gateは未完了。次はOPN-DD-12。
 
-**English:** CONS-DD-01 is unchanged. The approved four-table design is recorded as CHG-DD-10-01. OPN-DD-10 is closed for design. Setup, tests, and Gate review remain open. Next is OPN-DD-11.
+**English:** Past approvals are kept. Option B for DD11-01 is recorded as CHG-DD-11-01. OPN-DD-11 is closed for normal design. An error correction process is still needed. Testing and Gate review are not complete. Next is OPN-DD-12.

@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.3／2026-11-15。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）およびOPN-DD-10の詳細設計補完判断DD10-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v0.4／2026-11-15。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -203,8 +203,30 @@
 
 **設計反映先：** `docs/design/MVP_Design.md` Draft v0.3 §§4・5・9・10・11・12・13。本決裁はMVP設計書全体の正式承認を意味しない。**次はOPN-DD-11**。
 
+## 12. 詳細設計補完の正式採否 — DD11-01（OPN-DD-11）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／Open Item | **DD11-01／OPN-DD-11** |
+| 承認日・承認者 | **2026-11-15／ユーザーの本チャットでの明示回答**：「OPN-DD-11の設計判断DD11-01はBで進めます」 |
+| 判断結果 | **B：Approved**。Aの通常遷移・日付・代表表示を維持し、**状態監査テーブルを追加しない**。終端状態誤登録訂正はMVP通常操作の対象外 |
+| 根拠資料 | `docs/design/OPN-DD-11_State_Transition_Review.md` Review Draft v0.1の§8 B案／改訂後Decision Record v0.2 §§1〜8 |
+| 元の比較案 | **A**：`tblOccurrenceStatusHistory`で状態監査・誤記訂正を記録（不採用）。**C**：監査表ありで最大OccurrenceNoの状態をイベント代表表示（不採用） |
+| 理由の区分 | **AIレビュー上の評価**：Bはテーブル・保存処理を減らす一方、状態変更履歴をアプリ内で追跡できない。**ユーザー固有の選択理由は未記録** |
+| 正本・データ列 | `tblOccurrence.OccurrenceStatus`が開催回の現行状態の正本。状態根拠を同一行の`StatusReason`・`StatusChangedBy`・`StatusChangedAt`、必要に応じ`StatusBasisRef`／`StatusBasisEvidenceID`で保持（これは監査履歴ではない）。`tblDateHistory`は代表日付の唯一の正本で追記専用 |
+| 通常遷移 | 新規は開催予定。`開催予定→開催済`は管理者の明示操作・理由・証跡／外部根拠・実績日付が必要。`開催予定→中止`は中止理由必須。終端状態からの通常逆遷移禁止。日付経過による自動開催済化なし |
+| 日付取消・再設定 | 取消は`ChangeType=取消`／`AfterDate`空欄／`DateClass`空欄。**開催予定は維持**。再設定は同`OccurrenceID`で`ChangeType=設定`を追記し新しい正常確定最大`HistoryID`を代表日付とする。終了済み回の事実誤記に限った日付訂正は日付履歴へ追記 |
+| イベント要約 | 実効適用=`対象`の回を集約。予定あり＝計画済、予定なし＋開催済あり＝開催済、中止のみ＝中止、0回＝未計画。状態別件数を保持。非適用・未判定には通常業務の4値を割り当てない |
+| 非適用化 | 新規回・通常状態遷移・予定編集は禁止。旧回・日付履歴は保持し、自動中止／削除しない。再適用時には既存回の確認警告を表示 |
+| 境界・残課題 | **OPS-DD11-01 Open／運用開始前**：終端状態の誤登録訂正・復元手順（根拠の外部記録・影響確認・権限・整合再検証）の承認が必要。通常UIから直接上書き不可。保存原子性OPN-DD-14、部分失敗・復旧OPN-DD-15、テスト具体化OPN-DD-13、4ガント・2一覧OPN-DD-12は未確定／Not Tested |
+| 変更管理 | **CHG-DD-11-01**として旧未承認Draftからの補完を`Change_Log.md`に記録。DD11-01以外に独立した変更決裁があったと扱わない |
+| 保全事項 | **本書§9の詳細Q01〜Q24、§10のCONS-DD-01（A）、§11のDD10-01（A）を原文維持**。基本設計Q04＝B・詳細Q05＝Aも当時の選択履歴として保持 |
+| 現在状態 | **OPN-DD-11 Closed（通常業務の論理設計）**。基本設計EXIT-06 Not Met／未Freeze、詳細設計EXIT-DD-01〜10 Not Evaluated／Gate未判定、実装Not Started／試験Not Tested |
+
+**反映先：** `docs/design/MVP_Design.md` Draft v0.4 §§4,6,7,11〜13、`docs/changes/Change_Log.md` Draft v0.5、本レビューDecision Record v0.2。**次はOPN-DD-12**。
+
 ## まとめ / Summary
 
-**日本語：** 詳細設計GrillMe Q01〜Q24とCONS-DD-01のA案承認履歴を保全し、DD10-01のA案承認・4テーブル論理設計を追記した。OPN-DD-10は論理設計上Closedとしたが、マスタ初期値と技術検証は未完了。次はOPN-DD-11。
+**日本語：** 詳細Q01〜Q24、CONS-DD-01 A、DD10-01 Aの回答履歴を維持してDD11-01 Bを追記した。状態監査表なしの通常設計を採用し、終端状態の誤登録訂正はOPS-DD11-01へ分離。試験・Exit／Gateは未完了。次はOPN-DD-12。
 
-**English:** The 24 original answers and CONS-DD-01 are kept. Option A for DD10-01 is approved and recorded. Four tables are now the design. Master setup and testing remain open. Next is OPN-DD-11.
+**English:** All old answers are kept. Option B for DD11-01 is recorded. No status history table is added. Error correction needs a separate process. Tests and Gate review are still open. Next is OPN-DD-12.
