@@ -1,0 +1,144 @@
+erDiagram
+    mstStage {
+        string StageID PK
+        string StageName
+        boolean IsActive
+    }
+
+    mstEventType {
+        string EventTypeID PK
+        string StageID FK
+        string OfficialEventName
+        boolean IsActive
+    }
+
+    tblProject {
+        string ProjectID PK
+        string ModelCode
+        string ProjectCode
+        string OfficialProjectKey
+        string ManagementApplicability
+    }
+
+    tblProjectStage {
+        string ProjectStageID PK
+        string ProjectID FK
+        string StageID FK
+        string StageApplicability
+        string JudgmentBasis
+        string UQ_ProjectID_StageID
+    }
+
+    tblProjectEvent {
+        string ProjectEventID PK
+        string ProjectID FK
+        string EventTypeID FK
+        string ProjectStageID FK
+        string EventApplicability
+        string JudgmentBasis
+        string UQ_ProjectID_EventTypeID
+    }
+
+    tblOccurrence {
+        string OccurrenceID PK
+        string ProjectEventID FK
+        int OccurrenceNo
+        string OccurrenceStatus
+        string StatusReason
+        string StatusChangedBy
+        datetime StatusChangedAt
+        string StatusBasisEvidenceID FK
+    }
+
+    tblMilestone {
+        string MilestoneID PK
+        string ProjectID FK
+        string MilestoneTypeCode
+        string MilestoneName
+        boolean IsActive
+        string UQ_ProjectID_MilestoneTypeCode
+    }
+
+    tblDateHistory {
+        string HistoryID PK
+        string TargetType
+        string TargetID
+        string ChangeType
+        date AfterDate
+        string DateClass
+        string Reason
+        string RecordedBy
+        datetime RecordedAt
+    }
+
+    tblEvidence {
+        string EvidenceID PK
+        string TargetType
+        string TargetID
+        string EvidenceType
+        string Title
+        string FileLink
+        datetime RegisteredAt
+        string RegisteredBy
+        boolean IsActive
+    }
+
+    tblReconciliation {
+        string ReconciliationID PK
+        string TargetType
+        string TargetID
+        string CompareFieldCode
+        string OfficialSource
+        datetime DetectedAt
+        string DetectedBy
+        string OfficialRecordRef
+    }
+
+    tblReconciliationReview {
+        string ReviewID PK
+        string ReconciliationID FK
+        string ReviewStatus
+        boolean OfficialValueIsSet
+        string OfficialValueSnapshot
+        boolean ExcelValueIsSet
+        string ExcelValueSnapshot
+        datetime ComparedAt
+        string ComparedBy
+        string ResultNote
+        string BasisEvidenceID FK
+        datetime OfficialAsOf
+        string CommitStatus
+    }
+
+    %% --- Master relations ---
+    mstStage ||--o{ mstEventType : has
+    mstStage ||--o{ tblProjectStage : used_by
+    mstEventType ||--o{ tblProjectEvent : used_by
+
+    %% --- Core project relations ---
+    tblProject ||--o{ tblProjectStage : has
+    tblProject ||--o{ tblProjectEvent : has
+    tblProjectStage ||--o{ tblProjectEvent : parent_of
+    tblProjectEvent ||--o{ tblOccurrence : has
+    tblProject ||--o{ tblMilestone : has
+
+    %% --- Date history (logical FK by TargetType + TargetID) ---
+    tblOccurrence ||--o{ tblDateHistory : "TargetType=Occurrence"
+    tblMilestone ||--o{ tblDateHistory : "TargetType=Milestone"
+
+    %% --- Evidence (logical FK by TargetType + TargetID) ---
+    tblProject ||--o{ tblEvidence : "TargetType=Project"
+    tblOccurrence ||--o{ tblEvidence : "TargetType=Occurrence"
+    tblMilestone ||--o{ tblEvidence : "TargetType=Milestone"
+
+    %% Occurrence optional basis evidence
+    tblEvidence ||--o{ tblOccurrence : "StatusBasisEvidenceID (optional)"
+
+    %% --- Reconciliation (logical FK by TargetType + TargetID) ---
+    tblProject ||--o{ tblReconciliation : "TargetType=Project"
+    tblOccurrence ||--o{ tblReconciliation : "TargetType=Occurrence"
+    tblMilestone ||--o{ tblReconciliation : "TargetType=Milestone"
+
+    %% --- Reconciliation review ---
+    tblReconciliation ||--o{ tblReconciliationReview : has
+    tblEvidence ||--o{ tblReconciliationReview : "BasisEvidenceID (optional)"
