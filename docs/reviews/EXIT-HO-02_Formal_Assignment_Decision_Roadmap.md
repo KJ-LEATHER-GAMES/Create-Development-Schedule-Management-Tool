@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v1.1（2026-11-17）  
+> **版**：Decision Roadmap Draft v1.2（2026-11-18）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.5（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.6（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -232,3 +232,10 @@ Owner・Executor・Approverの引受確認:
 **日本語：** 上長がスケジュール管理表本体の最終承認をする予定を記録。技術試験の自己判定、上長受入、詳細Exit/Gateを区別して進める。
 
 **English:** Manager sign-off is planned for the schedule workbook. Technical tests, manager approval, and the Exit/Gate decision stay separate.
+
+
+## 17. 上長最終受入の提出要件はNot Now（2026-11-18）
+
+ユーザーの明示指示により、**上長が承認するExcel管理表の対象版・機能範囲・提示証跡の具体化は保留**する。上長承認を最終的に取得する方針は維持。**正式任命を進めるS1〜S4のNow事項と、最終受入申請時に再開するNot Now事項を混同しない**。この保留はCOND-DD-03で必須の客観的試験証跡、STOP-01、技術試験計画を免除しない。
+
+参照：`EXIT-HO-02_Assignment_Register.md` v1.6 §21、最新`docs/handoffs/Context_Handoff_2026-11-18_v0.3.md`。正式割当0/10、41テストNot Tested、詳細Exit10件Not Evaluated、Gate未判定を維持。

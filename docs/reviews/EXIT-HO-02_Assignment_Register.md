@@ -1,6 +1,6 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v1.5（2026-11-17）  
+> **版**：Assignment Register Draft v1.6（2026-11-18）  
 > **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）、Excel実装Executor仮候補＝ユーザー本人（3役兼務の正式承認なし）。**COND-DD-03の客観的テスト証跡を条件とする自己承認方式はEXIT-HO-02-SA-01として採用（正式な組織的兼務承認・任命は未了）**。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
@@ -443,3 +443,18 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** 管理表本体の最終受入について上長承認を取得する予定を記録した。技術試験の自己承認とは分離し、上長決裁と詳細Exit/Gateは未実施。
 
 **English:** Manager approval is planned for the Excel schedule workbook. This is separate from self-approval of technical tests. Formal approval is still open.
+
+
+## 21. 上長最終承認の対象版・機能範囲・提出証跡を明示的に保留（2026-11-18）
+
+**ユーザー判断**：「上長が承認する管理表の対象版・機能範囲と、承認のために提示する証跡は保留で」。この3項目を**Not Now（意図的保留）**とし、現段階の正式任命準備・EXIT-HO-02の議論では確定を求めない。上長の最終承認を取得する**方針は維持**する。
+
+| 保留項目 | 今回の状態 | 再開契機 |
+|---|---|---|
+| 上長が承認する管理ブックの対象版 | **保留・未定** | 最終受入申請の準備に着手するとき、ユーザーが再開指示したとき |
+| 上長承認対象の機能範囲 | **保留・未定** | 同上 |
+| 上長へ提示する証跡セット | **保留・未定** | 同上（なお技術試験の客観的証跡を残す既決ルールは継続） |
+
+**区分**：上記の保留は、COND-DD-03の技術試験で必要な事前合否基準・客観的証跡を保留するものではない。また、EXIT-HO-02の正式Owner／Executor／Approver／期限／兼務承認等を自動的に延期・決裁済みとするものでもない。後続の受入承認申請までの意図的な判断先送りであり、上長からの承認取得は未実施。
+
+**不変の状態**：仮割当方針10/10、正式任命0/10、41テスト全件Not Tested、EXIT-DD-01〜10全件Not Evaluated、詳細Gate未判定、基本設計EXIT-06 Not Met・Freeze未実施、Excel実装Not Started、STOP-01〜06継続。
