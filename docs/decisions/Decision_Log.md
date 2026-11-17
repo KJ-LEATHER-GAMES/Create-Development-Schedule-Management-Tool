@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.5／2026-11-16。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v0.6／2026-11-16。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -248,8 +248,26 @@
 
 **反映先：** `docs/design/MVP_Design.md` Draft v0.5 §9、§11〜13、`docs/design/OPN-DD-12_Output_Spec_Review.md` Decision Record v0.2、`docs/changes/Change_Log.md` Draft v0.6。**次はOPN-DD-13**。既存§12の「次はOPN-DD-12」は当時の決裁記録である。
 
+## 14. 詳細設計補完の正式採否 — DD13-01（OPN-DD-13）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／Open Item | **DD13-01／OPN-DD-13** |
+| 承認者・日付 | **2026-11-16／ユーザーが本チャットで明示承認**：「OPN-DD-13の設計判断DD13-01はAで進めます」 |
+| 判断結果 | **Option A Approved**。`docs/design/OPN-DD-13_Test_Traceability_Review.md` Review Draft v0.1の**A案**を採用 |
+| 維持する既存ID | **TEST-DD-001〜014（14親）とT12-01〜16（16詳細）を全件維持**。既存期待結果・ケースIDは変更しない。親子の結果は独立して記録し二重に合格計上しない |
+| 補完した検証観点 | **REQ-MVP-002**：管理適用3状態の保存・再表示（TEST-DD-001）。**REQ-MVP-027**：表示上の元`OccurrenceID`と詳細遷移先一致（TEST-DD-009/010、T12-03）。**REQ-MVP-033**：90列・同セル全文／行高の**実機での視認確認**（TEST-DD-014）。これらは元ケースに手順・合格条件を追加 |
+| 新規ケース | **T13-01（関連親TEST-DD-013）**：REQ-MVP-034 (Should) に対し不変PK/FK・`TargetType+TargetID`による型別参照解決を検証。**Qlik Sense実接続はNot Now**。実行結果はNot Tested |
+| 要求カバレッジ | **REQ-MVP-001〜034の34要求すべてにテスト設計経路あり**。管理IDは14親＋16 T12＋1 T13＝31件。ただし31件の独立テスト実施・合格を意味しない |
+| 不採用案 | B：T13-01未追加でREQ034をLaterへ保留／C：テストID体系を再設計。**いずれも不採用** |
+| 採用理由の区分 | **AI評価**：既存IDの追跡性を損なわず最小1ケースでカバレッジを補完。**ユーザー固有の理由は未提示**につき推測しない |
+| 設計・変更管理反映 | `docs/test/Test_and_Validation.md` v0.2、`docs/design/MVP_Design.md` v0.6 §11/13、`docs/changes/Change_Log.md` v0.7（**CHG-DD-13-01**）、本書v0.6、OPN-DD-13レビューv0.2 |
+| 既決事項の保全 | **§9のQ01〜Q24、§10 CONS-DD-01 A、§11 DD10-01 A、§12 DD11-01 B、§13 DD12-01 Aの記録本文を不変更**。要求本文も変更しない |
+| 未実施・未解決 | **31管理IDすべてNot Tested**。OPN-DD-14/15、CFG-DD-10-01、OPS-DD11-01、OI-DD-01/02、RISK-DD-01〜04継続。基本設計EXIT-06 Not Met・未Freeze、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定 |
+| 判定状態 | **OPN-DD-13 Closed（テスト設計のみ）**。Excel実装・技術検証・受入実施・全体文書承認・Freeze・Gateは今回の承認に含まれない |
+
 ## まとめ / Summary
 
-**日本語：** 詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 Bの原判断を維持し、DD12-01 Aの4ガント・2一覧出力仕様決裁を追加した。OPN-DD-12の論理設計はClosed。テスト・Excelでの実現性・Exit／Gateは未完了。次はOPN-DD-13。
+**日本語：** 過去のQ01〜Q24・CONS-DD-01・DD10〜12の決裁記録を維持し、DD13-01 Aのテスト設計承認を追記した。14親・16詳細・T13-01は全件未実施。OPN-DD-13は設計上Closed、次はOPN-DD-14。
 
-**English:** Past decisions are kept. Option A for DD12-01 is approved and added. OPN-DD-12 is closed for logical output design. Tests and Gate reviews are not complete. Next is OPN-DD-13.
+**English:** Past decisions are kept. DD13-01 Option A is added for test design. All 31 test IDs are not tested. OPN-DD-13 is closed for design only. Next is OPN-DD-14.

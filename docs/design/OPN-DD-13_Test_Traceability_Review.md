@@ -1,8 +1,8 @@
 # OPN-DD-13 — 受入テストケース／要件・設計トレーサビリティレビュー
 
-> 文書版：**Review Draft v0.1（2026-11-16）**／**DD13-01 採否待ち**  
+> 文書版：**Decision Record v0.2（2026-11-16）**／**DD13-01 Option A Approved**  
 > 保存先：`docs/design/OPN-DD-13_Test_Traceability_Review.md`  
-> 台帳：`docs/test/Test_and_Validation.md`（同時作成、未承認）
+> 台帳：`docs/test/Test_and_Validation.md`（Test Design Draft v0.2、DD13-01 A承認反映／全テスト未実施）
 
 ## 0. 目的と既決事項
 
@@ -22,7 +22,7 @@
 
 **重要**：REQ-MVP-002の「対象／対象外」とDD12-01の「管理対象／管理対象外」は表現差がある。画面表示/内部コード対応は正式コード確定時に照合し、根拠なく要件本文を修正しない。
 
-## 2. DD13-01 設計判断（採否待ち）
+## 2. DD13-01 設計判断（A案採用／旧レビュー比較を保持）
 
 | 選択肢 | 内容 | 評価と懸念 |
 |---|---|---|
@@ -30,7 +30,7 @@
 | **B** | 親14＋子16の30件のみで確定。REQ034は**未カバー／Later**として残す | 当面のテスト設計を最小化。ただしShould要件034の合格根拠は不足 |
 | **C** | 親14を別ケース群へ細分化し、新規テストID体系で全要求を1対1に対応 | 詳細化は容易だが既存IDとの重複/移行管理負担が大きい。現MVPでは推奨しない |
 
-**推奨はA**。ただし、ユーザーが採用方針を選ぶ前にDD13-01をApprovedとはしない。A案の場合T13-01を追加しても**未実施=Not Tested**である。ユーザー固有の採用理由は承認後に明示された場合のみ記録する。
+**決裁結果：A Approved（2026-11-16、ユーザーの明示回答）**。追加T13-01も**Not Tested**。AIの推奨理由は記録するが、ユーザー固有の採用理由は提示されていないため補わない。
 
 ## 3. 完了条件・記録形式
 
@@ -51,20 +51,36 @@
 | RISK-DD-01〜04 | Not Tested。Windows/Web・権限・行高・採番競合を実機試験で確認 |
 | EXIT-DD-01〜10／Gate | Not Evaluated／未判定。文書ができても正式判定しない |
 
-## 5. 承認後の更新先（現時点では未変更）
+## 5. 承認反映先（文書版と状態）
 
-- `docs/test/Test_and_Validation.md` — DD13-01結果を反映して台帳の版を更新。
-- `docs/design/MVP_Design.md` — §11と§13へテスト台帳とOPN-DD-13の解消範囲を追加。
-- `docs/decisions/Decision_Log.md` — DD13-01の選択、理由の区分、既決事項の保全を追記。
-- `docs/changes/Change_Log.md` — `CHG-DD-13-01`の経緯と残るテスト/環境リスクを追記。
-- 本レビュー票 — 正式採否・承認日・利用者判断を追記。
+- `docs/test/Test_and_Validation.md` — **Test Design Draft v0.2更新済み**：T13-01採用・トレース・全件未実施。
+- `docs/design/MVP_Design.md` — **Draft v0.6更新済み**：§11・13に台帳とOPN-DD-13の解消範囲を反映。
+- `docs/decisions/Decision_Log.md` — **Draft v0.6更新済み**：DD13-01 A決裁を§14に追記。
+- `docs/changes/Change_Log.md` — **Draft v0.7更新済み**：`CHG-DD-13-01`を追記。
+- 本レビュー票 — **Decision Record v0.2更新済み**：正式採否・承認日を§6に記録。
 
-**現在の状態**：レビュー資料・テスト台帳Draftを作成しただけで、変更決裁は未実施。正式リポジトリへの反映/Git commitなし。
+**現在の状態**：DD13-01 Aの採用判断を本レビューと指定文書に反映済み。**OPN-DD-13はテスト設計の範囲でClosed**。全件Not Tested、基本設計Freeze・詳細設計Exit/Gateは未判定、正式リポジトリへの反映/Git commitなし。
+
+## 6. 正式決裁記録 — DD13-01 Option A（2026-11-16）
+
+| 項目 | 記録 |
+|---|---|
+| 決定／対象 | **DD13-01／OPN-DD-13** |
+| 承認根拠 | **2026-11-16：ユーザーによる明示判断「OPN-DD-13の設計判断DD13-01はAで進めます」** |
+| 採用内容 | **A案**：既存TEST-DD-001〜014（14親）とT12-01〜16（16詳細）のID・期待結果を変更せず、REQ-MVP-002／027／033の検証観点を既存ケース内に補完。**REQ-MVP-034に新規T13-01を1件追加** |
+| T13-01 | **関連親TEST-DD-013**。不変ID・PK/FK・`TargetType+TargetID`の型別参照整合のみを点検。**Qlik Sense実接続は対象外** |
+| カバレッジ | **REQ-MVP-001〜034全34件に設計上のテスト経路あり**。実機・環境依存の要求がPassした意味ではない |
+| 代替案 | B：T13-01なしでREQ034をLaterとする／C：既存ID体系を再編する。ともに**不採用**。過去の選択肢比較記載は維持 |
+| 理由の区分 | **AI評価**：既存IDを維持して不足1件のみ補完し、テスト結果の重複計上を避ける。**ユーザー固有の承認理由は未提示** |
+| 保全・追跡 | **詳細Q01〜Q24・CONS-DD-01 A・DD10-01 A・DD11-01 B・DD12-01 A**の原判断と履歴を不変更。**CHG-DD-13-01**に補完の経緯を記録 |
+| 反映先 | `docs/test/Test_and_Validation.md` Draft v0.2、`docs/design/MVP_Design.md` Draft v0.6、`docs/decisions/Decision_Log.md` Draft v0.6、`docs/changes/Change_Log.md` Draft v0.7、本レビュー Decision Record v0.2 |
+| 完了境界 | **OPN-DD-13 Closed（テスト設計のみ）**。31管理IDすべて**Not Tested**。EXIT-DD-08は**Not Evaluated**、基本設計EXIT-06はNot Met／未Freeze、Gate未判定 |
+| 継続事項 | **OPN-DD-14/15、CFG-DD-10-01、OPS-DD11-01、OI-DD-01/02、RISK-DD-01〜04** は状態を維持。テスト実施日・担当・証跡は未入力 |
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** 既存14件・16件の対応を整理し、全34要求への検証経路を点検した。追加候補T13-01の採否はDD13-01で判断する。既決事項は維持、テストは全件Not Tested。
+**日本語：** DD13-01 Aを承認し、既存14親・16詳細を保持してT13-01を追加した。34要求にテスト設計経路を設定し、全31管理IDは未実施。OPN-DD-13はテスト設計の範囲でClosed。
 
-**English:** The review maps 14 main tests and 16 detail tests to 34 requirements. DD13-01 will decide whether to add T13-01. Past decisions stay unchanged. All tests remain not tested.
+**English:** Option A is approved. The 14 main tests and 16 detail tests stay unchanged. T13-01 is added for REQ-MVP-034. All 31 test IDs are not tested. OPN-DD-13 is closed for test design.

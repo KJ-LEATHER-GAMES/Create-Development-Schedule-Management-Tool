@@ -1,8 +1,8 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v0.6／2026-11-16／CONS-DD-01（A）、DD10-01（A）、DD11-01（B）の履歴を保持し、DD12-01（A）の出力仕様補完を記録**  
+> **Draft v0.7／2026-11-16／CONS-DD-01（A）、DD10-01（A）、DD11-01（B）、DD12-01（A）の履歴を保持し、DD13-01（A）のテスト設計補完を記録**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01の採否（A案）、DD10-01の論理データ設計（A案）、DD11-01の通常遷移論理設計（B案）、DD12-01の論理出力仕様（A案）**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01の採否（A案）、DD10-01の論理データ設計（A案）、DD11-01の通常遷移論理設計（B案）、DD12-01の論理出力仕様（A案）、**DD13-01の受入テスト設計（A案）**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
@@ -12,6 +12,8 @@
 | **CHG-DD-10-01** | 重要な詳細設計補完／旧Draftの論理データ構造の改訂 | マイルストーン・証跡・照合差異と追記専用再照合履歴の4テーブル化 | **DD10-01 Option A Approved／設計への反映済**（旧Draftは未承認。新たな独立変更決裁ではない） | **ユーザーによるDD10-01採用／2026-11-15** |
 | **CHG-DD-11-01** | 詳細設計補完／状態履歴表を追加しないB案の採用 | 開催回の通常遷移・代表表示・日付取消後再設定・非適用化制限・終端状態訂正の運用境界 | **DD11-01 Option B Approved／設計反映済**（旧未承認A案からB案への選択。独立した変更決裁ではない） | **ユーザーによるDD11-01採用／2026-11-15** |
 | **CHG-DD-12-01** | 詳細設計補完／出力仕様の確定 | G01〜G04、L01/L02の粒度・抽出・表示除外、管理者要対応、受入観点 | **DD12-01 Option A Approved／論理出力仕様に反映済**（未承認Draftの補完、追加の独立変更決裁ではない） | **ユーザーによるDD12-01採用／2026-11-16** |
+
+| **CHG-DD-13-01** | 詳細設計補完／受入テスト設計の追加・トレース | 既存14親＋16詳細の保全、REQ002/027/033の検証補完、REQ034向けT13-01追加 | **DD13-01 Option A Approved／テスト設計反映済**（未承認Draftの補完で、追加の独立変更決裁ではない） | **ユーザーによるDD13-01採用／2026-11-16** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -59,7 +61,8 @@
 - **OPN-DD-10**：**DD10-01 A案を承認し、論理データ設計をClosed**。実コード一覧はCFG-DD-10-01、原子性はOPN-DD-14、再実行はOPN-DD-15、受入具体化はOPN-DD-13で別管理。
 - **OPN-DD-11**：**DD11-01 B承認／通常業務の論理設計Closed**。終端状態の誤登録訂正はOPS-DD11-01 Open（運用開始前に手順承認必須）。状態監査表は追加しない。
 - **OPN-DD-12**：**DD12-01 A承認／論理出力仕様Closed**。G04行構成・状態別除外・管理者抽出を確定。16ケースはNot Tested。
-- **OPN-DD-13〜15**：引き続きOpen。物理設計・復旧や受入具体化を今回承認したことにはならない。
+- **OPN-DD-13**：**DD13-01 A承認／テスト設計Closed**。14親＋16詳細維持、T13-01追加。34要求への経路は設計済み、**全件Not Tested**。
+- **OPN-DD-14〜15**：引き続きOpen。採番・原子性・表示更新復旧の方式は未承認。
 - **OI-DD-01／02、基本設計EXIT-06**：データ規模・クラウド版履歴の検証は未完了、**Not Met**を維持。
 - **基本設計Freeze**：**未実施**。詳細設計Exit（EXIT-DD-01〜10）：**Not Evaluated**。詳細設計Gate：**未判定**。
 - **Excel実装／Windows・Web・Box／SharePoint／復元・性能検証**：**Not Started／Not Tested**。
@@ -104,7 +107,7 @@
 
 ## 8. 承認後の次アクション
 
-**DD12-01 Aの論理出力仕様反映を完了**。次は**OPN-DD-13：受入テストケースと要件→設計→テストの対応・合否記録**を確定し、OPN-DD-14〜15を順次レビューする。終端状態訂正の**OPS-DD11-01**は運用開始前に別途手順を承認する。基本設計EXIT-06 Not Met、詳細設計Exit/Gate未判定と実装Not Testedを維持。Q01〜Q24を再審議しない。
+**DD13-01 Aのテスト設計反映を完了**。次は**OPN-DD-14：ID採番・HistoryID/ReviewID確定順・競合制御**をレビューし、OPN-DD-15を引き続き検討する。終端状態訂正の**OPS-DD11-01**は運用開始前に別途手順を承認する。基本設計EXIT-06 Not Met、詳細設計Exit/Gate未判定と実装Not Testedを維持。Q01〜Q24を再審議しない。
 
 ---
 
@@ -129,8 +132,25 @@
 | 改訂先 | `docs/design/OPN-DD-12_Output_Spec_Review.md` Decision Record v0.2、`docs/design/MVP_Design.md` Draft v0.5、`docs/decisions/Decision_Log.md` Draft v0.5、本ログ Draft v0.6 |
 | 判定の境界 | **OPN-DD-12 Closed（論理出力仕様のみ）**。OPN-DD-13〜15、OPS-DD11-01、CFG-DD-10-01、基本設計EXIT-06、詳細Exit/Gate、Excel技術検証は別管理・未完了 |
 
+## 10. CHG-DD-13-01 — DD13-01 A案の正式採否・テスト設計補完
+
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **DD13-01＝A／2026-11-16のユーザー明示承認**。`docs/design/OPN-DD-13_Test_Traceability_Review.md` Review Draft v0.1のA案を採用 |
+| 変更前 | 14親＋16 T12詳細のIDと期待値は存在。REQ-MVP-002／027／033の手順が粗く、REQ-MVP-034は独立した構造検証なし。OPN-DD-13は未承認のDraft |
+| 変更後 | **既存TEST-DD-001〜014およびT12-01〜16のID・期待値を保全**、検証手順を追加。REQ-MVP-034向けに**T13-01を追加（関連親TEST-DD-013）**し、要求34件の設計上の対応経路を完成 |
+| T13-01の範囲 | 不変PK/FK、Project/Occurrence/Milestoneの論理参照、`TargetType+TargetID`、レビュー・証跡参照を照合。**Qlik Sense実接続、API開発はNot Now** |
+| カバレッジと結果 | **34要求すべてにテスト経路あり**、**管理ID31件（14親＋16 T12＋1 T13）は全件Not Tested**。テスト合格・技術成立・実行証跡を追加したものではない |
+| 採用理由の区分 | **AIの技術評価**：既存IDを維持し、最小1追加ケースで抜けを補完し重複計上を避ける。**ユーザー固有の選択理由は未提示** |
+| 不採用案 | B：T13-01追加なし、REQ034をLater保留／C：ID再設計。いずれも不採用 |
+| 変更管理境界 | **既存の未承認テストDraftの補完**を本Change IDで記録。**DD13-01の採用判断とは別の独立Change承認があったとは扱わない** |
+| 既存判断の保全 | 詳細設計Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、基本設計Q04=B／詳細設計Q05=Aの履歴を改変しない |
+| 依存・残リスク | OPN-DD-14／15、CFG-DD-10-01、OPS-DD11-01、OI-DD-01／02、RISK-DD-01〜04 Open/Not Tested。REQ002の表記差は実装前確認。**EXIT-DD-08はNot Evaluated** |
+| 文書反映先 | `docs/test/Test_and_Validation.md` Test Design Draft v0.2、`docs/design/MVP_Design.md` Draft v0.6、`docs/decisions/Decision_Log.md` Draft v0.6、`docs/design/OPN-DD-13_Test_Traceability_Review.md` Decision Record v0.2、本Change Log Draft v0.7 |
+| 状態 | **DD13-01 A Approved／OPN-DD-13 Closed（テスト設計のみ）**。実施結果・Gate・Freezeは未変更 |
+
 ## まとめ / Summary
 
-**日本語：** DD12-01 AをCHG-DD-12-01として記録し、4ガント・2一覧の出力論理仕様を反映した。詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 Bの履歴は維持。技術検証・受入実施・Exit／Gateは未完了。次はOPN-DD-13。
+**日本語：** DD13-01 AをCHG-DD-13-01として記録し、14親・16詳細を維持したままT13-01を追加した。34要求への設計上の対応を確保し、全31管理IDはNot Tested。詳細Exit／Gateは未判定、次はOPN-DD-14。
 
-**English:** Option A for DD12-01 is recorded in the change log. The output design is updated. All past decisions are kept. Tests and Gate reviews are still open. Next is OPN-DD-13.
+**English:** DD13-01 Option A is recorded. One new test case is added while older IDs are kept. All 31 test IDs remain not tested. Next is OPN-DD-14.
