@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v1.2（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v1.3（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）、Excel実装Executor仮候補＝ユーザー本人（3役兼務の正式承認なし）。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -371,3 +371,27 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-07の情報システム部門内の具体担当者は未定と確認した。正式任命・期限・技術検証は引き続き未完了。
 
 **English:** The specific IT contact for COND-DD-07 is not decided. Formal roles, dates, and tests are still open.
+
+
+## 18. COND-DD-03 Excel実務Executor候補の本人確認（2026-11-17／正式任命なし）
+
+**確認根拠**：直前の提案「COND-DD-03の実務Executorの具体化」に対して、ユーザーが「実装も私です」と回答。Excelの実装作業もユーザー本人が担当する意向を確認した。
+
+| 項目 | 最新の仮割当 | 決裁状態 |
+|---|---|---|
+| 担当部門 | 開発プロセス統括係 | 部門確認済み |
+| Owner候補（技術責任） | ユーザー本人 | 仮候補、正式未任命 |
+| Executor候補（Excel設計・実装） | **ユーザー本人** | **今回確認した仮候補**、正式未任命 |
+| Approver候補（技術検証受入） | ユーザー本人 | 留保付き暫定候補、正式未任命 |
+| 3役兼務 | **本人によるOwner／Executor／Approver兼務の仮配置** | **兼務承認・自己受入権限は未決** |
+| 正式期限・引受証跡・STOP解除権限 | 未決 | 決裁なし |
+
+**設計・運用上の注意**：3役兼務では作成者による自己検証・自己承認のリスクが高くなる。合否基準の事前固定、正常系・異常系テスト結果とログの保存、独立した証跡確認の要否、および自己受入を許容する決裁権限を正式化時に審査する。第三者チェックが実施できるとは現時点で断定しない。
+
+**変更しない事項**：正式割当0/10、期限未決、兼務未承認、STOP-01（安全性立証前の原本書込禁止）維持。正式41テストは全件`Not Tested`、EXIT-DD-01〜10は全件`Not Evaluated`、Gate未判定。§15〜17および他条件の候補履歴は当時の記録として維持し、COND-DD-04／05の実務担当へ自動展開しない。
+
+## まとめ / Summary（COND-DD-03 Executor候補確認）
+
+**日本語：** COND-DD-03のOwner・Executor・Approver候補をユーザー本人に仮設定した。3役兼務の正式承認、任命、期限、技術検証は未完了。
+
+**English:** The user is the proposed owner, executor, and approver for COND-DD-03. Formal role approval, deadlines, and technical tests are still open.

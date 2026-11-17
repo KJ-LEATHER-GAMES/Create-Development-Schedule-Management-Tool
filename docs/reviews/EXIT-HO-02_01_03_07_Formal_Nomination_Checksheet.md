@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.8（2026-11-17）  
-> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Ownerおよび最終Approverの暫定候補はユーザー本人（兼務未承認）と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v0.9（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Owner・Excel実装Executor・最終Approverの仮候補はユーザー本人（3役兼務未承認）と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.1、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.3、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -231,3 +231,18 @@
 **日本語：** 情報システム部門の具体担当者は未定と確認した。正式任命は行っていない。
 
 **English:** The IT contact is not decided. No formal appointment was made.
+
+
+## 13. COND-DD-03 Excel実装Executor候補の確認（2026-11-17）
+
+- **回答**：「実装も私です」により、Excel設計・実装のExecutor候補は**ユーザー本人**とする。所属は開発プロセス統括係（確認済み）。
+- **最新の3役候補**：Owner＝ユーザー本人、Executor＝**ユーザー本人**、Approver＝ユーザー本人（Approverは従来どおり留保付き候補）。
+- **未決項目**：本人の3役兼務を認める権限、自己受入の可否、代替となる独立レビューの必要性と実行者、正式な引受・任命、期限、STOP-01解除権限・差戻し先。
+- **判断基準**：テスト合否基準の事前固定、実測証跡の保存、競合・確定順・部分保存・復旧の異常系検証を候補統制とする（未承認）。作成者本人だけでの受入成立を自動認定しない。
+- **維持事項**：COND-DD-07の個人担当者は未定。COND-DD-04／05は別条件であり、今回の回答を自動適用しない。正式任命0/10、41テスト`Not Tested`、Exit10項目`Not Evaluated`、Gate未判定、STOP-01を維持する。過去の§3などの候補情報は当時の記録として残す。
+
+## まとめ / Summary（COND-DD-03実装候補）
+
+**日本語：** Excel実装の担当者候補もユーザー本人と確認した。Owner／Executor／Approverの3役兼務は正式未承認。
+
+**English:** The user is also the proposed Excel developer. The three-role assignment is not formally approved.

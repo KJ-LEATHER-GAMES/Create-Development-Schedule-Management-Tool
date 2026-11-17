@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.8（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.9（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.1（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.3（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -177,3 +177,18 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-07の具体担当者は未定と確認した。部門特定は3/3、正式任命は0/10のまま。
 
 **English:** The IT contact for condition 07 is not decided. All three teams are known. Formal assignments remain 0 of 10.
+
+
+## 14. S1追補：COND-DD-03 Excel実務Executor候補の確認（2026-11-17）
+
+- **候補の更新**：ユーザー回答「実装も私です」により、COND-DD-03のExcel実装Executorも**ユーザー本人**とする。従来確認済みのOwner本人、Approver本人（暫定）と併せて**3役兼務の仮配置**となる。
+- **S1で判明したこと**：COND-DD-03の担当部門・Owner候補・Executor候補・Approver候補は具体化。ただし実施と受入の独立性、承認権限、引受、期限は未決。COND-DD-01／07の残事項も維持。
+- **次の決裁に必要な条件**：3役兼務承認者、自己検証・自己受入の可否、第三者レビューまたは代替統制の要否と責任者、正式Owner／Executor／Approverの引受、期限、停止解除権限・差戻し先。
+- **境界**：本確認はCOND-DD-03に限る。COND-DD-04／05へ自動転用せず、COND-DD-07の具体担当者を未定のまま保持する。
+- **状態維持**：仮割当方針10/10、正式任命0/10、正式41テスト全件`Not Tested`、Exit10項目全件`Not Evaluated`、Gate未判定。STOP-01〜06維持。
+
+## まとめ / Summary（COND-DD-03 Executor仮候補）
+
+**日本語：** COND-DD-03の3役すべてをユーザー本人の仮候補として整理した。正式任命・兼務承認・期限は未決。
+
+**English:** The user is the proposed owner, developer, and approver. Formal role approval and deadlines are still open.
