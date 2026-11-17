@@ -1,6 +1,6 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.7（2026-11-17）  
+> **文書版**：Nomination Checksheet Draft v0.8（2026-11-17）  
 > **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Ownerおよび最終Approverの暫定候補はユーザー本人（兼務未承認）と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
 > **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.1、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
@@ -217,3 +217,17 @@
 **日本語：** COND-DD-03のApprover候補にユーザー本人を仮置きした。自己受入の兼務承認は未決。
 
 **English:** The user is the temporary approver candidate for COND-DD-03. Approval to hold both roles is still open.
+
+
+## 12. COND-DD-07 個人担当者の未定確認（2026-11-17）
+
+- **確認結果**：情報システム部門内の具体的な担当者は**未定**（ユーザー回答「はい、未定でいいです」）。
+- **管理部門**：情報システム部門と確認済み。Box・SharePoint Onlineの管理部署としての回答は維持する。
+- **未特定の人・権限**：単独Owner、クラウド管理・復元のExecutor、最終Approver、共同確認者、保存先選定権限、STOP解除権限。正式期限・兼務承認・引受証跡も未決。
+- **維持する制限**：正式割当0/10、TV-08は`Not Tested`、STOP-05維持。先行する確認結果および既決事項は変更しない。
+
+## まとめ / Summary（COND-DD-07担当者未定）
+
+**日本語：** 情報システム部門の具体担当者は未定と確認した。正式任命は行っていない。
+
+**English:** The IT contact is not decided. No formal appointment was made.

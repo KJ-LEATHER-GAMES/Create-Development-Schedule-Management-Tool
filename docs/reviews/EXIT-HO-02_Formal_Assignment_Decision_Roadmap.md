@@ -1,6 +1,6 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.7（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.8（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
 > **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.1（仮割当10/10、正式0/10）。
@@ -163,3 +163,17 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-03のOwner・Approver候補はともにユーザー本人。兼務の正式承認と検証は未完了。
 
 **English:** The user is the proposed owner and approver for COND-DD-03. Formal approval and tests are still open.
+
+
+## 13. S1確認追補：COND-DD-07 個人担当者は未定（2026-11-17）
+
+- **確認結果**：部門特定（01＝開発プロセス統括係、03＝開発プロセス統括係、07＝情報システム部門）は3/3を維持するが、07の具体担当者はユーザー回答により**未定**と確認した。
+- **S1の残作業**：07のOwner・Executor・Approver候補の具体的人選、実際の権限、引受確認を行う。未定の担当者を勝手に指名せず、後続の正式任命に向けた確認待ちとして管理する。
+- **S2〜S4への影響**：全10条件の正式割当0/10、期限・兼務承認未決。07の復元・高水位確認、TV-08とSTOP-05は維持。41正式テスト`Not Tested`、Exit10項目`Not Evaluated`、Gate未判定。
+- **次の実務候補**：COND-DD-01の実コード提供Executor、COND-DD-03の実務Executorを確認する（正式任命ではない）。
+
+## まとめ / Summary（07担当者未定）
+
+**日本語：** COND-DD-07の具体担当者は未定と確認した。部門特定は3/3、正式任命は0/10のまま。
+
+**English:** The IT contact for condition 07 is not decided. All three teams are known. Formal assignments remain 0 of 10.

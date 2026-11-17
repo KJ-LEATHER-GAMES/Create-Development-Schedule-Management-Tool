@@ -1,6 +1,6 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v1.1（2026-11-17）  
+> **版**：Assignment Register Draft v1.2（2026-11-17）  
 > **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
@@ -354,3 +354,20 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-03の最終Approverもユーザー本人を暫定候補とした。Ownerとの兼務は未承認で、正式任命・検証・期限は未決。
 
 **English:** The user is now the temporary approver candidate for COND-DD-03. The shared role is not approved. Formal assignments and tests are still open.
+
+
+## 17. COND-DD-07 情報システム部門の具体担当者未定の確認（2026-11-17／正式任命なし）
+
+**確認根拠**：「COND-DD-07の情報システム部門について、具体的な担当者はまだ未定という認識でよいですか？」との照会に、ユーザーが「はい、未定でいいです」と回答。
+
+- **管理部門**：情報システム部門（既確認、変更なし）。
+- **個人の担当者**：**未定（今回明示確認）**。IT／クラウド運用責任者、保存先・復元実施者、技術・業務側受入承認者の具体的人選は未確定。役割候補は§9.1・§14を維持する。
+- **正式任命**：Owner／Executor／Approver、引受・決裁権限、正式期限、兼務可否、STOP解除権限、未達時差戻し先はすべて未決。§2の正式欄は変更しない。
+- **技術・環境**：Box第一候補／SharePoint Online代替は維持。採用保存先、版履歴保持・復元条件、TV-08は未確定・`Not Tested`。STOP-05を解除しない。
+- **履歴保全**：COND-DD-01／03の候補、COND-DD-08〜10の本人仮指名、Q01〜Q24および全既承認判断を維持。仮割当方針10/10、正式任命**0/10**、正式41テスト全件`Not Tested`、Exit10項目全件`Not Evaluated`、Gate未判定を維持する。
+
+## まとめ / Summary（COND-DD-07担当者未定）
+
+**日本語：** COND-DD-07の情報システム部門内の具体担当者は未定と確認した。正式任命・期限・技術検証は引き続き未完了。
+
+**English:** The specific IT contact for COND-DD-07 is not decided. Formal roles, dates, and tests are still open.
