@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.5（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**10条件の仮割当方針は記録済み／正式任命・期限・兼務承認は未決**。  
+> **版**：Assignment Register Draft v0.6（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係（ユーザー回答により特定）**。正式任命・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -208,3 +208,19 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** 01／03／07の正式任命に向けた確認票とロードマップを追加した。正式任命と期限は全件未決。
 
 **English:** New checklists help confirm teams for conditions 01, 03, and 07. No formal owner or deadline has been approved.
+
+
+## 11. COND-DD-01 管理部門の特定（2026-11-17／正式任命は未決）
+
+- **取得した回答**：ユーザーが、COND-DD-01のマスタコード（`MilestoneTypeCode`・`EvidenceType`・`CompareFieldCode`）を管理する部署について「自部門(開発プロセス統括係)」と回答。
+- **確認した管理部門**：**開発プロセス統括係**。3コード体系の管理部門として確認票に記録する。
+- **承認していない事項**：3コードそれぞれの正式承認権限、実コード値と対象別許容表、COND-DD-01全体の単独Owner、Executor、最終Approver、期限、兼務、引受決裁。部門特定からユーザー本人を正式Owner／Approverへ自動昇格させない。
+- **次の確認**：開発プロセス統括係内でコード実値・根拠資料を提示するExecutorと、コードの最終業務承認権者を確認する。03・07の実担当組織の探索を継続する。
+- **参照**：`EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md` Draft v0.2 §1・§6。
+- **状態不変**：EXIT-HO-02 Open、仮割当方針10/10、正式割当0/10。41正式テスト＝Not Tested、Exit10項目＝Not Evaluated、Gate＝未判定。
+
+## まとめ / Summary（管理部門特定の追補）
+
+**日本語：** COND-DD-01の管理部門を開発プロセス統括係として記録。正式任命・期限は未決のまま。
+
+**English:** COND-DD-01 is managed by the Development Process Coordination Section. Formal assignments and deadlines are still open.

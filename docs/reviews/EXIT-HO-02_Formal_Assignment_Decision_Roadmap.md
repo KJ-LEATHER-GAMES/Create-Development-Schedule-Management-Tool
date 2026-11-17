@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.1（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.2（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.4（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.6（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -29,7 +29,7 @@
 
 | 項目 | 決定する人（役割案） | 未確定の重要事項 |
 |---|---|---|
-| コード体系・許容表 | コード体系別の業務承認権者 | 3コード別の部門／決裁権者、01の全体Owner |
+| コード体系・許容表 | コード体系別の業務承認権者 | 管理部門＝開発プロセス統括係（ユーザー回答）、各コードの決裁権者と01の全体Ownerは未指名 |
 | Excel制御・排他・原子的保存 | Excel技術責任者と技術受入承認者 | 03の実装担当、独立検証者、Windows/Web実機環境 |
 | 保存先・復元 | IT／クラウド運用責任者とIT受入承認者 | 07の運用担当、Box／SharePoint正式選定権限者 |
 | 技術検証の全体計画 | 08の正式Owner・Approver | 08の本人3役兼務の可否、TV-01〜09の実施者 |
@@ -78,3 +78,16 @@ Owner・Executor・Approverの引受確認:
 **日本語：** 01/03/07の実担当確認から始め、08〜10の本人兼務、残りの正式任命を順次決定する。全条件の正式割当は0/10で、Exit/Gateは未判定。
 
 **English:** First confirm teams for conditions 01, 03, and 07. Then review the user's shared roles and finish all assignments. All 10 formal assignments are still open. Exit and Gate decisions are not made.
+
+
+## 7. S1の進捗追記（2026-11-17）
+
+- COND-DD-01：マスタコード3種類の管理部門を**開発プロセス統括係**と確認（ユーザー回答）。コード別の最終承認権者・全体Owner・Executor・期限は未決。
+- COND-DD-03／07：担当する実組織は未特定。S1は**進行中・未完了**。
+- S2〜S6および正式任命の完了条件は変更しない。正式割当0/10、41テストNot Tested、Exit10件Not Evaluated、Gate未判定。
+
+## まとめ / Summary（S1進捗）
+
+**日本語：** S1でCOND-DD-01の管理部門が判明した。COND-DD-03／07の担当組織と正式任命は引き続き未決。
+
+**English:** The team for COND-DD-01 is now known. Teams for 03 and 07 and all formal assignments are still open.
