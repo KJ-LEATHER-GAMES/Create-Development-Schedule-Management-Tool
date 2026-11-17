@@ -1,10 +1,10 @@
 # OPN-DD-15 — 保存失敗・表示更新失敗・再試行・復旧 詳細設計レビュー
 
-> **文書状態**：Review Draft v0.1／**DD15-01 未承認**（2026-11-17）  
-> **フェーズ**：MVP詳細設計 In Progress／OPN-DD-15 Open  
+> **文書状態**：Decision Record v0.2／**DD15-01 Option A Approved**（2026-11-17）  
+> **フェーズ**：MVP詳細設計 In Progress／**OPN-DD-15 Closed（論理復旧設計のみ）**  
 > **プロジェクト内保存先**：`docs/design/OPN-DD-15_Recovery_Review.md`  
 > **根拠**：`docs/design/MVP_Design.md` Draft v0.7（特に§5.1、§5.3、§6、§8〜9、§11〜13）、`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md` Decision Record v0.2、`docs/test/Test_and_Validation.md` Test Design Draft v0.3、`docs/decisions/Decision_Log.md` Draft v0.7、`docs/changes/Change_Log.md` Draft v0.8、`reference/AI協働開発_基本運用プロセス.md`。  
-> **判断境界**：詳細設計GrillMe Q01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A、DD13-01=A、DD14-01=Aを再審議しない。本書で提案するのは未確定の障害別復旧手順・表示鮮度の**論理仕様**。Excelの物理保証／版履歴保持・復元は未検証。
+> **判断境界**：詳細設計GrillMe Q01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A、DD13-01=A、DD14-01=Aを再審議しない。本書で提案するのは正式採用した障害別復旧手順・表示鮮度の**論理仕様**。Excelの物理保証／版履歴保持・復元は未検証。
 
 ## 0. 目的・対象・非対象
 
@@ -26,7 +26,7 @@
 | Q20〜Q22／DD12-01=A | 正本保存成功後に共通表示データを再生成。表示失敗でも正本を巻き戻さず古さ警告 | 鮮度判定、表示再生成の再試行、閲覧可否 |
 | DD13-01=A | 31管理IDはテスト設計として確定、全件Not Tested | C14候補とC15候補は採否／実施を別管理し、勝手に正式IDへ追加しない |
 
-## 2. 故障分類・検知条件・即時処置（A案候補）
+## 2. 故障分類・検知条件・即時処置（DD15-01承認 A案）
 
 | 障害ID | 典型事象／検知条件 | 原本の判定 | 管理者の即時処置 | 閲覧表示 |
 |---|---|---|---|---|
@@ -59,7 +59,7 @@
 
 `破棄確認済`は実際に誤って公開された行を残してよいという意味ではない。**未確定版の隔離／復旧が証明できること**を前提とする。`tblSaveOperation`と`tblIdSequence`は論理補助管理であり、物理配置と原子的確定手段は未選定。
 
-### 3.2 表示鮮度の導出（提案）
+### 3.2 表示鮮度の導出（DD15-01承認の論理仕様）
 
 管理対象候補：`SourceRevision`（再読込・整合検証済みの**正本確定版**）、`DisplayRevision`（**共通表示データを最後に正常公開**した元の正本版）、`DisplayRefreshStatus`（未生成／更新中／正常／失敗）、`LastSuccessfulRefreshAt`、`LastRefreshError`、`LastRefreshAttemptAt`。版は**同一性を検証できる単調な論理確定識別子**であり、保存先のファイル更新日時だけに依存しない。物理格納先、信頼できる版取得方式は未検証。
 
@@ -75,7 +75,7 @@
 - `LastSuccessfulRefreshAt`は参考時刻であり、時刻が新しいだけで版一致を証明しない。システム当日判定の再生成時点については、L01の鮮度を含め実装時に検証する（時計の境界・タイムゾーンは未検証）。
 - **重要な制約**：共通表示全体が一つの`DisplayRevision`に対応する**一括公開**を実装できないなら、混在版を最新として公開しない。Excel上での公開制御は物理成立性の検証対象。
 
-## 4. 障害時の共通復旧手順（A案候補）
+## 4. 障害時の共通復旧手順（DD15-01承認 A案）
 
 | Step | 操作主体 | 実施内容 | 完了証跡／次へ進む条件 |
 |---|---|---|---|
@@ -118,7 +118,7 @@ flowchart TD
 - 「再試行」は**同じ保存要求を無条件に再送することではない**。R03による結果確定が必須。未書込を証明できた後の**新たな入力・保存要求**は、復旧終了後に新OperationKeyを発行して実施する（確定前に割当済みのIDは再利用しない）。
 - **表示のみの再試行**はF15-05に限り、正本を新規保存せず、最新の正常確定`SourceRevision`から再生成する。再生成途中で別の正本版に変わった場合は混在版を公開しない。
 
-## 5. 選択肢と評価：DD15-01（今回の採否対象）
+## 5. 選択肢と評価：DD15-01（決裁前の比較履歴）
 
 | 案 | 方式 | 利点 | トレードオフ・評価 |
 |---|---|---|---|
@@ -126,7 +126,7 @@ flowchart TD
 | **B** | Aの不変条件を維持しつつ、**未書込が確実に証明された場合のみ**保存要求の自動再実行を補助する | 限定された失敗時の手数削減 | 確実な「未書込」証明と再送の冪等性が必要。Excelの同一版照合機能を要し未検証。MVPでは複雑化 |
 | **C** | 障害時に版履歴から直前版へ戻す運用を標準化し、復旧後に全体を検証 | 手順は見かけ上シンプル | **後続の正常確定・ID高水位・証跡が巻戻る可能性**。古い版への復元を常用するのは危険。採用するなら例外条件と変更管理が必要 |
 
-**推奨理由（AIの設計評価）**：既存の論理正本と監査履歴の一貫性を重視するためA案。**ユーザー固有の採用理由は未提示**。A/B/Cのいずれも現時点で未承認。
+**レビュー時の推奨理由（AIの設計評価）**：既存の論理正本と監査履歴の一貫性を重視するためA案。**ユーザー固有の採用理由は未提示**。**2026-11-17にユーザーがA案を正式承認したため、Aを採用、B/Cを不採用として記録する**。上表は決裁前の比較経緯として保持する。
 
 ## 6. 追加試験候補とトレーサビリティ（正式採用とは別）
 
@@ -150,7 +150,7 @@ flowchart TD
 
 ## 7. 完了条件・依存Open Items・Exitの境界
 
-### 7.1 DD15-01論理設計の完了条件（レビュー案）
+### 7.1 DD15-01論理設計の完了条件（A案承認・設計上の確認項目）
 
 - F15-01〜10に**検知／停止／影響範囲／正本判定／閲覧判定**が定義される。
 - 保存結果不明と表示だけ失敗の復旧ルートが分離され、`OperationKey`と版・期待集合で再送を判定できる。
@@ -164,8 +164,8 @@ flowchart TD
 
 | ID | 分類・状態 | 必要な処置 |
 |---|---|---|
-| **DD15-01／OPN-DD-15** | **Now／未承認・Open** | 今回のA/B/C方式を決定後、`MVP_Design.md`、`Decision_Log.md`、`Change_Log.md`、本Reviewへ正式採否を反映 |
-| **DD15-02（仮）** | **Now／未起票** | C14/C15候補の統合・採否・正式テスト管理ID・実施前提を別途判断。採用・実施を混同しない |
+| **DD15-01／OPN-DD-15** | **A Approved／Closed（論理復旧設計）** | 2026-11-17にA案正式承認。`MVP_Design.md`、`Decision_Log.md`、`Change_Log.md`、`Test_and_Validation.md`、本Reviewへ採否・論理仕様を反映。実機保証は未検証 |
+| **DD15-02（仮）** | **Now／別判断未実施** | C14/C15候補の統合・採否・正式テスト管理ID・実施前提を別途判断。採用・実施を混同しない |
 | **OPS-DD11-01** | **運用開始前／Open** | 終端状態の誤登録訂正、外部根拠・復元の副作用・運用権限を別途正式化 |
 | **OI-DD-02／基本設計EXIT-06** | **Later／Not Met** | 選定保存先の版履歴保持期間・復元権限・高水位追跡可能性を確認。不能なら運用開始禁止・変更管理 |
 | **OI-DD-01／基本設計EXIT-06** | **Later／未設定** | 想定案件／回／履歴数と復旧・再生成の性能計画を確定 |
@@ -175,24 +175,26 @@ flowchart TD
 
 **Gate判定の境界**：基本設計EXIT-06はNot Met、基本設計Freeze未実施、詳細設計EXIT-DD-01〜10は全件Not Evaluated、詳細設計Gate未判定、Excel実装Not Started／テスト全件Not Tested。本Review作成をもって自動的にClosed／Metにしない。
 
-## 8. DD15-01 採否記入欄（ユーザー決裁待ち）
+## 8. DD15-01 正式採否・変更反映記録
 
 | 項目 | 状態 |
 |---|---|
 | 判断ID | DD15-01 |
 | 対象 | OPN-DD-15（論理復旧手順・表示鮮度） |
 | AI推奨 | **Option A** |
-| ユーザー正式採否 | **未回答** |
-| 決裁日 | 未確定 |
-| 不採用案 | 未確定 |
-| 変更管理ID（採否後に起票） | `CHG-DD-15-01`（案） |
+| ユーザー正式採否 | **A Approved（明示承認）** |
+| 決裁日 | **2026-11-17** |
+| 不採用案 | **B：未書込証明時の自動再実行補助／C：版履歴からの全体復元を標準化** |
+| 変更管理ID | **CHG-DD-15-01**（設計補完の変更記録。別個の独立変更承認ではない） |
 | 既決事項 | Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 A、DD14-01 Aを保全 |
-| 更新対象（承認後） | `docs/design/MVP_Design.md`／`docs/decisions/Decision_Log.md`／`docs/changes/Change_Log.md`／`docs/test/Test_and_Validation.md`（候補状態のみ）／本レビュー記録 |
+| 更新結果 | **MVP_Design.md Draft v0.8／Decision_Log.md Draft v0.8／Change_Log.md Draft v0.9／Test_and_Validation.md Draft v0.4／本Review Decision Record v0.2**へ反映。正式31件全てNot Tested、C14/C15候補22件は未承認 |
+| 承認理由の扱い | AIの技術推奨とユーザーによるA案採用を区別。ユーザー固有の選択理由は**未提示** |
+| 承認範囲の限界 | OPN-DD-15は**論理復旧設計のみClosed**。原子的保存・未確定行隔離・一括表示公開・復元後高水位の物理成立性、基本設計EXIT-06／Freeze、詳細Exit／Gateは未完了 |
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** DD14-01 AのFail-closedを前提に、障害分類、保存結果の照合、復旧R01〜R08、表示鮮度と再開条件を提案した。DD15-01のA/B/Cは未承認。正式31テストは全件Not Testedで、C14/C15は候補のまま。
+**日本語：** 2026-11-17にDD15-01 Aを正式承認し、障害F15-01〜10、復旧R01〜R08、表示鮮度の論理仕様を確定。OPN-DD-15は論理設計上Closed、実機保証は未検証。正式31管理IDは全件Not Tested、C14/C15の22件は候補・未承認。
 
-**English:** This draft defines failure checks, recovery steps, and display status. It follows DD14-01 Option A. DD15-01 is not approved yet. All 31 official tests are not tested. C14 and C15 are still test ideas.
+**English:** DD15-01 Option A is approved for logical recovery design. OPN-DD-15 is closed for logical design. Technical tests are not complete. All 31 official tests are not tested. The 22 extra cases are still candidates.

@@ -1,8 +1,8 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v0.8／2026-11-16／CONS-DD-01・DD10〜13の履歴を保持し、DD14-01 Aの採番・確定順・競合制御の論理補完を追記**  
+> **Draft v0.9／2026-11-17／過去の変更履歴を保持し、DD15-01 Aの障害復旧・表示鮮度の論理補完を追記**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）の各個別設計判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）の各個別設計判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
@@ -12,9 +12,9 @@
 | **CHG-DD-10-01** | 重要な詳細設計補完／旧Draftの論理データ構造の改訂 | マイルストーン・証跡・照合差異と追記専用再照合履歴の4テーブル化 | **DD10-01 Option A Approved／設計への反映済**（旧Draftは未承認。新たな独立変更決裁ではない） | **ユーザーによるDD10-01採用／2026-11-15** |
 | **CHG-DD-11-01** | 詳細設計補完／状態履歴表を追加しないB案の採用 | 開催回の通常遷移・代表表示・日付取消後再設定・非適用化制限・終端状態訂正の運用境界 | **DD11-01 Option B Approved／設計反映済**（旧未承認A案からB案への選択。独立した変更決裁ではない） | **ユーザーによるDD11-01採用／2026-11-15** |
 | **CHG-DD-12-01** | 詳細設計補完／出力仕様の確定 | G01〜G04、L01/L02の粒度・抽出・表示除外、管理者要対応、受入観点 | **DD12-01 Option A Approved／論理出力仕様に反映済**（未承認Draftの補完、追加の独立変更決裁ではない） | **ユーザーによるDD12-01採用／2026-11-16** |
-
 | **CHG-DD-13-01** | 詳細設計補完／受入テスト設計の追加・トレース | 既存14親＋16詳細の保全、REQ002/027/033の検証補完、REQ034向けT13-01追加 | **DD13-01 Option A Approved／テスト設計反映済**（未承認Draftの補完で、追加の独立変更決裁ではない） | **ユーザーによるDD13-01採用／2026-11-16** |
 | **CHG-DD-14-01** | 詳細設計補完／採番・正常確定順・競合制御 | 単一書込者・直列コミット、論理発番高水位／保存要求識別、結果不明時停止 | **DD14-01 Option A Approved／論理方式反映済**。補助物理表・原子的保存は未検証。独立Change決裁を新設しない | **ユーザーによるDD14-01採用／2026-11-16** |
+| **CHG-DD-15-01** | 詳細設計補完／障害復旧・表示鮮度の論理仕様 | 障害F15-01〜10、復旧R01〜R08、正本／表示の二層状態、再開判定、無条件再送禁止 | **DD15-01 Option A Approved／論理復旧設計反映済**。復元・隔離・一括公開の物理保証は未検証。独立Change決裁を新設しない | **ユーザーによるDD15-01採用／2026-11-17** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -168,8 +168,25 @@
 | 文書反映先 | `docs/design/MVP_Design.md` Draft v0.7、`docs/decisions/Decision_Log.md` Draft v0.7、`docs/test/Test_and_Validation.md` Draft v0.3、`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md` Decision Record v0.2、本Change Log Draft v0.8 |
 
 
+## 12. CHG-DD-15-01 — DD15-01 A案の正式採否・障害復旧論理補完
+
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **DD15-01＝A／ユーザー明示承認（2026-11-17）**：「A案を正式承認します」。直前のDD15-01選択への回答。`docs/design/OPN-DD-15_Recovery_Review.md` Review Draft v0.1 §5のA案を採用 |
+| 変更前 | DD14-01 AのFail-closed・直列コミット論理契約は承認済み。OPN-DD-15の障害別復旧・版履歴復元・表示鮮度・再開ゲートは未承認Draft |
+| 変更後 | **F15-01〜10**の障害分類、保存状態と表示鮮度の二層判定、`OperationKey`・版・期待行集合の照合、保存結果不明時の無条件再送禁止、**R01〜R08**復旧と再開確認を論理設計として採用 |
+| 保存・表示失敗の分離 | 正本未確定／不整合なら**新規書込・正常表示停止**。正本確定済みで表示のみ失敗の場合は**旧確定表示のStale警告**＋**表示のみ再生成**（正本保存を再実行しない） |
+| 高水位・復元 | 版履歴復元で発番済み高水位や後続正常操作が巻戻る場合は、再使用防止と整合を証明できるまで停止。安易な全体復元を標準運用としない |
+| 不採用案 | **B**：未書込証明後の自動再実行補助／**C**：版履歴復元を標準復旧手段とする。比較した経緯はレビュー票へ保持 |
+| AI評価とユーザー採用理由の区分 | **AIの技術評価**：不確実な正本と古い表示を区別し、二重登録・ID再使用・混在版公開を抑制。**ユーザー独自の採用理由は未提示**。A案の採用事実のみ承認として記録 |
+| 変更管理上の境界 | 未承認Draftの詳細設計補完を本Change IDで追跡。DD15-01以外の独立したChange承認があったとはみなさない。新規業務正本・追加定期バックアップ・新承認WFは追加しない |
+| テスト採否・実施 | 正式**31管理IDは全件Not Tested**。C14候補12件、C15候補10件は**採否未決の候補**として明示し、正式採用／実施状態を分ける。候補の重複統合は別判断（仮DD15-02） |
+| 未解決・技術リスク | OPS-DD11-01、CFG-DD-10-01、OI-DD-01/02、RISK-DD-01〜04はOpen／Not Tested。Excel Windows/Webと保存先のロック・原子的保存・一括表示公開・版履歴復元／高水位の技術保証は未確認 |
+| 判定の境界 | **OPN-DD-15 Closed（論理復旧設計のみ）**。基本設計EXIT-06 Not Met・未Freeze、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定。実装・試験は未着手／未実施 |
+| 文書反映先 | `docs/design/MVP_Design.md` Draft v0.8、`docs/decisions/Decision_Log.md` Draft v0.8、`docs/test/Test_and_Validation.md` Draft v0.4、`docs/design/OPN-DD-15_Recovery_Review.md` Decision Record v0.2、本Change Log Draft v0.9 |
+
 ## まとめ / Summary
 
-**日本語：** DD14-01 AをCHG-DD-14-01として記録し、単一書込者・直列コミット論理契約を採用した。過去の判断と正式31テストIDは維持し、すべてNot Tested。C14候補12件は未採用、次はOPN-DD-15。
+**日本語：** CHG-DD-15-01にDD15-01 A承認を記録。過去の変更判断を保持し、復旧・再試行・表示鮮度の論理契約を採用した。正式31件はNot Tested、追加22件は未承認候補。技術成立性・Exit/Gateは未確認。
 
-**English:** DD14-01 Option A is recorded for logical design. All 31 official tests remain not tested. The 12 new test ideas are not approved yet. Next is OPN-DD-15.
+**English:** DD15-01 Option A is recorded in the change log. Past decisions are kept. All 31 official tests are not tested. The 22 extra cases are not approved. Technical tests and the design gate are still open.
