@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v1.0／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v1.1／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。**CFG10-01（A：マスタコード管理方式）も2026-11-17にユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -339,8 +339,25 @@
 | Exit／Gate | **EXIT-DD-03／09**の運用方針未決は解消し論理根拠を追加。ただしOPS-TECH-01と実機の検証は未完了で正式状態は**両方Not Evaluated**。EXIT-DD-01〜10も全件Not Evaluated、基本設計EXIT-06 Not Met、Freeze未実施、Gate未判定 |
 | 保全・現在状態 | **本書§1〜17の既決判断本文は維持**。OPS-DD11-01は**Closed（運用設計判断のみ）**。運用開始を許可したものではない |
 
+## 19. マスタコード初期設定・承認方式の正式採否 — CFG10-01（CFG-DD-10-01）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| 判断／対象 | **CFG10-01／CFG-DD-10-01**。出典：`docs/config/CFG-DD-10-01_Master_Code_Review.md` v0.1の比較案 |
+| 承認者・日付 | **2026-11-17／ユーザーの明示回答**：「CFG-DD-10-01の管理方式に関する設計判断CFG10-01はA案を承認します」 |
+| 採用判断 | **A Approved（管理方式）**。`MilestoneTypeCode`・`EvidenceType`・`CompareFieldCode`について、各体系の業務オーナーを指名、出典付きの実値・意味・対象別許容表を正式承認後、管理担当者が初期登録・保存検証する |
+| 既存の制約 | DD10-01の登録済コード検証、対象別論理参照、Q07の不整合保存拒否、Q08の明示マスタ差分同期、DD14／DD15の安全な保存・復旧方針は変更しない。未定義コード・未承認TargetType組合せは保存拒否 |
+| 不採用案 | B＝コード体系別独立台帳、C＝コード収集を実装開始直前まで延期。どちらも不採用。A案の利点は**AIの評価**であり、**ユーザー固有の採用理由は未提示** |
+| 変更記録 | `docs/changes/Change_Log.md`の**CHG-CFG10-01**に管理方式の採用・影響・未解決を記録。別の独立した変更決裁があったとは扱わない |
+| 決裁対象外 | **3コード実値・許容対象・出典資料・提供元部門・正式業務責任者・承認者・登録者は未確定**。物理テーブル、登録実施、性能・復元などの技術検証も未完了 |
+| Open Itemの区別 | **CFG10-01の方式判断はClosed**。**CFG-DD-10-01の実値収集・初期設定・検証はOpen**。OPS-TECH-01もOpen／Not Tested |
+| テスト・Exit | **正式41管理IDすべてNot Tested**。OP11-T01〜05は未採用候補。TV-01〜09は検証計画IDのみ。**EXIT-DD-01〜10すべてNot Evaluated**、基本設計EXIT-06 Not Met、Freeze未実施、詳細Gate未判定 |
+| 保全 | 本書§1〜18の回答・判断本文は維持。詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 A、DD14-01 A、DD15-01 A、DD15-02 A、OPS11-01 Aを再採決しない |
+
+---
+
 ## まとめ / Summary
 
-**日本語：** DD15-02の正式41テストは全件Not Testedを維持し、OPS11-01 Aの運用論理仕様を新たに決裁記録へ追加した。OPS-TECH-01は未検証、Exit/Gateは未判定。
+**日本語：** CFG10-01 Aの管理方式承認を追加記録した。実コード・責任者・初期登録は未完了でCFG-DD-10-01はOpen。正式41テストは全件Not Tested、Exit/Gateは未判定。
 
-**English:** OPS11-01 Option A is recorded. All 41 official tests are not tested. OPS-TECH-01 is open, and the design exit gate is not decided.
+**English:** CFG10-01 Option A is approved for the setup process. Code values and owners are still open. All 41 tests are not tested. The exit gate is not decided.

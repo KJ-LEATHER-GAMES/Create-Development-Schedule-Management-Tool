@@ -1,8 +1,8 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v1.1／2026-11-17／既存変更履歴を保持し、OPS11-01 Aの運用設計採用・技術未検証を追加**  
+> **Draft v1.2／2026-11-17／既存変更履歴を保持し、CFG10-01 Aの管理方式承認と未完了の初期設定を追加**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）・OPS11-01（A案）の各個別設計・運用判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）・OPS11-01（A案）・CFG10-01（A案）の各個別設計・運用・初期設定方式の判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
@@ -17,6 +17,8 @@
 | **CHG-DD-15-01** | 詳細設計補完／障害復旧・表示鮮度の論理仕様 | 障害F15-01〜10、復旧R01〜R08、正本／表示の二層状態、再開判定、無条件再送禁止 | **DD15-01 Option A Approved／論理復旧設計反映済**。復元・隔離・一括公開の物理保証は未検証。独立Change決裁を新設しない | **ユーザーによるDD15-01採用／2026-11-17** |
 | **CHG-DD-15-02** | 詳細テスト設計の統合・正式採用 | C14/C15計22候補をT15-01〜10とTEST-DD-013補完へ全件移行 | **DD15-02 Option A Approved／正式41管理ID・全件Not Tested**。旧候補履歴保持。別の独立Change決裁を作出しない | **ユーザーによるDD15-02採用／2026-11-17** |
 | **CHG-OPS11-01** | 運用設計補完／終端状態誤登録の例外訂正統制 | 管理者限定の保守例外・外部根拠・同一保存ゲート・再開判定 | **OPS11-01 Option A Approved／運用設計判断Closed**。**OPS-TECH-01はOpen／Not Tested、実行不可**。別の独立Change決裁を作出しない | **ユーザーによるOPS11-01採用／2026-11-17** |
+
+| **CHG-CFG10-01** | 初期設定管理方式の採否・責任分離 | 3コード体系の業務承認→承認版の安全な初期登録・検証 | **CFG10-01 Option A Approved（方式判断のみ）**。実値／Owner／投入／検証はOpen。別の独立Change決裁ではない | **ユーザーによるCFG10-01採用／2026-11-17** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -218,8 +220,27 @@
 | 変更管理の境界 | 未承認運用Draftの採用判断を本Change IDに記録する。**OPS11-01とは別の独立したChange承認があったと扱わない**。正式原本へのGit反映・commitは別作業 |
 | 状態 | **OPS11-01 A Approved／OPS-DD11-01 Closed（運用設計の論理仕様に限る）**。OPS-TECH-01はOpen、実機Not Tested |
 
+## 15. CHG-CFG10-01 — CFG10-01 A案の正式採用・マスタ初期設定責任の分離
+
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **CFG10-01＝A／2026-11-17ユーザー明示承認**。`docs/config/CFG-DD-10-01_Master_Code_Review.md` Draft v0.1のA案を採用 |
+| 変更前 | `MilestoneTypeCode`、`EvidenceType`、`CompareFieldCode`の実値・責任者・承認経路が未定義。CFG10-01 A/B/Cの管理方式はレビュー案・未決裁だった |
+| 変更後（確定範囲） | **コード体系ごとに業務オーナーを指名し、出典付き実コードとTargetType許容表を業務承認後、管理担当者が承認版を安全に初期登録・検証するA案**を採用。CFG-R01〜R07を管理プロセスとして確定 |
+| 不採用案・理由 | B＝独立したコード別台帳、C＝実装直前まで収集延期を不採用。管理責任と初期登録責任の分離という利点は**AI技術評価**。ユーザー固有の採用理由は未提示 |
+| 既存判断の保全 | 詳細設計Q01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A、DD13-01=A、DD14-01=A、DD15-01=A、DD15-02=A、OPS11-01=Aを変更せず、初期設定管理方法のみ追加採用 |
+| 未解決・Blocked | **CFG-DD-10-01 Open**。3コード実値・出典・TargetType許可組合せ・正式提供元部門／Owner／承認者／登録者は未確定。承認版投入と技術検証Not Started／Not Tested。未承認コード・許可未定義組合せの保存／本番投入は拒否 |
+| Exit／技術連携 | EXIT-DD-01/05/07/08/09に判断根拠を補強し、`docs/reviews/Technical_Validation_Exit_Handoff.md` TV-09を引継ぎ。OPS-TECH-01 Open／Not Tested、基本EXIT-06 Not Met、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定 |
+| テストへの影響 | **正式41管理IDは不変更・全件Not Tested**。OP11-T01〜05は未承認候補。TV-01〜09は既存検証計画タスクであり、新規正式テスト採用なし |
+| 管理の境界 | CFG10-01の明示承認に紐付く変更履歴であり、別個のChange承認を捏造しない。実値の正式承認はコード体系ごとの後続決裁で扱う |
+| 現在状態 | **CFG10-01 A Approved／管理方式の採否Closed**。**CFG-DD-10-01は実値・責任者・登録・検証が未完了のためOpen** |
+
+**既存§2〜14の「未承認／Open」「当時31管理ID」は各時点の履歴であり、現在状態は本節と最新の判断記録を優先する。過去記録の上書きはしない。**
+
+---
+
 ## まとめ / Summary
 
-**日本語：** CHG-OPS11-01を追加しOPS11-01 Aの運用設計決裁を記録。正式41テストは全件Not Tested、OPS-TECH-01はOpen、詳細Exit/Gateは未判定。
+**日本語：** CHG-CFG10-01に管理方式Aの正式採用を記録。実コード・責任者・登録・検証は未完了でCFG-DD-10-01はOpen。正式41テストは全件Not Tested、詳細Exit/Gateは未判定。
 
-**English:** CHG-OPS11-01 records the approved operations plan. All 41 tests are not tested. OPS-TECH-01 is open, and the design gate is not decided.
+**English:** CHG-CFG10-01 records the approved setup process. Code values and owners are still open. All 41 tests are not tested. The design gate is not decided.
