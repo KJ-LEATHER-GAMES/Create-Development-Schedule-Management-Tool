@@ -1,8 +1,8 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v1.0／2026-11-17／過去の変更履歴を保持し、DD15-02 Aのテスト候補統合・正式採用を追加**  
+> **Draft v1.1／2026-11-17／既存変更履歴を保持し、OPS11-01 Aの運用設計採用・技術未検証を追加**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）の各個別設計判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）・OPS11-01（A案）の各個別設計・運用判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
@@ -16,6 +16,7 @@
 | **CHG-DD-14-01** | 詳細設計補完／採番・正常確定順・競合制御 | 単一書込者・直列コミット、論理発番高水位／保存要求識別、結果不明時停止 | **DD14-01 Option A Approved／論理方式反映済**。補助物理表・原子的保存は未検証。独立Change決裁を新設しない | **ユーザーによるDD14-01採用／2026-11-16** |
 | **CHG-DD-15-01** | 詳細設計補完／障害復旧・表示鮮度の論理仕様 | 障害F15-01〜10、復旧R01〜R08、正本／表示の二層状態、再開判定、無条件再送禁止 | **DD15-01 Option A Approved／論理復旧設計反映済**。復元・隔離・一括公開の物理保証は未検証。独立Change決裁を新設しない | **ユーザーによるDD15-01採用／2026-11-17** |
 | **CHG-DD-15-02** | 詳細テスト設計の統合・正式採用 | C14/C15計22候補をT15-01〜10とTEST-DD-013補完へ全件移行 | **DD15-02 Option A Approved／正式41管理ID・全件Not Tested**。旧候補履歴保持。別の独立Change決裁を作出しない | **ユーザーによるDD15-02採用／2026-11-17** |
+| **CHG-OPS11-01** | 運用設計補完／終端状態誤登録の例外訂正統制 | 管理者限定の保守例外・外部根拠・同一保存ゲート・再開判定 | **OPS11-01 Option A Approved／運用設計判断Closed**。**OPS-TECH-01はOpen／Not Tested、実行不可**。別の独立Change決裁を作出しない | **ユーザーによるOPS11-01採用／2026-11-17** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -202,8 +203,23 @@
 | Exit／Gate | 基本設計EXIT-06 Not Met、Freeze未実施、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定。テスト設計の正式化を実施合格と混同しない |
 
 
+## 14. CHG-OPS11-01 — OPS11-01 A案の正式採用・終端状態の訂正運用統制
+
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **OPS11-01＝A／2026-11-17のユーザー明示判断**。`docs/operations/OPS-DD11-01_Terminal_Status_Correction_Review.md` Draft v0.1のA案を採用 |
+| 変更前 | DD11-01 Bで終端状態の通常逆遷移・状態監査表の追加を禁止。誤登録訂正の例外運用は**OPS-DD11-01 Open／Review Draft未決裁**だった |
+| 変更後 | **OP11-R01〜R08**の管理担当者限定の例外保守、外部インシデント記録（旧値・新値・根拠・版・OperationKey等）、DD14/DD15の整合保存・再読込・表示更新・再開条件を採用。状態監査表や新承認WFは追加しない |
+| 不変とする既決事項 | **Q01〜Q24、CONS-DD-01＝A、DD10-01＝A、DD11-01＝B、DD12-01＝A、DD13-01＝A、DD14-01＝A、DD15-01＝A、DD15-02＝A**を保持。通常逆遷移禁止、OccurrenceID/No不変、日付履歴追記専用、正本セル直接編集禁止を維持 |
+| 不採用・理由 | B：条件付き版履歴の全体復元中心、C：訂正運用を新変更まで全面禁止。**AI評価**は原レビューの比較。ユーザー固有の採用理由は未提示と区別する |
+| 実装・運用上のリスク | **OPS-TECH-01 Open／Not Tested**。保守専用実行手段・アクセス権・外部記録保持／権限、単一書込者・版／行集合検証・原本再読込・表示同一版公開が成立するまで**Blocked／実施不可**。不成立なら停止と別途変更管理 |
+| 正式テストへの影響 | **正式41管理IDは変更なし／全件Not Tested**。OP11-T01〜05は正式採否未判断の候補。OPS11-01 A承認を追加テストの自動承認・実施合格としない |
+| Exitへの影響 | **EXIT-DD-03／09**の運用ルール未決は解消。ただしOPS-TECH-01・環境・実機確認・条件付き引継ぎが残る。**全EXIT-DD-01〜10 Not Evaluated／Gate未判定**、基本設計EXIT-06 Not Met・Freeze未実施 |
+| 変更管理の境界 | 未承認運用Draftの採用判断を本Change IDに記録する。**OPS11-01とは別の独立したChange承認があったと扱わない**。正式原本へのGit反映・commitは別作業 |
+| 状態 | **OPS11-01 A Approved／OPS-DD11-01 Closed（運用設計の論理仕様に限る）**。OPS-TECH-01はOpen、実機Not Tested |
+
 ## まとめ / Summary
 
-**日本語：** CHG-DD-15-02を追加し、22候補の10正式詳細テスト＋既存1テスト補完への移行を記録。41管理IDはすべて未実施。OPS-DD11-01と技術検証は未解決。
+**日本語：** CHG-OPS11-01を追加しOPS11-01 Aの運用設計決裁を記録。正式41テストは全件Not Tested、OPS-TECH-01はOpen、詳細Exit/Gateは未判定。
 
-**English:** CHG-DD-15-02 records the approved test changes. There are 41 official test IDs, and none has been run. OPS-DD11-01 and technical tests are still open.
+**English:** CHG-OPS11-01 records the approved operations plan. All 41 tests are not tested. OPS-TECH-01 is open, and the design gate is not decided.

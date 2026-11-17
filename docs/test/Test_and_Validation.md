@@ -1,16 +1,16 @@
 # Test & Validation — 開発プロセス統合管理ブック（受入テスト・トレーサビリティ）
 
-> 文書版: **Test Design Draft v0.5（2026-11-17）**／**DD13-01 A／DD14-01 A／DD15-01 A／DD15-02 A Approved（各設計・テスト判断のみ）**  
+> 文書版: **Test Design Draft v0.6（2026-11-17）**／**DD13-01 A／DD14-01 A／DD15-01 A／DD15-02 A Approved／OPS11-01 A Approved（各設計・テスト・運用判断のみ）**  
 > 文書状態: **DD15-02 Aの採用によって正式41管理ID／実行は全件 Not Tested**。DD13-01の既存31件を維持し、C14/C15計22候補をT15-01〜10の正式10件とTEST-DD-013への補完1件に統合した。旧候補表は決裁前の履歴であり、未承認候補として二重集計しない。本台帳全体の最終文書承認・受入試験の合格・Exit/Gate承認を意味しない。  
 > プロジェクト内保存先: `docs/test/Test_and_Validation.md`  
-> 根拠: `docs/requirements/MVP_Requirements.md` v0.1（未承認整理Draft）、`docs/design/MVP_Design.md` Draft v0.9 §§2,9,10,11,12,13、`docs/design/OPN-DD-12_Output_Spec_Review.md` Decision Record v0.2、`docs/decisions/Decision_Log.md`、`reference/AI協働開発_基本運用プロセス.md`  
+> 根拠: `docs/requirements/MVP_Requirements.md` v0.1（未承認整理Draft）、`docs/design/MVP_Design.md` Draft v1.0 §§2,9,10,11,12,13、`docs/design/OPN-DD-12_Output_Spec_Review.md` Decision Record v0.2、`docs/decisions/Decision_Log.md`、`reference/AI協働開発_基本運用プロセス.md`  
 > IDの解釈: 既存 `TEST-DD-001〜014` **親テスト14件**、既存 `T12-01〜16` **出力・境界の詳細ケース16件**（親に紐付け）。追加 `T13-01` は**DD13-01 A承認による新規詳細ケース**（親 `TEST-DD-013`）。既存14親・16詳細ケースおよびT13-01のID・期待結果は変更しない。レビュー由来のC14-01〜12およびC15-01〜10は決裁前の候補履歴として保持し、DD15-02 A承認後はT15正式IDおよびTEST-DD-013補完に移行した。**正式計41管理ID**。
 
 ## 0. 目的・対象・状態
 
 - 要求IDから**設計決定・親テスト・詳細ケース・期待値・実施証跡**まで双方向に参照できる状態を作る。
 - 実装前レビューで入力条件・操作順・期待結果・Pass判定根拠を確認し、後工程で結果を記入する。正常系を優先し、無制限の網羅的テストをMVPに追加しない。
-- **継承する確定判断**：詳細設計Q01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A。**DD13-01=A（2026-11-16）**はこのテスト設計の採否にのみ追加した判断。**DD14-01=A（2026-11-16）**は論理的な採番・直列コミット方式の承認であり、**DD15-01=A（2026-11-17）**は障害復旧・表示鮮度の論理仕様承認である。いずれも既決事項やテスト実施結果を変更しない。**DD15-02 A（2026-11-17）**はC14/C15の採否統合のみを確定し、全41件をNot Testedで管理する。
+- **継承する確定判断**：詳細設計Q01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A。**DD13-01=A（2026-11-16）**はこのテスト設計の採否にのみ追加した判断。**DD14-01=A（2026-11-16）**は論理的な採番・直列コミット方式の承認であり、**DD15-01=A（2026-11-17）**は障害復旧・表示鮮度の論理仕様承認である。いずれも既決事項やテスト実施結果を変更しない。**DD15-02 A（2026-11-17）**はC14/C15の採否統合のみを確定し、全41件をNot Testedで管理する。**OPS11-01 A（2026-11-17）**は終端状態の例外保守運用の論理仕様を採用したが、OP11-T01〜05は**未採用の追加候補**で正式41件に含めない。
 - **運用上の限界**：Q23/Q24はテストのトレーサビリティとGate運用に関する判断。Q24のExit判定は試験Passとは別。基本設計EXIT-06=Not Met/未Freeze、詳細Exit=Not Evaluated、Excel実装=Not Started。
 - **対象外**：Qlik Sense実接続、外部自動取込、新承認WF、定期別バックアップ、実機PoCの前倒し。技術成立性の確認は定義しても実施済みとはしない。
 
@@ -327,6 +327,21 @@
 - `Blocked`／`Not Tested`の必須サブケースが1つでも残ればそのT15 IDをPassとしない。`N/A`は理由と承認が必要。
 - OPS-DD11-01の誤登録訂正運用、CFG-DD-10-01、OI-DD-01/02、RISK-DD-01〜04は継続課題。詳細Exit／Gateを自動でMetにしない。
 
+
+### 5.6 OPS11-01 A承認の受入観点（正式ケース追加は別決裁）
+
+**承認範囲の区別**：OPS11-01 Aは業務運用の論理仕様を承認した。`OP11-T01〜05`は`docs/operations/OPS-DD11-01_Terminal_Status_Correction_Review.md` §7にある**候補**であり、DD15-02 Aの正式41管理IDには含めない。
+
+| 候補ID | 追加で確認したい観点 | 既存の関連テスト | 採用状態／実施結果 |
+|---|---|---|---|
+| OP11-T01 | 通常UIでの終端逆遷移拒否・原本不変更 | TEST-DD-006／013 | **候補・未採用／Not Tested** |
+| OP11-T02 | 権限・外部根拠不足時の保守操作拒否 | TEST-DD-013、RISK-DD-03 | **候補・未採用／Not Tested** |
+| OP11-T03 | 例外保守での根拠保全・同一コミット・表示更新 | TEST-DD-006／013、T15-08／10 | **候補・未採用／Not Tested** |
+| OP11-T04 | 保守途中失敗時のFail-closed・高水位照合 | T15-06／07／10 | **候補・未採用／Not Tested** |
+| OP11-T05 | 他回への無影響・表示抽出と差異／証跡の整合 | TEST-DD-009／010、T12-06／07 | **候補・未採用／Not Tested** |
+
+**次の判断**：上記5候補について、既存正式テストの必須サブケースへの吸収か新規ID採用かを別途正式判断する。OPS-TECH-01の実機成立・合格判定を予断しない。**正式テスト数41、全件Not Testedを維持**。
+
 ## 6. 設計判断→親テストの逆トレース索引
 
 **出典準拠**：Q01〜Q22の参照関係はMVP_Design.md §11.1の既存索引を下記へ移し、T12の追加対応は§4・§5で示す。Q23は本表全体、Q24はExit/Gateの評価手順であり、テストの合格でQ24を済ませた扱いにしない。
@@ -377,20 +392,21 @@
 | Now | **DD15-01 / OPN-DD-15** | F15-01〜10、R01〜R08、正本／表示の二層状態、再試行／復旧の論理仕様を採用。C15候補10件は正式テスト未採用 | **A Approved／Closed（論理復旧設計のみ）・実機Not Tested** |
 | Now | **DD15-02** | C14/C15候補22件をT15正式10件とTEST-DD-013補完へ移行 | **A Approved／Closed（テスト設計）・全41件Not Tested** |
 | Now/実装前設定 | **CFG-DD-10-01** | 有効マスタコードの試験データセットを構築 | **Open** |
-| 運用開始前 | **OPS-DD11-01** | 終端状態誤登録訂正の運用復元・外部根拠の手順（通常UI外） | **Open** |
+| 運用開始前 | **OPS-DD11-01** | **OPS11-01 Aで運用論理仕様を承認**。管理者限定保守例外、外部記録、DD14/DD15整合ゲート | **Closed（運用設計判断のみ）** |
+| 運用開始前／実機 | **OPS-TECH-01** | 保守経路の物理アクセス制限・外部記録保全・正常確定／再読込・表示再生成が成立するか検証。未成立なら操作禁止 | **Open／Not Tested** |
 | Later/基本EXIT-06 | **OI-DD-01 / OI-DD-02** | 性能対象件数／版履歴の保持・復元条件を決めTEST-DD-014に適用 | **未確定** |
 | Later/実機 | **RISK-DD-01〜04** | 閲覧者フィルタ・行高／全文・編集統制・採番競合 | **Not Tested** |
 
 ## 9. OPN-DD-13の完了条件・変更管理（DD13-01 A決裁）
 
 - **設計上の完了条件（採用し、記録確認済み）**：(1) 全34要求に明示したテスト経路または未カバー理由がある、(2) 親14と既存T12詳細16のID・粒度・期待結果が保持され、入力/手順/合否記録形式を備える、(3) T13-01の採否を正式に決める、(4) 実機依存をNow/Laterに分離する、(5) Decision LogとChange Logへの承認記録がある。
-- **未実施のまま残るもの**：全テスト実行、環境・性能・保存先復元、OPS-DD11-01、基本設計Freeze、詳細設計Exit/Gateの判定。本書完成のみでEXIT-DD-08をMetにしない。
+- **未実施のまま残るもの**：全テスト実行、環境・性能・保存先復元、OPS-TECH-01（OPS11-01 Aの技術成立性）、基本設計Freeze、詳細設計Exit/Gateの判定。本書完成のみでEXIT-DD-08をMetにしない。
 - **正式決裁・変更記録**：**2026-11-16、ユーザーがDD13-01 Aを明示承認**。`CHG-DD-13-01`をChange Logに登録し、Decision Log・MVP_Design.md・レビュー記録と相互参照する。既存30件はID・期待値を保全。**OPN-DD-13はテスト設計の範囲でClosed**。
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** DD15-02 A承認を受けて10詳細テストを正式追加し、旧22候補を全件移行した。既存31件は原文を保持し、正式41件すべてNot Tested。OPS-DD11-01は未承認の別課題。
+**日本語：** OPS11-01 Aの運用設計承認を追跡事項に追加した。正式41テストは全件Not Tested、OP11-T01〜05は候補・未採用、OPS-TECH-01は未検証。
 
-**English:** DD15-02 Option A adds 10 official tests. All 22 old ideas have a clear mapping. The first 31 tests are unchanged. All 41 IDs are not tested. OPS-DD11-01 is still open.
+**English:** OPS11-01 Option A is approved for operations design. All 41 official tests are not tested. The five OPS test ideas are not approved. OPS-TECH-01 is open.

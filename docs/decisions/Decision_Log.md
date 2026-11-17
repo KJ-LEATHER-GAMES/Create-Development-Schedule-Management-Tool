@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.9／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v1.0／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）、**OPS11-01（A：終端状態誤登録訂正の運用論理仕様）**はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -323,8 +323,24 @@
 | 次アクション | **OPS-DD11-01** 終端状態誤登録の訂正運用レビュー（別判断、未承認）。CFG-DD-10-01、OI-DD-01／02、RISK-DD-01〜04は引き続きOpen／Not Tested |
 
 
+## 18. 終端開催状態の誤登録訂正・例外保守 — OPS11-01（OPS-DD11-01）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／Open Item | **OPS11-01／OPS-DD11-01**。レビュー：`docs/operations/OPS-DD11-01_Terminal_Status_Correction_Review.md` |
+| 承認者・日付 | **2026-11-17／ユーザーの明示回答**：「OPS-DD11-01の正式運用設計判断OPS11-01はA案で進めます」 |
+| 採用判断 | **A Approved（運用論理仕様）**。管理担当者限定の例外保守経路、外部インシデント記録、DD14/DD15の一貫した整合性検証、**技術成立しなければBlocked継続**を正式採用 |
+| 採用する手順 | **OP11-R01〜R08**：申告、隔離、事実照合、影響分析、訂正判断、例外経路による正本訂正、全体・表示再検証、管理担当者の再開判定。旧値・新値・根拠・版・OperationKey・対象ID・再開根拠は外部記録に保存 |
+| 不変条件 | **DD11-01 Bの状態監査テーブルなし、終端状態の通常逆遷移禁止を維持**。OccurrenceID・回次を維持し、日付は履歴追記のみ。正本の直接セル編集・クラウド全体復元の無条件実行・新承認WFは許さない |
+| 不採用案 | B＝条件付き全ブック版履歴復元中心／C＝別設計変更まで誤登録訂正を一律停止。理由の技術評価はレビュー§4に保持。**ユーザー固有の理由は未記録** |
+| 技術・権限の未解決 | **OPS-TECH-01 Open／Not Tested**。保守専用経路・管理者限定アクセス・外部記録の保全／権限・DD14/DD15同一保存ゲート・再読込・表示更新の成立をWindows/Web／採用保存先で検証するまで例外訂正を**実行不可**とする |
+| テスト状態 | **正式41管理IDは全件Not Tested**。レビューのOP11-T01〜05は**候補・正式未採用**。今回のA承認だけでテストを追加しない |
+| 変更管理 | **CHG-OPS11-01**として`docs/changes/Change_Log.md`に判断と影響を追記。OPS11-01とは別の追加変更承認を仮定しない |
+| Exit／Gate | **EXIT-DD-03／09**の運用方針未決は解消し論理根拠を追加。ただしOPS-TECH-01と実機の検証は未完了で正式状態は**両方Not Evaluated**。EXIT-DD-01〜10も全件Not Evaluated、基本設計EXIT-06 Not Met、Freeze未実施、Gate未判定 |
+| 保全・現在状態 | **本書§1〜17の既決判断本文は維持**。OPS-DD11-01は**Closed（運用設計判断のみ）**。運用開始を許可したものではない |
+
 ## まとめ / Summary
 
-**日本語：** DD15-02 Aを正式承認。旧22候補はT15-01〜10の正式10件とTEST-DD-013の補完1件に統合。正式41件はすべてNot Tested。OPS-DD11-01は未承認の運用設計レビューへ進む。
+**日本語：** DD15-02の正式41テストは全件Not Testedを維持し、OPS11-01 Aの運用論理仕様を新たに決裁記録へ追加した。OPS-TECH-01は未検証、Exit/Gateは未判定。
 
-**English:** DD15-02 Option A is approved. The 22 ideas map to 10 new tests and one existing test. All 41 official test IDs are not tested. The OPS-DD11-01 review is next.
+**English:** OPS11-01 Option A is recorded. All 41 official tests are not tested. OPS-TECH-01 is open, and the design exit gate is not decided.
