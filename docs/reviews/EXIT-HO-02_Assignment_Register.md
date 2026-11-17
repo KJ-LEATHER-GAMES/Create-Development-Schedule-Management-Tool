@@ -1,6 +1,6 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.1（2026-11-17）  
+> **版**：Assignment Register Draft v0.2（2026-11-17）  
 > **状態**：**EXIT-HO-02 Open／正式割当0/10**。候補ロールは未任命。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
@@ -90,6 +90,19 @@ STOPゲート／STOP解除権限者:
 | Excel実装 | **Not Started** |
 
 既存の詳細設計Q01〜Q24、CONS-DD-01、DD10-01〜DD15-02、OPS11-01、CFG10-01の判断は変更しない。
+
+
+## 7. EXIT-HO-02先行指名準備 — COND-DD-08／09／10（2026-11-17）
+
+正式責任者と期限の任命を進めるため、次の**決裁準備シート**を作成した。**新規決裁は発生していない**ため、§2の10条件すべての`未指名`・`未決`・`Open`は変更しない。
+
+- `docs/reviews/EXIT-HO-02_Priority_08_09_10_Nomination_Sheet.md`（Nomination Sheet Draft v0.1）
+- **COND-DD-08**：TV-01〜09の実施計画、技術検証統括、41正式テストとの対応、全STOP管理の責任を指名する。
+- **COND-DD-09**：未解決事項の引受・期限・受入・未達時差戻し責任を指名する。
+- **COND-DD-10**：Requirements等の現行根拠版、版照合、旧Next Action整合の責任を指名する。
+- 候補ロールを記載したが、**正式Owner／Executor／Approver／期限は全件未決**。3条件は**0/3正式割当**、全体は**0/10**。
+- 既定の管理節目はM0（正式Exit評価開始前）だが、具体的な正式期限の承認ではない。
+- 他の7条件や正式Exit・Gate、TVの実施結果には影響しない。
 
 ---
 
