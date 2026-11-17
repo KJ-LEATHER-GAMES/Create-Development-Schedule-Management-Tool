@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.5（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.6（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.9（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.0（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -135,3 +135,17 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-01／03／07の担当部門を特定した。次は正式なOwner・Executor・Approverと期限の確定に必要な権限・引受確認を行う。
 
 **English:** Teams for conditions 01, 03, and 07 are known. Formal owners, executors, approvers, and deadlines are still open.
+
+
+## 11. S1進捗：COND-DD-03 Excel技術Owner候補（2026-11-17）
+
+- **候補の確認**：ユーザー回答「はい」により、COND-DD-03のExcel技術責任者（Owner）**仮候補はユーザー本人**とする。正式任命ではない。
+- **先行3条件の情報**：01＝開発プロセス統括係（3コードの内容承認者候補は本人）、03＝開発プロセス統括係（技術Owner候補は本人）、07＝情報システム部門（単独Owner等の具体的人選は未決）。
+- **次の必要事項**：03のExecutor・最終Approver・独立確認要否、正式期限、引受・兼務・STOP解除・差戻し権限を確認する。07のクラウド運用責任者と受入承認者の特定も継続。
+- **不変条件**：COND-DD-04／05のOwnerに自動展開しない。STOP-01を解除せず、TV-01〜03はNot Tested。正式任命0/10、正式41テスト全件Not Tested、Exit10項目全件Not Evaluated、Gate未判定を維持。
+
+## まとめ / Summary（S1技術Owner候補）
+
+**日本語：** COND-DD-03の技術Owner候補をユーザー本人と確認した。正式任命と期限は未決。
+
+**English:** The user is the proposed technical owner for COND-DD-03. Formal appointment and deadlines remain open.

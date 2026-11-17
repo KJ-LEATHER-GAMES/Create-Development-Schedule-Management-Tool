@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.9（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v1.0（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -20,7 +20,7 @@
 |---|---|---|---|---|---|---|---|
 | **COND-DD-01** | CFGコード実値・許容表／STOP-02 | コード体系別業務責任者（横断調整はユーザー本人を推奨・統括1名は未決）（A案仮割当） | 未指名 | 未指名 | 未指名 | 未決 | Open |
 | **COND-DD-02** | 承認コード登録・TV-09／STOP-02 | ユーザー本人（仮Owner）（A案仮割当） | 未指名 | 未指名 | 未指名 | 未決 | Open |
-| **COND-DD-03** | 排他・連番・確定順・保存／TV-01〜03／STOP-01 | Excel技術責任者（候補）（A案仮割当） | 未指名 | 未指名 | 未指名 | 未決 | Open |
+| **COND-DD-03** | 排他・連番・確定順・保存／TV-01〜03／STOP-01 | **ユーザー本人（Excel技術責任者の仮候補／2026-11-17確認）** | 未指名 | 未指名 | 未指名 | 未決 | Open |
 | **COND-DD-04** | OPS-TECH-01・TV-05／STOP-03 | Excel技術責任者（候補）（A案仮割当） | 未指名 | 未指名 | 未指名 | 未決 | Open |
 | **COND-DD-05** | 表示・独立絞込・鮮度／TV-04/06／STOP-04 | Excel技術責任者（候補）（A案仮割当） | 未指名 | 未指名 | 未指名 | 未決 | Open |
 | **COND-DD-06** | 性能の規模／数値閾値・TV-07／STOP-05 | ユーザー本人（仮Owner）（A案仮割当） | 未指名 | 未指名 | 未指名 | 未決 | Open |
@@ -299,3 +299,28 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-07のBox／SharePoint Online管理部門を情報システム部門として記録した。先行3条件の担当部門は特定済みだが正式任命は0/10のまま。
 
 **English:** The IT department is confirmed as the management team for Box and SharePoint Online. Teams for conditions 01, 03, and 07 are known. No formal assignments are complete.
+
+
+## 15. COND-DD-03 Excel技術責任者候補の確認（2026-11-17／正式任命なし）
+
+**確認根拠**：ユーザーへの質問「COND-DD-03のExcel技術責任者も、あなた自身が担当する予定ですか？」に対して「はい」と回答。今回の回答は**Owner候補（Excel技術責任者）の指名**に限る。§13の「責任者未指定」は当時の履歴として保持し、本節を最新の仮候補情報とする。
+
+| 項目 | 現時点の扱い | 決裁状態 |
+|---|---|---|
+| 対象条件 | **COND-DD-03**：採番・連番・確定順・保存整合／TV-01〜03／STOP-01 | 条件定義は変更なし |
+| 設計・実装担当部門 | **開発プロセス統括係** | 既確認 |
+| 技術Owner候補 | **ユーザー本人**（Excel技術責任者としての仮指名） | **候補確認済み・正式任命未決** |
+| Executor候補 | 開発プロセス統括係のExcel実装担当 | 個人・担当範囲・引受は未決 |
+| Approver候補 | 技術検証の最終受入責任者 | 未指名。独立確認・自己承認の可否は未審査 |
+| 正式期限、兼務可否、STOP解除権限、未達差戻し先 | いずれも未決 | 承認証跡なし |
+| TV-01〜03等の技術検証 | 未実施 | **Not Tested／STOP-01維持** |
+
+**解釈上の制約**：COND-DD-03のOwner候補の確認を、COND-DD-04／05のOwner候補指名、技術的安全性の証明、正式な責任引受・自己承認・正式Exit判断に拡大しない。正式Owner・Executor・Approver・期限などの§2の正式欄は未指名・未決のまま。COND-DD-08〜10の本人仮指名、COND-DD-01承認者候補、COND-DD-07の情報システム部門は維持する。
+
+**全体状態**：EXIT-HO-02 Open／仮割当方針10/10／正式割当**0/10**。正式41テストおよびTV-01〜09はすべて`Not Tested`。詳細設計EXIT-DD-01〜10はすべて`Not Evaluated`、Gate未判定。基本設計EXIT-06は`Not Met`、STOP-01〜06は変更なし。Q01〜Q24および既承認判断は変更なし。
+
+## まとめ / Summary（COND-DD-03責任者候補）
+
+**日本語：** COND-DD-03のExcel技術責任者の仮候補をユーザー本人と確認した。正式任命と技術検証は未完了で、正式割当は0/10。
+
+**English:** The user is the proposed technical owner for COND-DD-03. Formal appointment and technical tests are not complete. Official assignments remain 0 of 10.

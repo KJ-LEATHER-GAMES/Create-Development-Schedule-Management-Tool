@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.5（2026-11-17）  
-> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v0.6（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Ownerの仮候補はユーザー本人と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.9、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.0、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -37,7 +37,7 @@
 | 確認項目 | 現時点の扱い／候補 | ヒアリング回答・確定資料 |
 |---|---|---|
 | Excelシステム実装の実担当組織 | 未特定。Excel開発・保守を引き受ける人／部門を確認 | 未回答 |
-| 単独Owner | Excel技術責任者（役割案）、実名／社内承認済み役職は未指名 | 未回答 |
+| 単独Owner | **ユーザー本人（Excel技術責任者の仮候補／2026-11-17確認）**。正式任命・権限証跡は未決 | ユーザー回答「はい」（正式決裁ではない） |
 | Executor | Excel実装担当（Windows/Web両方の成立性を確認可能な体制） | 未回答 |
 | 最終Approver | 技術検証の受入責任者（独立した証跡審査を推奨） | 未回答 |
 | 協力先 | 保存先管理者：クラウド同時編集・版管理の条件を提供 | 未回答 |
@@ -186,3 +186,19 @@
 **日本語：** 保存先の管理部門は情報システム部門と確認した。正式責任者・選定権限・期限・復元試験は未決。
 
 **English:** The IT department manages Box and SharePoint Online. Formal owners, dates, storage choice, and recovery tests are still open.
+
+
+## 10. COND-DD-03 技術Owner候補の確認（2026-11-17）
+
+- **質問と回答**：「COND-DD-03のExcel技術責任者も、あなた自身が担当する予定ですか？」に対し、ユーザーが「はい」と回答。
+- **確認済み**：COND-DD-03技術Ownerの**仮候補＝ユーザー本人**。担当部門は既確認の開発プロセス統括係。
+- **未指名**：実務Executor個人、最終Approver、独立確認者、正式Owner（任命決裁としての位置付け）。正式期限・兼務承認・引受証跡・STOP解除権限・差戻し先も未決。
+- **技術境界**：TV-01〜03およびT15の必須ケースは`Not Tested`、STOP-01（原本書込禁止）を継続。ユーザー本人の候補指名から安全性Passや自己承認を推論しない。
+- **範囲**：COND-DD-04／05への自動展開はしない。01のコード最終承認者候補、07のIT管理部門、08〜10の本人仮指名を維持。
+- **全体**：EXIT-HO-02正式任命0/10、41正式テストすべてNot Tested、Exit10項目すべてNot Evaluated、Gate未判定。確定済み判断・STOP-01〜06を維持。
+
+## まとめ / Summary（技術Owner候補）
+
+**日本語：** COND-DD-03の技術Owner候補はユーザー本人と確認した。正式任命、承認権限、実機検証は未完了。
+
+**English:** The user is the proposed technical owner of COND-DD-03. Formal approval and technical tests are still open.
