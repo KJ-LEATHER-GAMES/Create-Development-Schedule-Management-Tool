@@ -1,6 +1,6 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.4（2026-11-17）  
+> **版**：Assignment Register Draft v0.5（2026-11-17）  
 > **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**10条件の仮割当方針は記録済み／正式任命・期限・兼務承認は未決**。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
@@ -191,3 +191,20 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-01〜07の仮割当A案を採用し、08〜10の本人仮指名を維持した。仮割当方針は10/10、正式割当は0/10。全41テストはNot Tested、Exit10項目はNot Evaluated、Gate未判定。
 
 **English:** Option A is the temporary role plan for conditions 01–07. The user's temporary roles for 08–10 remain unchanged. All 10 plans are recorded, but no formal assignments are complete. All 41 tests are not tested. Exit and Gate decisions are still open.
+
+
+---
+
+## 10. 正式任命の実担当組織確認準備（2026-11-17／新規任命なし）
+
+- **目的**：既採用の仮割当方針を変えず、COND-DD-01／03／07の実担当部門、単独Owner、Executor、最終Approver、期限、兼務可否を確認するための情報収集手順を具体化。
+- **新規確認票**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md` Draft v0.1。コード体系別責任、Excel技術責任、Box／SharePoint運用責任の照会項目と正式決裁欄を保持。
+- **割当のロードマップ**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md` Draft v0.1。全10条件の引受・兼務・期限・証跡を正式化し、EXIT-HO-03／04へ移る手順案。
+- **今回の効力**：ヒアリング準備のみ。01／03／07の実担当組織・社内固有役職を確認できていない。§2の正式Owner・Executor・Approver・期限は一切記入・変更しない。既存§8のCOND-DD-08／09／10本人仮指名、§9の01〜07仮割当A案も変更しない。
+- **正式状態**：EXIT-HO-02 Open／仮割当方針10/10／正式割当0/10。41正式テスト全件Not Tested、EXIT-DD-01〜10全件Not Evaluated、Gate未判定、基本EXIT-06 Not Met。
+
+## まとめ / Summary（確認準備追補）
+
+**日本語：** 01／03／07の正式任命に向けた確認票とロードマップを追加した。正式任命と期限は全件未決。
+
+**English:** New checklists help confirm teams for conditions 01, 03, and 07. No formal owner or deadline has been approved.
