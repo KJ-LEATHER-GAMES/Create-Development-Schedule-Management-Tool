@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.6（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.7（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.0（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v1.1（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -149,3 +149,17 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-03の技術Owner候補をユーザー本人と確認した。正式任命と期限は未決。
 
 **English:** The user is the proposed technical owner for COND-DD-03. Formal appointment and deadlines remain open.
+
+
+## 12. S1進捗：COND-DD-03の受入Approver暫定候補（2026-11-17）
+
+- Owner候補＝**ユーザー本人**（既確認）、Approver候補＝**ユーザー本人**（今回の留保付き回答）、Executor候補＝開発プロセス統括係内のExcel実装担当（個人未指名）。
+- **本人兼務の正式承認はない**。正式化前に社内の受入決裁権、自己受入の可否、必要な独立確認または代替統制、引受・期限・STOP-01解除権限を確認する。
+- 独立性リスクはTV-01〜03の合否基準事前固定・ログ・失敗系の証跡保管および可能なら別担当者によるレビューで軽減する案を提示する（未承認）。
+- **S1は候補確認が進展した段階**であり、正式任命ではない。03以外のOwner／Approverを自動変更しない。正式割当0/10、41テストNot Tested、Exit10件Not Evaluated、Gate未判定、STOP-01〜06維持。
+
+## まとめ / Summary（COND-DD-03 Approver候補）
+
+**日本語：** COND-DD-03のOwner・Approver候補はともにユーザー本人。兼務の正式承認と検証は未完了。
+
+**English:** The user is the proposed owner and approver for COND-DD-03. Formal approval and tests are still open.

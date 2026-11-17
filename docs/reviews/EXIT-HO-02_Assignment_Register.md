@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v1.0（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v1.1（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係、Excel技術責任者の仮Owner候補＝ユーザー本人、技術検証の最終Approver仮候補＝ユーザー本人（現時点の意向・兼務未承認）。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -324,3 +324,33 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-03のExcel技術責任者の仮候補をユーザー本人と確認した。正式任命と技術検証は未完了で、正式割当は0/10。
 
 **English:** The user is the proposed technical owner for COND-DD-03. Formal appointment and technical tests are not complete. Official assignments remain 0 of 10.
+
+
+## 16. COND-DD-03 最終Approver候補の暫定確認（2026-11-17／正式任命なし）
+
+**回答の対象**：「COND-DD-03の技術検証結果を受け入れる最終Approverは、あなた自身ではなく別の担当者にする予定ですか？」への回答「うーん、現状自分かな。」。明確な他者指名はなく、**現時点ではユーザー本人を最終Approverの暫定候補**として記録する。回答には留保があるため、確約・正式決裁とは扱わない。
+
+| 項目 | 現在の候補・状態 | 決裁状態 |
+|---|---|---|
+| 対象 | COND-DD-03：排他・採番・保存整合性（TV-01〜03） | 定義変更なし |
+| 担当部門 | 開発プロセス統括係 | 既確認 |
+| Owner候補 | **ユーザー本人** | 仮指名／正式未任命 |
+| Executor候補 | 開発プロセス統括係のExcel実装担当 | 個人と責任分界は未決 |
+| 最終Approver候補 | **ユーザー本人（暫定・回答に留保あり）** | 仮候補／正式未任命 |
+| Owner／Approver兼務 | **候補上は本人兼務** | 兼務の正式承認・権限証跡は未取得 |
+| 期限・停止解除権限・差戻し先 | 未決 | 正式決裁なし |
+
+### 兼務に関するリスクと提案（未承認）
+
+- **リスク**：技術設計の責任者と最終受入承認者を同一人が担うため、採番競合、HistoryID／ReviewID順序逆転、部分保存等の不具合を自己評価で見落とす可能性がある。
+- **軽量な補完策案**：合否基準を試験前に固定し、異常系を含むTV-01〜03・T15関連ケースを実測し、実行ログ・原本版・OperationKey・期待行／実際行・判定根拠を保管する。可能なら別担当者による証跡レビューを入れる。
+- **正式化の条件**：自己受入を認める組織権限の確認、兼務承認、第三者レビューの要否と代替統制の決裁、本人の引受、正式期限、STOP-01解除権限を特定する。これらは**今回承認していない**。
+- **禁止の維持**：必須検証Passと所定の承認が揃うまでSTOP-01（安全な原本書込禁止）を維持。Excel上の安全性は**Not Tested**。
+
+**履歴・状態**：既存のQ01〜Q24、CONS-DD-01、DD10-01〜DD15-02、OPS11-01、CFG10-01、EXIT-HO-01および01／07／08〜10の仮候補は変更しない。正式割当は**0/10**、正式41テストは全件`Not Tested`、詳細設計Exit10項目は全件`Not Evaluated`、Gateは未判定。
+
+## まとめ / Summary（COND-DD-03 Approver候補）
+
+**日本語：** COND-DD-03の最終Approverもユーザー本人を暫定候補とした。Ownerとの兼務は未承認で、正式任命・検証・期限は未決。
+
+**English:** The user is now the temporary approver candidate for COND-DD-03. The shared role is not approved. Formal assignments and tests are still open.

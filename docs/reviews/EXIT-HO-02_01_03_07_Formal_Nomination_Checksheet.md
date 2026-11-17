@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.6（2026-11-17）  
-> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Ownerの仮候補はユーザー本人と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v0.7（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係、技術Ownerおよび最終Approverの暫定候補はユーザー本人（兼務未承認）と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.0、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v1.1、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -202,3 +202,18 @@
 **日本語：** COND-DD-03の技術Owner候補はユーザー本人と確認した。正式任命、承認権限、実機検証は未完了。
 
 **English:** The user is the proposed technical owner of COND-DD-03. Formal approval and technical tests are still open.
+
+
+## 11. COND-DD-03 最終Approver暫定候補（2026-11-17）
+
+- **回答**：別の最終Approverの予定を尋ねたところ、ユーザーが「うーん、現状自分かな。」と回答。**本人を暫定Approver候補**として記録するが、意向は留保付きである。
+- **候補配置**：Owner＝ユーザー本人／Executor＝開発プロセス統括係のExcel実装担当（個人未指名）／Approver＝ユーザー本人（暫定）。
+- **兼務状態**：OwnerとApproverの兼務は候補のみ。組織上の受入決裁権、独立性、第三者レビュー要否、兼務の正式承認は**未決**。
+- **独立確認の代替案（未承認）**：事前合意の合否基準、TV-01〜03の実測・失敗ケース、再読込・高水位・競合・部分保存のログ保管、可能なら別担当者の証跡レビュー。独立確認ができない場合の受入可否は正式決裁で判断する。
+- **変更しない状態**：正式Owner／Executor／Approver／期限欄は未指名・未決。STOP-01継続。41テストは全件Not Tested、Exit10項目はNot Evaluated、Gate未判定。01／07等の既存仮候補と設計判断の履歴を維持する。
+
+## まとめ / Summary（Approver暫定候補）
+
+**日本語：** COND-DD-03のApprover候補にユーザー本人を仮置きした。自己受入の兼務承認は未決。
+
+**English:** The user is the temporary approver candidate for COND-DD-03. Approval to hold both roles is still open.
