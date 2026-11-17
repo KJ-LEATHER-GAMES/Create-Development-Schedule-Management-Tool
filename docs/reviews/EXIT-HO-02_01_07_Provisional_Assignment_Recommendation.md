@@ -1,12 +1,12 @@
 # EXIT-HO-02 — COND-DD-01〜07 仮割当推奨案
 
-> 版: Recommendation Draft v0.1（2026-11-17）  
-> 状態: **提案・未採用／正式任命未実施**  
+> 版: Adopted Provisional Plan v0.2（2026-11-17）  
+> 状態: **A案を仮割当方針として採用／正式任命未実施・期限未決・兼務承認未決**  
 > 保存先: `docs/reviews/EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md`  
-> 根拠: `EXIT-HO-02_Assignment_Register.md` Draft v0.3、`Detail_Design_Exit_Conditions_Register.md` Draft v0.3、`Technical_Validation_Exit_Handoff.md` Draft v0.3。  
+> 根拠: `EXIT-HO-02_Assignment_Register.md` Draft v0.4、`Detail_Design_Exit_Conditions_Register.md` Draft v0.3、`Technical_Validation_Exit_Handoff.md` Draft v0.3。  
 > 判断前提: EXIT-HO-01=A承認、COND-DD-08〜10はユーザー本人が3役の候補（正式未任命）。
 
-## 1. 仮割当の推奨案（確定記録ではない）
+## 1. 仮割当A案（2026-11-17採用・正式任命ではない）
 
 | ID | 対象 | 仮Owner | 仮Executor | 仮Approver | 関連検証／制限 |
 |---|---|---|---|---|---|
@@ -44,7 +44,7 @@ M0〜M3はEXIT-HO-01で採用した相対節目。**正式期限として決裁�
 
 ## 4. 既存状態の固定
 
-- **COND-DD-01〜07：このファイルでは提案のみ。割当台帳の正式欄は変更しない。**
+- **COND-DD-01〜07：2026-11-17にユーザーがA案の仮割当を採用。割当台帳§9に反映済み。正式Owner／Executor／Approver欄は変更しない。**
 - COND-DD-08／09／10：ユーザー本人への仮指名を維持。正式任命は未決。
 - EXIT-HO-02全体：正式割当 **0/10**、Open。
 - 詳細設計Q01〜24、CONS-DD-01、DD10-01〜DD15-02、OPS11-01、CFG10-01、EXIT-HO-01の確定履歴は変更しない。
@@ -55,3 +55,20 @@ M0〜M3はEXIT-HO-01で採用した相対節目。**正式期限として決裁�
 **日本語：** 01・02・06は業務責任、03〜05はExcel技術責任、07は保存先運用責任を軸に仮割当を提案した。未任命の役職・実名・期限は未決とし、正式任命0/10を維持する。
 
 **English:** The proposed roles split business work, Excel technical work, and cloud operations. Names and deadlines are still open. Formal assignments remain 0 of 10.
+
+---
+
+## 5. A案仮割当採用の記録（2026-11-17）
+
+- **判断**：ユーザーが「EXIT-HO-02のCOND-DD-01〜07の仮割当はA案で進めます」と明示。
+- **反映先**：`EXIT-HO-02_Assignment_Register.md` Draft v0.4 §2・§9。
+- **効力範囲**：上表の業務／Excel技術／IT運用の仮役割分担を採用。COND-DD-08〜10のユーザー本人仮指名は変更しない。
+- **非承認事項**：実名・社内役職による正式任命、同一人物の兼務、正式期限、STOP解除、技術検証結果、ExitとGate。
+- **未決事項**：01のコード体系別責任者と条件統括Ownerの一意特定、02／04／07の最終Approver、全条件の実施責任者・受入確認・正式期限。
+- **保全状態**：正式割当0/10。正式41テスト全件Not Tested。EXIT-DD-01〜10全件Not Evaluated。Gate未判定。
+
+## 更新後のまとめ / Summary
+
+**日本語：** COND-DD-01〜07の仮割当A案を採用した。08〜10の本人仮指名は維持し、正式任命と期限は未決のまま。
+
+**English:** Option A is now the temporary role plan for conditions 01–07. Temporary roles for 08–10 are unchanged. Formal owners and deadlines are still open.

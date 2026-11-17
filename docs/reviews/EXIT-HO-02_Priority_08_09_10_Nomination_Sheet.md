@@ -3,7 +3,7 @@
 > **版**：Nomination Sheet Draft v0.2（2026-11-17）  
 > **状態**：**本人を3条件・3役の候補に仮指名／正式決裁0/3（全体0/10）**。氏名・期限・兼務承認・正式決裁は未取得。  
 > **保存先（プロジェクト内）**：`docs/reviews/EXIT-HO-02_Priority_08_09_10_Nomination_Sheet.md`  
-> **正本参照**：`EXIT-HO-02_Assignment_Register.md` v0.3、`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` Decision Record v0.2、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。  
+> **正本参照**：`EXIT-HO-02_Assignment_Register.md` v0.4、`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` Decision Record v0.2、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。  
 > **承認済み前提**：EXIT-HO-01＝A（2026-11-17）／M0〜M3とSTOP-01〜06の管理方針。  
 > **注意**：以下の「候補ロール」は組織内での正式任命を意味しない。個人名・社内正式職位・期限を推測して埋めない。
 
@@ -118,3 +118,5 @@
 **日本語：** COND-DD-08／09／10の3条件すべてで、Owner・Executor・Approverをユーザー本人として仮指名した。正式決裁と期限は未了。
 
 **English:** The user is the temporary candidate for all three roles in conditions 08, 09, and 10. Formal approval and deadlines are still open.
+
+> **2026-11-17参照更新**：COND-DD-01〜07の仮割当A案は割当台帳 v0.4 §9で管理。**本シートの08〜10の仮Owner／Executor／Approver、正式未任命状態、期限、兼務未承認は変更なし。**
