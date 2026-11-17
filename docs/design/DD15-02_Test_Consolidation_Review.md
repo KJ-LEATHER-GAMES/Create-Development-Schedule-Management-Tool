@@ -1,26 +1,26 @@
 # DD15-02 — C14/C15追加テスト候補 統合・正式採否レビュー
 
-> **文書版**：Review Draft v0.1（2026-11-17）  
-> **判断状態**：**DD15-02 未決裁／A案を推奨。ユーザー承認待ち**  
+> **文書版**：Decision Record v0.2（2026-11-17）  
+> **判断状態**：**DD15-02 Option A Approved（2026-11-17）／テスト設計Closed**  
 > **プロジェクト内保存先**：`docs/design/DD15-02_Test_Consolidation_Review.md`  
-> **直接参照**：`docs/test/Test_and_Validation.md` Test Design Draft v0.4 §§3〜7、`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md` §5、`docs/design/OPN-DD-15_Recovery_Review.md` §§2〜7、`docs/design/MVP_Design.md` Draft v0.8 §§11〜13、Decision Log Draft v0.8、Change Log Draft v0.9、`reference/AI協働開発_基本運用プロセス.md`。  
-> **記録上の原則**：過去のQ01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A、DD13-01=A、DD14-01=A、DD15-01=Aを再審議・上書きしない。既存31管理IDは**全件Not Tested**。候補22件は正式採否前であり、テスト設計と試験合格を混同しない。
+> **直接参照**：`docs/test/Test_and_Validation.md` Test Design Draft v0.5 §§3〜7、`docs/design/OPN-DD-14_ID_Sequencing_Concurrency_Review.md` §5、`docs/design/OPN-DD-15_Recovery_Review.md` §§2〜7、`docs/design/MVP_Design.md` Draft v0.9 §§11〜13、Decision Log Draft v0.9、Change Log Draft v1.0、`reference/AI協働開発_基本運用プロセス.md`。  
+> **記録上の原則**：過去のQ01〜Q24、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A、DD13-01=A、DD14-01=A、DD15-01=Aを再審議・上書きしない。決裁前の正式31管理IDは**全件Not Tested**だった。候補22件は**DD15-02 Aで移行済み**であり、現行の正式41管理IDも全件Not Tested。テスト採用と試験合格を混同しない。
 
 ## 1. 目的と判断範囲
 
 `C14-01〜12`（12候補）および`C15-01〜10`（10候補）の**全22件**について、既存親テスト／詳細テストとの重複を解消し、必要な障害・競合・復旧の検証観点を落とさない最小の追加詳細テスト構成を正式決裁できる形にする。新規テストの物理実行、パス判定、Excel実装の完了、詳細設計Exit/Gateの正式判断は本レビューの対象外。
 
-**DD15-02 A案（AI推奨）**：既存31管理IDを保持し、追加詳細10ケース `T15-01〜10` を設計上採用する。`C15-01`は`TEST-DD-013`に補完確認手順として吸収する。正式採用は**本A案へのユーザー明示承認を条件**とする。承認前は新規10件とも**採用候補・Not Tested**、正式ID総数は31件のまま。
+**DD15-02 A案（正式承認）**：既存31管理IDを保持し、追加詳細10ケース `T15-01〜10` を正式採用した。`C15-01`は`TEST-DD-013`に補完確認手順として吸収する。ユーザーの**2026-11-17明示承認**が根拠。承認後の正式ID総数は**41管理ID・全件Not Tested**。
 
 ## 2. 選択肢・採否判断
 
 | 選択肢 | 管理単位 | 承認後の正式ID数 | メリット／トレードオフ | AI評価 |
 |---|---|---:|---|---|
-| **A（推奨）** | 10追加詳細ケース＋C15-01を既存親TEST-DD-013へ追補。統合ケースは必須サブケース別に実績・証跡を残す | **41**（14親＋16 T12＋1 T13＋10 T15） | 22候補の全観点をカバーしつつ重複実行を抑える。サブケースを個別判定しないと試験漏れになる | **採用推奨** |
+| **A（推奨）** | 10追加詳細ケース＋C15-01を既存親TEST-DD-013へ追補。統合ケースは必須サブケース別に実績・証跡を残す | **41**（14親＋16 T12＋1 T13＋10 T15） | 22候補の全観点をカバーしつつ重複実行を抑える。サブケースを個別判定しないと試験漏れになる | **採用／Approved** |
 | B | A案の競合／順序ケースをさらに独立管理（計12追加詳細ケースとする） | **43** | 独立結果の見通しはよいがケース・管理工数が増加。ID案は承認後に別途確定する | 代替案 |
 | C | 22候補を独立詳細ケース化し、既存31件に追加 | **53** | 元の候補との1:1参照は容易だが、同等故障注入・重複確認の工数が増える | 非推奨 |
 
-**注意**：A案の「22候補→10追加詳細＋既存吸収1」は**テスト観点の整理**であり、すべての障害注入手順が10回で終了するという意味ではない。特にT15-01／02／03は複数の必須サブケースがあり、サブケースを省略してPassにしない。
+**注意**：承認されたA案の「22候補→10追加詳細＋既存吸収1」は**テスト観点の整理**であり、すべての障害注入手順が10回で終了するという意味ではない。特にT15-01／02／03は複数の必須サブケースがあり、サブケースを省略してPassにしない。
 
 ## 3. C14／C15候補の完全移行マトリクス（22/22）
 
@@ -72,7 +72,7 @@
 
 | ID | 現在状態 | 次工程で必要な判断／成果物 | 関係Exit |
 |---|---|---|---|
-| **DD15-02** | **本書レビュー中・未決裁** | A/B/Cの採否、追加テストID、移行記録、既存台帳の追補 | EXIT-DD-08／09 |
+| **DD15-02** | **A Approved／Closed（テスト設計）** | 正式41 IDのテスト実施・環境検証・実行証跡（全件Not Tested） | EXIT-DD-08／09 |
 | **OPS-DD11-01** | **Open／運用開始前必須** | 開催済／中止の誤登録訂正の申告・権限・外部根拠・影響確認・手順・整合再検証を別決裁。状態監査専用表は設けない | EXIT-DD-03／09 |
 | **CFG-DD-10-01** | **Open／実装前** | MilestoneTypeCode／EvidenceType／CompareFieldCodeの実値と許容対象表を確認 | EXIT-DD-01／05／09 |
 | **OI-DD-01** | **未設定** | 想定データ規模と性能試験条件（案件／開催回／履歴件数など） | EXIT-DD-07／10、基本設計EXIT-06 |
@@ -82,9 +82,9 @@
 
 未解決課題を**正式Exitで条件として引継ぐこと**と、実装・運用に進んでよいことは同義ではない。特にOPS-DD11-01は**運用開始前に承認が必要**、高水位保証が成立しない場合は書込不可というDD14/DD15の既決制約を維持する。
 
-## 7. 正式採否後の文書更新計画（承認前には実施しない）
+## 7. A案承認後の文書反映（2026-11-17）
 
-| 反映先 | A案承認時の更新 |
+| 反映先 | A案採用による更新結果 |
 |---|---|
 | `docs/test/Test_and_Validation.md` | T15-01〜10を正式詳細ケースとして追記、31→41管理ID（未実施）、C14/C15の全22候補に移行先・採否状態を記録、C15-01をTEST-DD-013へ追補 |
 | `docs/design/MVP_Design.md` | §11に追加試験・正本／表示・R01〜R08トレースの採用を追記、§13のDD15-02をClosed（テスト設計）へ更新 |
@@ -92,16 +92,18 @@
 | `docs/changes/Change_Log.md` | CHG-DD-15-02としてテスト設計追加・移行・要件影響と未検証リスクを記録 |
 | 本書・`docs/test/DD15-02_Consolidated_Test_Plan_Draft.md` | DraftをDecision Record／採用設計へ更新。実施結果はNot Testedを維持 |
 
-**正式リポジトリへの反映、Git commit、詳細設計Exit審査は別アクション**。A案の承認前に既存4文書を変更しない。
+**正式リポジトリへの反映、Git commit、詳細設計Exit審査は別アクション**。本レビューの承認前に4文書を変更していなかった履歴を維持し、A承認後の反映結果は上表のとおり。
 
-## 8. 判断依頼
+## 8. 正式採否と次のレビュー
 
-**DD15-02の判断はA／B／Cのいずれか。AI推奨はA。** 採用後も既存31件＋追加分はすべてNot Testedとし、Exit Criteriaを自動でMetにしない。次の個別レビューはOPS-DD11-01の誤登録訂正運用（通常機能追加なし）、その後に詳細設計Exit準備の正式評価とする。
+**正式決裁：DD15-02 Option A Approved（2026-11-17、ユーザー明示回答）**。B（追加12件）・C（追加22件）は不採用。AIが提示した重複削減の理由をユーザー固有の採用理由と取り違えない。既存31件と追加10件の実施状態は**全41件 Not Tested**、Exit CriteriaはすべてNot Evaluated、Gate未判定。
+
+**次の個別レビュー：OPS-DD11-01**（終端状態誤登録の訂正運用）。新監査テーブルや通常UIの例外編集は自動採用しない。レビューDraftを`docs/operations/OPS-DD11-01_Terminal_Status_Correction_Review.md`に作成し、正式採否は**別判断**とする。
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** DD15-02のA案はC14/C15の22候補を10追加テストと既存1テストへの吸収に整理した。採否は未決定。既存31管理IDは全件Not Tested、Exit/Gateは未判定。
+**日本語：** DD15-02はAを正式採用した。22候補から10新規詳細テストと既存TEST-DD-013への吸収1件へ全件移行。正式41件は全件Not Tested。OPS-DD11-01レビューに進む。
 
-**English:** Option A maps 22 test ideas to 10 new cases and one existing test. Approval is still needed. All 31 official tests are not tested. The design gate is not decided.
+**English:** DD15-02 Option A is approved. All 22 ideas map to 10 new tests and one existing test. All 41 official IDs are not tested. OPS-DD11-01 is next.

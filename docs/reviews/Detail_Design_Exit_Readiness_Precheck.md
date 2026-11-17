@@ -1,8 +1,8 @@
 # 詳細設計Exit Review — 準備状況プレチェック（非正式判定）
 
-> **文書状態**：Readiness Precheck Draft v0.1（2026-11-17）／**正式Exit Reviewではない**  
+> **文書状態**：Readiness Precheck Draft v0.2（2026-11-17）／**正式Exit Reviewではない**  
 > **プロジェクト内保存先**：`docs/reviews/Detail_Design_Exit_Readiness_Precheck.md`  
-> **判定の境界**：EXIT-DD-01〜10の正式ステータスは**すべてNot Evaluated**。基本設計EXIT-06=Not Met、基本設計Freeze未実施、詳細設計Gate未判定、Excel実装Not Started、正式31管理IDすべてNot Tested。
+> **判定の境界**：EXIT-DD-01〜10の正式ステータスは**すべてNot Evaluated**。基本設計EXIT-06=Not Met、基本設計Freeze未実施、詳細設計Gate未判定、Excel実装Not Started、正式41管理IDすべてNot Tested。
 
 ## 1. Exit Criteria別の準備ギャップ
 
@@ -15,13 +15,13 @@
 | EXIT-DD-05 | DD10-01の証跡・差異・Review追記専用構造 | CFG-DD-10-01、差異初回レビューの一括保存成立性を検証対象化 | **Not Evaluated** |
 | EXIT-DD-06 | DD12-01のG01〜G04・L01/L02、DD15-01の表示鮮度管理 | 独立フィルタ・90列／全文・版一括公開・旧版警告の実機試験計画 | **Not Evaluated** |
 | EXIT-DD-07 | OI-DD-01/02・RISK-DD-01〜04を未検証として認識 | **確認環境・担当・時期・合否基準**を登録、先送りの可否と停止条件をレビュー | **Not Evaluated** |
-| EXIT-DD-08 | DD13-01による要求34件→正式31テストのトレース | **DD15-02採否**、環境と故障注入手順、C14/C15移行後の試験台帳を確定。実行は全件未実施 | **Not Evaluated** |
+| EXIT-DD-08 | DD13-01時点の要求34件→31管理ID、DD15-02 A承認後の正式41管理IDのトレース | **DD15-02 A承認済み**で正式41管理IDへ統合。今後は環境と故障注入手順を具体化し、**全件Not Tested**を維持 | **Not Evaluated** |
 | EXIT-DD-09 | 既決のNow/Later/Not Nowと変更管理ログ | OPS-DD11-01、CFG-DD-10-01、OPN-DOCの対処・条件付引継ぎを明示 | **Not Evaluated** |
 | EXIT-DD-10 | 基本設計EXIT-06を未完了として明示管理 | **OI-DD-01／02の責任者（未指定）、確認方法・タイミング・停止条件**を決め、条件付き移行の整合を確認 | **Not Evaluated** |
 
 ## 2. 先に実施する判断と実施前提
 
-1. **DD15-02の正式採否**：22候補の重複統合、T15採用とC15-01の既存吸収、全件Not Tested管理を明示決裁する。
+1. **DD15-02の正式採否（完了）**：2026-11-17 A承認。旧22候補をT15-01〜10＋TEST-DD-013補完へ移行し、正式41件すべてNot Tested。
 2. **OPS-DD11-01の運用手順レビュー**：状態`開催済／中止`の誤登録を通常UIで直接修正しない前提のまま、申告者・管理担当者の権限、訂正根拠の保存場所、影響レコード、クラウド版履歴復元の副作用、表示更新・復旧後照合、復旧不能時の停止と変更管理を具体化する。**新しい状態監査専用表・承認WFは追加しない。**
 3. **CFG-DD-10-01の設定責任と値の入手計画**：業務コード実値が未提供であることを明記し、初期マスタ投入・許容対象・未登録コード拒否を含む確認計画を作る。値を捏造しない。
 4. **基本設計EXIT-06の引継ぎ明文化**：OI-DD-01の実施規模・性能条件、OI-DD-02の保存先／復元権限／保持条件、RISK-DD-01〜04の検証時期・担当・終了条件をExitに記載。実機成功を事前に宣言しない。
@@ -39,15 +39,15 @@
 
 | 成果物 | 保存先／次にすべきこと | 状態 |
 |---|---|---|
-| DD15-02候補統合レビュー | `docs/design/DD15-02_Test_Consolidation_Review.md` — 正式採否をユーザー決裁 | **Draft／未承認** |
-| 追加テスト案10件 | `docs/test/DD15-02_Consolidated_Test_Plan_Draft.md` — 承認後に正規テスト台帳へ反映 | **Draft／未承認** |
-| OPS-DD11-01手順 | `docs/operations/`へ別レビュー票を作成して正式判断 | **未作成／Open** |
+| DD15-02候補統合レビュー | `docs/design/DD15-02_Test_Consolidation_Review.md` — **A承認済み**／テスト実行は未実施 | **Decision Record v0.2／A Approved** |
+| 追加テスト案10件 | `docs/test/DD15-02_Consolidated_Test_Plan_Draft.md` — **正規テスト台帳へ反映済み**／実施結果未記録 | **Approved Test Design Record v0.2／全件Not Tested** |
+| OPS-DD11-01手順 | `docs/operations/OPS-DD11-01_Terminal_Status_Correction_Review.md`のA/B/Cを別途正式判断 | **Review Draft v0.1作成／承認待ち** |
 | 詳細設計Exit Review記録 | `docs/reviews/`へ正式Exit評価票を作成し、ユーザーがGate判断 | **未実施／全10 Not Evaluated** |
 
 ---
 
 ## まとめ / Summary
 
-**日本語：** DD15-02、OPS-DD11-01、CFG-DD-10-01、基本設計EXIT-06がExit準備の主要論点。正式10項目の評価は未実施で、Gateも未判定。
+**日本語：** DD15-02はA承認で完了し、正式41テストは全件Not Tested。OPS-DD11-01はレビューDraft作成・未承認。CFG-DD-10-01と基本設計EXIT-06は残り、詳細10 ExitはNot Evaluated。
 
-**English:** The main open tasks are DD15-02, OPS-DD11-01, CFG-DD-10-01, and basic design EXIT-06. No detailed exit item has been evaluated. The gate is not decided.
+**English:** DD15-02 Option A is approved. All 41 tests are not tested. OPS-DD11-01 is still under review. Other open items and the exit gate remain open.

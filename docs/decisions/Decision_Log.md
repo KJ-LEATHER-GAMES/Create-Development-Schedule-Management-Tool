@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.8／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v0.9／2026-11-17。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）、OPN-DD-13のDD13-01（A）、DD14-01（A）、DD15-01（A）、DD15-02（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -304,8 +304,27 @@
 | 履歴保全 | 本書**§1〜15の本文は変更せず**、詳細設計Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 A、DD14-01 Aの決裁履歴を維持。基本設計Q04=B／詳細Q05=Aの当時の回答も維持 |
 | 反映先・状態 | `docs/design/MVP_Design.md` Draft v0.8、`docs/test/Test_and_Validation.md` Draft v0.4、`docs/changes/Change_Log.md` Draft v0.9、`docs/design/OPN-DD-15_Recovery_Review.md` Decision Record v0.2、本Decision Log Draft v0.8。**OPN-DD-15 Closed（論理復旧設計のみ）** |
 
+## 17. 追加受入テスト候補の統合・正式採否 — DD15-02
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／対象 | **DD15-02／C14-01〜12・C15-01〜10統合**。レビュー資料：`docs/design/DD15-02_Test_Consolidation_Review.md` |
+| 承認者・日付 | **2026-11-17／ユーザーの明示回答**：「DD15-02の正式設計判断はA案を承認します」 |
+| 採用判断 | **A Approved**。既存31管理IDを維持し、**T15-01〜10の10件を正式な追加詳細テストとして採用**。C15-01は既存`TEST-DD-013`の補完チェックへ吸収する |
+| 採用後のID集計 | 親`TEST-DD-001〜014`=14、詳細`T12-01〜16`=16、`T13-01`=1、`T15-01〜10`=10、**正式管理ID計41件**。親・子は独立に結果管理し、同じ試験を二重採点しない |
+| 候補の移行 | 旧候補22件は`T15-01〜10`か`TEST-DD-013`に**22/22件すべて移行先を明示**。候補のIDと当初内容は削除せず、旧候補表を決裁前の履歴として保存する |
+| 統合ケースの合格条件 | T15内の**必須サブケースは個別記録**し、1つでもFail／Blocked／Not Testedなら当該詳細テスト全体をPassとしない。`N/A`は理由と承認が必要。隔離試験ブックで実機・環境の証跡を取得し、模擬のみで物理的排他・復元をPassにしない |
+| 既存吸収の内容 | `TEST-DD-013`の既存期待結果は維持した上で、C15-01の**不正FK拒否時の原本不変更・エラー対象行／列・理由表示**を補完チェックとして追記 |
+| 不採用案 | B＝競合・確定順を分離して12追加テスト（計43管理ID）、C＝旧22候補を独立採用（計53管理ID）。両案とも不採用 |
+| 理由の区分 | **AIの評価**：重複を統合しつつ、故障注入・確定順・復旧の個別観点を必須サブケースで保持する。**ユーザー固有の理由は未提示**（A採用という判断のみ確定） |
+| 変更記録 | **CHG-DD-15-02**として`docs/changes/Change_Log.md`に採用・移行・影響を記録。DD15-02に加えて別個の変更承認があったとは扱わない |
+| 既決事項の保全 | 本書§1〜16の詳細Q01〜Q24、基本設計Q04=B、CONS-DD-01=A、DD10-01=A、DD11-01=B、DD12-01=A、DD13-01=A、DD14-01=A、DD15-01=Aの**原判断本文を保持** |
+| 実施状態とGate | **正式41件すべてNot Tested**。基本設計EXIT-06 Not Met／Freeze未実施、詳細EXIT-DD-01〜10 Not Evaluated／Gate未判定。技術的保証は未検証 |
+| 次アクション | **OPS-DD11-01** 終端状態誤登録の訂正運用レビュー（別判断、未承認）。CFG-DD-10-01、OI-DD-01／02、RISK-DD-01〜04は引き続きOpen／Not Tested |
+
+
 ## まとめ / Summary
 
-**日本語：** 過去のGrillMe・個別決裁履歴を維持し、DD15-01 Aを論理復旧設計として追記した。31管理IDはすべてNot Tested。C14・C15の22件は未承認候補、物理復旧保証・Exit/Gateは未評価。
+**日本語：** DD15-02 Aを正式承認。旧22候補はT15-01〜10の正式10件とTEST-DD-013の補完1件に統合。正式41件はすべてNot Tested。OPS-DD11-01は未承認の運用設計レビューへ進む。
 
-**English:** Past decisions are kept. DD15-01 Option A is approved for logical recovery design. All 31 official tests are not tested. The 22 extra tests are still candidates. Technical recovery and the design gate are not confirmed.
+**English:** DD15-02 Option A is approved. The 22 ideas map to 10 new tests and one existing test. All 41 official test IDs are not tested. The OPS-DD11-01 review is next.

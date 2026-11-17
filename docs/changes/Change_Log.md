@@ -1,8 +1,8 @@
 # Change Log — 開発プロセス統合管理ブック
 
-> **Draft v0.9／2026-11-17／過去の変更履歴を保持し、DD15-01 Aの障害復旧・表示鮮度の論理補完を追記**  
+> **Draft v1.0／2026-11-17／過去の変更履歴を保持し、DD15-02 Aのテスト候補統合・正式採用を追加**  
 > **プロジェクト内保存先**：`docs/changes/Change_Log.md`  
-> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）の各個別設計判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
+> 本書は変更判断の記録。承認済みなのは**CONS-DD-01（A案）・DD10-01（A案）・DD11-01（B案）・DD12-01（A案）・DD13-01（A案）・DD14-01（A案）・DD15-01（A案）・DD15-02（A案）の各個別設計判断**であり、MVP設計書全体の承認、基本設計Freeze、詳細設計Exit／Gate、Excel実装・検証の完了ではない。
 
 ## 1. 変更要求一覧
 
@@ -15,6 +15,7 @@
 | **CHG-DD-13-01** | 詳細設計補完／受入テスト設計の追加・トレース | 既存14親＋16詳細の保全、REQ002/027/033の検証補完、REQ034向けT13-01追加 | **DD13-01 Option A Approved／テスト設計反映済**（未承認Draftの補完で、追加の独立変更決裁ではない） | **ユーザーによるDD13-01採用／2026-11-16** |
 | **CHG-DD-14-01** | 詳細設計補完／採番・正常確定順・競合制御 | 単一書込者・直列コミット、論理発番高水位／保存要求識別、結果不明時停止 | **DD14-01 Option A Approved／論理方式反映済**。補助物理表・原子的保存は未検証。独立Change決裁を新設しない | **ユーザーによるDD14-01採用／2026-11-16** |
 | **CHG-DD-15-01** | 詳細設計補完／障害復旧・表示鮮度の論理仕様 | 障害F15-01〜10、復旧R01〜R08、正本／表示の二層状態、再開判定、無条件再送禁止 | **DD15-01 Option A Approved／論理復旧設計反映済**。復元・隔離・一括公開の物理保証は未検証。独立Change決裁を新設しない | **ユーザーによるDD15-01採用／2026-11-17** |
+| **CHG-DD-15-02** | 詳細テスト設計の統合・正式採用 | C14/C15計22候補をT15-01〜10とTEST-DD-013補完へ全件移行 | **DD15-02 Option A Approved／正式41管理ID・全件Not Tested**。旧候補履歴保持。別の独立Change決裁を作出しない | **ユーザーによるDD15-02採用／2026-11-17** |
 
 ## 2. CONS-DD-01 — 正式変更決裁
 
@@ -185,8 +186,24 @@
 | 判定の境界 | **OPN-DD-15 Closed（論理復旧設計のみ）**。基本設計EXIT-06 Not Met・未Freeze、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定。実装・試験は未着手／未実施 |
 | 文書反映先 | `docs/design/MVP_Design.md` Draft v0.8、`docs/decisions/Decision_Log.md` Draft v0.8、`docs/test/Test_and_Validation.md` Draft v0.4、`docs/design/OPN-DD-15_Recovery_Review.md` Decision Record v0.2、本Change Log Draft v0.9 |
 
+## 13. CHG-DD-15-02 — DD15-02 A案の正式採用・C14/C15候補の統合
+
+| 項目 | 記録 |
+|---|---|
+| 判断根拠 | **DD15-02＝A／2026-11-17ユーザー明示承認**。`docs/design/DD15-02_Test_Consolidation_Review.md` Review Draft v0.1のA案を採用 |
+| 変更前 | 親14＋T12詳細16＋T13詳細1＝**正式31管理ID**。C14候補12件・C15候補10件は未承認で、重複あり |
+| 変更後 | **T15-01〜10を正式追加**し、C15-01のみ既存`TEST-DD-013`補完チェックへ吸収。**正式41管理ID・全件Not Tested**。既存31件の本文・期待結果は維持 |
+| 移行管理 | 元22候補すべてにT15 IDまたはTEST-DD-013を対応付け、レビュー§3とテスト台帳§5.5で22/22を照合。旧候補表は決裁前の履歴であり、未承認候補として二重計上しない |
+| 品質・適用範囲 | T15必須サブケースを独立評価。Windows／Web、保存先、故障注入、PK/高水位/OperationKey/版/証跡を実機で検証する計画。試験実施・合格・実装成立は**未確認** |
+| 追加補完 | `TEST-DD-013`の原期待結果は変更せず、不正FK保存拒否時の**原本不変更・問題箇所・理由表示**を補足検証とする |
+| 比較案・理由 | B：12件追加、C：22件追加は不採用。**AIの技術評価**＝重複を除きサブケースで故障網羅を保持。**ユーザー個人の採用理由は未記録** |
+| 変更管理境界 | 旧未承認テスト候補の採否を決裁した設計補完であり、DD15-02とは別の独立した変更承認を仮定しない |
+| 保全・残リスク | 詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 B、DD12-01 A、DD13-01 A、DD14-01 A、DD15-01 Aの原判断を維持。**OPS-DD11-01はOpen／別レビュー待ち**。CFG-DD-10-01・OI-DD-01／02・RISK-DD-01〜04も未解決 |
+| Exit／Gate | 基本設計EXIT-06 Not Met、Freeze未実施、詳細EXIT-DD-01〜10 Not Evaluated、Gate未判定。テスト設計の正式化を実施合格と混同しない |
+
+
 ## まとめ / Summary
 
-**日本語：** CHG-DD-15-01にDD15-01 A承認を記録。過去の変更判断を保持し、復旧・再試行・表示鮮度の論理契約を採用した。正式31件はNot Tested、追加22件は未承認候補。技術成立性・Exit/Gateは未確認。
+**日本語：** CHG-DD-15-02を追加し、22候補の10正式詳細テスト＋既存1テスト補完への移行を記録。41管理IDはすべて未実施。OPS-DD11-01と技術検証は未解決。
 
-**English:** DD15-01 Option A is recorded in the change log. Past decisions are kept. All 31 official tests are not tested. The 22 extra cases are not approved. Technical tests and the design gate are still open.
+**English:** CHG-DD-15-02 records the approved test changes. There are 41 official test IDs, and none has been run. OPS-DD11-01 and technical tests are still open.
