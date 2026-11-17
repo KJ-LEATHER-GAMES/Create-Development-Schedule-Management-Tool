@@ -1,6 +1,6 @@
 # Decision Log — 開発プロセス統合管理ブック（会話統合版）
 
-> **Draft v0.4／2026-11-15。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
+> **Draft v0.5／2026-11-16。** 本文の要件・基本設計GrillMe回答履歴は元の選択肢を変更せず保持。**CONS-DD-01の変更決裁（A）、OPN-DD-10のDD10-01（A）、OPN-DD-11のDD11-01（B）、OPN-DD-12のDD12-01（A）はユーザー承認済み**。これは本Decision Log全体の正式承認、基本設計Freeze、詳細設計Gate承認を意味しない。各GrillMeでQ番号が再利用されているためセクション名と共に参照する。変更理由のうちAIの技術評価は過去のユーザー回答理由と区別する。
 
 ## 1. 要件定義GrillMe Q1〜Q15
 
@@ -225,8 +225,31 @@
 
 **反映先：** `docs/design/MVP_Design.md` Draft v0.4 §§4,6,7,11〜13、`docs/changes/Change_Log.md` Draft v0.5、本レビューDecision Record v0.2。**次はOPN-DD-12**。
 
+## 13. 詳細設計補完の正式採否 — DD12-01（OPN-DD-12）
+
+| 項目 | 決裁・根拠 |
+|---|---|
+| Decision／Open Item | **DD12-01／OPN-DD-12** |
+| 承認者・日付 | **2026-11-16／ユーザーによる本チャットの明示判断**：「OPN-DD-12の設計判断DD12-01はAで進めます」 |
+| 判断結果 | **A：Approved**。`docs/design/OPN-DD-12_Output_Spec_Review.md` Review Draft v0.1 の**§2〜7**の共通表示、G01〜G04、L01/L02、管理者要対応、画面操作を論理出力仕様として採用 |
+| G01 | 1案件1行、24か月=72旬。管理対象／未判定案件の有効マイルストーン日付を表示し、対象外案件を既定除外 |
+| G02／G03 | 1案件×1ステージ1行、90日／72旬。対象／未判定のステージ行を既定表示し、実効対象・日付あり・中止以外の回を点表示。未判定ステージ行は残すが非実効対象の回は点表示しない |
+| G04 | **単一機種**：**旬＝案件ごとの開発日程行＋ステージごとのイベント行を分離（72旬）**、**日＝ステージごとのイベント行のみ（90日）**。選択機種以外を除外 |
+| セル内の複数回・中止・日付Null | 同日／同旬に同名でも各`OccurrenceID`を回次付きで全件改行列挙。**中止回と実効非対象回は標準イベントマークから除外**。取消／日付Nullの実在回はマークなし、管理者「日付未設定」へ。正本は削除しない |
+| L01／L02 | L01＝**実効対象・開催予定・日付あり・代表日付＜システム当日**。L02＝同前提の開催回で**基準日≦代表日付≦基準日から翌々月末**。案件管理適用未判定は2一覧から除外。各一覧は1`OccurrenceID`1行。過去設定のL02はL01と重複し得る |
+| 管理者用要対応 | 既存の`未判定`／`未計画`／`期限超過`／`要確認`を維持し、**実在回かつ開催予定・日付Nullの「日付未設定」を表示抽出として追加**。未計画＝開催回0件と混同しない。マイルストーンNullはこのカテゴリに自動包含しない |
+| 共通表示／閲覧者権限 | 正本から共通の再生成可能な表示データへ供給。元IDを保持し、各閲覧者・各画面の絞り込みは独立。表示開始期間とL02基準日の変更・表示再生成は管理者のみ |
+| 比較した代替案 | B＝中止回をガント上に「中止」と明示して残す、C＝G04旬を案件1行へ統合する。**いずれも不採用** |
+| 採用理由の区分 | **AI評価**：行粒度と抽出を既存ID単位に整合させ、非適用／中止／日付未設定の誤掲載を防ぐ。**ユーザー固有の採用理由は未記録**。A案採用の明示回答のみを事実として記録 |
+| 変更管理 | 未承認Draftを補完・具体化した履歴を**CHG-DD-12-01**として`Change_Log.md`に記録。独立した追加の変更承認を作出しない |
+| 保全と非対象 | **本書§9詳細Q01〜Q24、§10 CONS-DD-01 A、§11 DD10-01 A、§12 DD11-01 Bの原判断・承認記録を変更しない**。個別の論理仕様承認を全体文書承認・基本設計Freeze・技術検証完了とはしない |
+| テスト・残課題 | T12-01〜T12-16を受入の期待結果として引継ぎ、**全件 Not Tested**。入力データ・手順・合否記録はOPN-DD-13、確定順／日時・技術保証はOPN-DD-14、表示再生成の障害復旧はOPN-DD-15、表示・フィルタ性能はRISK-DD-01/02/03へ。OPS-DD11-01／CFG-DD-10-01もOpen |
+| 判定状態 | **OPN-DD-12 Closed（論理出力仕様）**。基本設計EXIT-06 Not Met／未Freeze、詳細設計EXIT-DD-01〜10 Not Evaluated／Gate未判定、Excel実装Not Started／テストNot Tested |
+
+**反映先：** `docs/design/MVP_Design.md` Draft v0.5 §9、§11〜13、`docs/design/OPN-DD-12_Output_Spec_Review.md` Decision Record v0.2、`docs/changes/Change_Log.md` Draft v0.6。**次はOPN-DD-13**。既存§12の「次はOPN-DD-12」は当時の決裁記録である。
+
 ## まとめ / Summary
 
-**日本語：** 詳細Q01〜Q24、CONS-DD-01 A、DD10-01 Aの回答履歴を維持してDD11-01 Bを追記した。状態監査表なしの通常設計を採用し、終端状態の誤登録訂正はOPS-DD11-01へ分離。試験・Exit／Gateは未完了。次はOPN-DD-12。
+**日本語：** 詳細Q01〜Q24、CONS-DD-01 A、DD10-01 A、DD11-01 Bの原判断を維持し、DD12-01 Aの4ガント・2一覧出力仕様決裁を追加した。OPN-DD-12の論理設計はClosed。テスト・Excelでの実現性・Exit／Gateは未完了。次はOPN-DD-13。
 
-**English:** All old answers are kept. Option B for DD11-01 is recorded. No status history table is added. Error correction needs a separate process. Tests and Gate review are still open. Next is OPN-DD-12.
+**English:** Past decisions are kept. Option A for DD12-01 is approved and added. OPN-DD-12 is closed for logical output design. Tests and Gate reviews are not complete. Next is OPN-DD-13.
