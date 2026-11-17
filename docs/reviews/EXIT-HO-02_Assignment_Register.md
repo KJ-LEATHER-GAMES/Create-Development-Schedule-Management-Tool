@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.6（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係（ユーザー回答により特定）**。正式任命・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v0.7（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係（ユーザー回答により特定）、各コード最終承認者の仮候補＝ユーザー本人（今回の「OK」による確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -224,3 +224,26 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-01の管理部門を開発プロセス統括係として記録。正式任命・期限は未決のまま。
 
 **English:** COND-DD-01 is managed by the Development Process Coordination Section. Formal assignments and deadlines are still open.
+
+
+## 12. COND-DD-01 3コード最終承認者候補の確認（2026-11-17／正式任命なし）
+
+**確認の経緯**：直前に「COND-DD-01の3種類のマスタコードについて、最終承認者もあなた自身でよいですか？」と照会し、ユーザーが「OK」と回答した。質問時には**候補の特定に限り、正式任命は別決裁**と明示している。したがって、今回の回答を正式任命・正式権限の証明・実コード値の承認とは扱わない。
+
+| コード体系 | 管理部門（既確認） | 最終業務承認者の仮候補 | 正式任命・権限証跡 | コード実値・許容表 |
+|---|---|---|---|---|
+| `MilestoneTypeCode` | 開発プロセス統括係 | **ユーザー本人** | 未決・未取得 | 未入手・未承認 |
+| `EvidenceType` | 開発プロセス統括係 | **ユーザー本人** | 未決・未取得 | 未入手・未承認 |
+| `CompareFieldCode` | 開発プロセス統括係 | **ユーザー本人** | 未決・未取得 | 未入手・未承認 |
+
+**役割の区別**：上記の最終承認者候補は「コード体系の内容承認者」の仮候補。**COND-DD-01全体の単独Owner、コード値提供Executor、条件解消の最終Approver**は正式未指名。ユーザー本人がこれらを兼務するか、社内の承認権限・独立確認が必要かも未決。§9.1／§11は過去時点の記録として保持し、**本§12を現時点の候補情報として参照**する。
+
+**残る確認**：候補本人の正式な社内承認権限、引受・任命決裁、3コードの現行実値と出典、許容対象表、正式期限、条件全体の受入・STOP解除権限。COND-DD-03／07の実担当組織も未特定。
+
+**状態**：仮割当方針10/10、正式割当**0/10**。正式41テスト＝すべて`Not Tested`、詳細設計Exit10項目＝すべて`Not Evaluated`、Gate＝未判定。STOP-01〜06は変更しない。Q01〜Q24および既承認判断に変更なし。
+
+## まとめ / Summary（最終承認者候補の追補）
+
+**日本語：** COND-DD-01の3コード最終承認者候補をユーザー本人として記録した。正式任命とコード実値の承認は未決で、正式割当は0/10。
+
+**English:** The user is the proposed final approver for all three master code types. Formal approval and code values are still open. Official assignments remain 0 of 10.

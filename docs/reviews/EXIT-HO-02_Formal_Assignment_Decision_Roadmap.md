@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.2（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.3（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.6（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.7（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -91,3 +91,17 @@ Owner・Executor・Approverの引受確認:
 **日本語：** S1でCOND-DD-01の管理部門が判明した。COND-DD-03／07の担当組織と正式任命は引き続き未決。
 
 **English:** The team for COND-DD-01 is now known. Teams for 03 and 07 and all formal assignments are still open.
+
+
+## 8. S1進捗：COND-DD-01コード内容承認者候補の特定（2026-11-17）
+
+- 管理部門：`MilestoneTypeCode`、`EvidenceType`、`CompareFieldCode`の全3体系とも**開発プロセス統括係**（確認済み）。
+- コード内容の最終承認者候補：**ユーザー本人**。直前照会への「OK」により候補が特定されたが、**正式任命の決裁ではない**。
+- COND-DD-01の単独Owner／Executor／条件解消Approver、権限証跡、兼務の可否、正式期限は未決。実コード値・対象別許容表は未入手。
+- COND-DD-03／07の担当組織も未特定であり、S1は進行中。正式割当0/10、41テストNot Tested、Exit10項目Not Evaluated、Gate未判定を維持。
+
+## まとめ / Summary（S1進捗追補）
+
+**日本語：** COND-DD-01の3コードの最終承認者候補をユーザー本人とした。正式任命は未完了。
+
+**English:** The user is the proposed approver for the three code types. Formal appointment is not complete.

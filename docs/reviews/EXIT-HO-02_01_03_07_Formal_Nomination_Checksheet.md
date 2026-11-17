@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.2（2026-11-17）  
-> **状態**：COND-DD-01の管理部門はユーザー回答により確認済み／03・07の担当組織は未特定。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v0.3（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03・07の担当組織は未特定。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.4、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.7、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -130,3 +130,24 @@
 **日本語：** COND-DD-01の管理部門は開発プロセス統括係と確認した。最終承認権者と正式な担当者、期限は未決。
 
 **English:** The master code management team for COND-DD-01 is the Development Process Coordination Section. Formal owners, approvers, and deadlines are still open.
+
+
+## 7. 3コード最終承認者の候補確認（2026-11-17）
+
+直前の照会「COND-DD-01の3種類のマスタコードについて、最終承認者もあなた自身でよいですか？」に対し、ユーザーが「OK」と回答した。**これは候補の選定であり、正式任命の決裁ではない。**
+
+| コード | 管理部門 | コード内容の最終承認者候補 | 正式権限・引受 |
+|---|---|---|---|
+| `MilestoneTypeCode` | 開発プロセス統括係 | **ユーザー本人（仮候補）** | 未確認・未決 |
+| `EvidenceType` | 開発プロセス統括係 | **ユーザー本人（仮候補）** | 未確認・未決 |
+| `CompareFieldCode` | 開発プロセス統括係 | **ユーザー本人（仮候補）** | 未確認・未決 |
+
+- **区別**：コード内容の最終承認者候補と、COND-DD-01全体の単独Owner・Executor・条件解消Approverは必ずしも同じではない。正式な組織権限、兼務、受入、期限の決裁を要する。§1・§6の「未指名」は当時の記録として残す。
+- **未解決**：実コード値／出典／対象別許容表、承認権限証跡、正式Owner・Executor・Approver、期限、STOP解除・差戻し先。COND-DD-03／07の担当組織も未特定。
+- **状態**：正式任命0/10、正式41テストすべて`Not Tested`、Exit10項目すべて`Not Evaluated`、Gate未判定。既承認の設計判断は維持。
+
+## まとめ / Summary（候補確認追補）
+
+**日本語：** 開発プロセス統括係の3コードの最終承認者候補はユーザー本人。正式任命と期限は未決。
+
+**English:** The user is the proposed approver for the three code types. Formal assignments and dates are still open.
