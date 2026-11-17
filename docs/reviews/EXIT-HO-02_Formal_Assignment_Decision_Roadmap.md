@@ -1,9 +1,9 @@
 # EXIT-HO-02｜正式任命の決定ロードマップ（01〜10）
 
-> **版**：Decision Roadmap Draft v0.4（2026-11-17）  
+> **版**：Decision Roadmap Draft v0.5（2026-11-17）  
 > **状態**：正式任命の進行案／未承認の担当者や期限は確定しない  
 > **保存先**：`docs/reviews/EXIT-HO-02_Formal_Assignment_Decision_Roadmap.md`  
-> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.8（仮割当10/10、正式0/10）。
+> **根拠**：EXIT-HO-01=A（引継ぎ方式）、`EXIT-HO-02_Assignment_Register.md` v0.9（仮割当10/10、正式0/10）。
 
 ## 1. 現在位置
 
@@ -120,3 +120,18 @@ Owner・Executor・Approverの引受確認:
 **日本語：** COND-DD-03の設計・実装部門を確認した。次はCOND-DD-07の保存先管理組織を確認し、正式責任者と期限を決める。
 
 **English:** The Excel design and build team is confirmed. Next, confirm the cloud storage team. Formal owners and dates are still open.
+
+
+## 10. S1進捗：COND-DD-07保存先管理部門の確認（2026-11-17）
+
+- **確認内容**：ユーザーが「Box／SharePoint Onlineの管理部門は、社内の情報システム部門ですか？」に「はい」と回答。社内の管理部門は**情報システム部門**とする。
+- **S1の部門確認**：COND-DD-01マスタ管理＝開発プロセス統括係、COND-DD-03 Excel設計・実装＝開発プロセス統括係、COND-DD-07 Box／SharePoint Online管理＝情報システム部門。**担当部門の特定は3/3**。ただしS1の正式権限構造・個人候補は未完了であり、S2〜S4の決裁条件は未達。
+- **次に確認する事項**：COND-DD-07のクラウド運用責任者、実際の管理・復元実施者、最終Approver、保存先選定決裁権限、引受・期限・兼務可否・STOP解除権限。Box第一候補／SharePoint Online代替の正式選定は未決。
+- **制約**：復元試験TV-08、保持条件・ID高水位の保全はNot Tested。STOP-05継続。情報システム部門の担当確認を技術保証や任命の承認として扱わない。
+- **状態**：仮割当10/10、正式任命0/10、41正式テストNot Tested、Exit10項目Not Evaluated、Gate未判定。既承認判断を維持。
+
+## まとめ / Summary（S1の部門特定）
+
+**日本語：** COND-DD-01／03／07の担当部門を特定した。次は正式なOwner・Executor・Approverと期限の確定に必要な権限・引受確認を行う。
+
+**English:** Teams for conditions 01, 03, and 07 are known. Formal owners, executors, approvers, and deadlines are still open.

@@ -1,9 +1,9 @@
 # EXIT-HO-02｜COND-DD-01／03／07 正式任命のための担当組織確認票
 
-> **文書版**：Nomination Checksheet Draft v0.4（2026-11-17）  
-> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係と確認済み、07の運用部門は未特定。3条件とも正式Owner・Executor・Approver・期限は未決。  
+> **文書版**：Nomination Checksheet Draft v0.5（2026-11-17）  
+> **状態**：COND-DD-01の管理部門は確認済み、3コードの最終業務承認者の仮候補はユーザー本人。03のExcel設計・実装部門は開発プロセス統括係と確認済み。07のBox／SharePoint Online管理部門は情報システム部門と確認済み。3条件とも正式Owner・Executor・Approver・期限は未決。  
 > **保存先**：`docs/reviews/EXIT-HO-02_01_03_07_Formal_Nomination_Checksheet.md`  
-> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.8、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
+> **参照正本候補**：`EXIT-HO-02_Assignment_Register.md` v0.9、`Detail_Design_Exit_Conditions_Register.md` v0.3、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-HO-02_01_07_Provisional_Assignment_Recommendation.md` v0.2。
 
 ## 0. 記入・判定ルール
 
@@ -55,8 +55,8 @@
 
 | 確認項目 | 現時点の扱い／候補 | ヒアリング回答・確定資料 |
 |---|---|---|
-| Box管理組織・管理者 | 未特定。利用権限・版履歴・復元設定を説明できる運用管理者を確認 | 未回答 |
-| SharePoint Online管理組織・管理者 | 未特定。代替候補環境の管理権限者を確認 | 未回答 |
+| Box管理組織・管理者 | **情報システム部門（管理部門として確認済み）**。個別の運用管理者・復元権限者は未特定 | 2026-11-17：質問への回答「はい」。具体的な管理者・権限証跡は未取得 |
+| SharePoint Online管理組織・管理者 | **情報システム部門（管理部門として確認済み）**。個別の運用管理者・復元権限者は未特定 | 2026-11-17：同回答。具体的な管理者・権限証跡は未取得 |
 | 単独Owner | IT／クラウド運用責任者（役割案） | 未回答 |
 | Executor | 保存先管理担当＋Excel技術担当（候補、共同作業を分担する） | 未回答 |
 | 最終Approver | IT運用の最終受入承認者（業務側は共同確認者を推奨） | 未回答 |
@@ -170,3 +170,19 @@
 **日本語：** Excel設計・実装の担当部門を開発プロセス統括係として確認。担当者の正式任命と技術検証は未完了。
 
 **English:** The Excel design and development team is confirmed. Formal roles and technical tests are not complete.
+
+
+## 9. COND-DD-07 管理部門回答の反映（2026-11-17）
+
+直前の質問「Box／SharePoint Onlineの管理部門は、社内の情報システム部門ですか？」に対する回答「はい」に基づき、**Box・SharePoint Onlineとも社内管理部門を情報システム部門と確認**した。§3の現行管理部門欄を更新。
+
+- **確認済み**：COND-DD-01マスタコード管理部門＝開発プロセス統括係、COND-DD-03 Excel設計・実装部門＝開発プロセス統括係、COND-DD-07 Box／SharePoint Online管理部門＝情報システム部門。
+- **未決**：COND-DD-07の単独Owner、具体的なExecutor、最終Approver、共同確認者、引受確認、期限、兼務承認、正式保存先選定権限、復元権限、STOP解除・差戻し先。
+- **未検証**：Box／SharePointの版履歴保持条件、安全な復元、後続更新とID高水位の保全、TV-08。STOP-05を解除しない。
+- **任命・Exitへの影響**：管理部門の特定によって正式任命は成立しない。EXIT-HO-02正式0/10、41正式テストすべてNot Tested、Exit10項目すべてNot Evaluated、Gate未判定を保持。過去の未特定表記は当時の記録として扱い、本節が最新の事実を示す。
+
+## まとめ / Summary（COND-DD-07更新）
+
+**日本語：** 保存先の管理部門は情報システム部門と確認した。正式責任者・選定権限・期限・復元試験は未決。
+
+**English:** The IT department manages Box and SharePoint Online. Formal owners, dates, storage choice, and recovery tests are still open.

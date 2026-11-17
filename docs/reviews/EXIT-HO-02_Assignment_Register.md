@@ -1,7 +1,7 @@
 # EXIT-HO-02 — COND-DD-01〜10 正式責任・期限割当台帳
 
-> **版**：Assignment Register Draft v0.8（2026-11-17）  
-> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係（ユーザー回答「Yes」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
+> **版**：Assignment Register Draft v0.9（2026-11-17）  
+> **状態**：**EXIT-HO-02 Open／正式割当0/10**。COND-DD-01〜07はA案の仮役割案を採用（7/7）、COND-DD-08〜10はユーザー本人の仮指名を維持（3/3）。**COND-DD-01の3コード管理部門＝開発プロセス統括係、コード最終承認者の仮候補＝ユーザー本人。COND-DD-03のExcel設計・実装担当部門＝開発プロセス統括係。COND-DD-07のBox／SharePoint Online管理部門＝社内の情報システム部門（直前の確認質問への「はい」により確認）**。正式任命・承認権限・期限・兼務承認は未決。  
 > **プロジェクト内保存先**：`docs/reviews/EXIT-HO-02_Assignment_Register.md`  
 > **参照**：`Detail_Design_Exit_Conditions_Register.md` v0.3、`EXIT-DD-07_09_10_Handoff_Review.md` v0.2、`Technical_Validation_Exit_Handoff.md` v0.3、`EXIT-DD-07_09_10_Decision_Sheet.md` v0.2。
 
@@ -271,3 +271,31 @@ COND-DD-01〜07の仮Owner等は**役割候補**であり、実名・承認済�
 **日本語：** COND-DD-03のExcel設計・実装部門を開発プロセス統括係と確認した。技術責任者・受入承認者・期限は未決で、正式割当は0/10のまま。
 
 **English:** The Development Process Coordination Section will design and build the Excel system. Technical owners, approvers, and deadlines are still open. Formal assignments remain 0 of 10.
+
+
+## 14. COND-DD-07 Box／SharePoint Online管理部門の確認（2026-11-17／正式任命なし）
+
+**確認根拠**：ユーザーへの質問「Box／SharePoint Onlineの管理部門は、社内の情報システム部門ですか？」に対する回答「はい」。
+
+| 項目 | 最新の扱い | 判定 |
+|---|---|---|
+| Boxの社内管理部門 | **情報システム部門** | ユーザー回答により確認済み |
+| SharePoint Onlineの社内管理部門 | **情報システム部門** | ユーザー回答により確認済み |
+| COND-DD-07 仮Owner | IT／クラウド運用責任者 | 従来の役割候補を維持 |
+| COND-DD-07 仮Executor | 保存先管理担当＋Excel技術担当 | 従来の役割候補を維持 |
+| COND-DD-07 仮Approver | IT運用承認者＋業務側受入責任者 | 最終Approverの単独指名は未決 |
+| 正式Owner／Executor／Approver／引受・兼務承認／期限 | **すべて未決** | 正式任命なし |
+| 保存先の正式選定 | **未決定**（Box第一候補・SharePoint Online代替） | 既決方針を維持 |
+| 版履歴・復元条件・権限・ID高水位・TV-08 | **未確認／Not Tested** | STOP-05を維持 |
+
+**位置付け**：部門の特定だけを更新したものであり、情報システム部門による復元条件の保証、社内承認権限の証明、個人の正式任命、採用保存先の決定ではない。§13以前の「07未特定」は当時の経過記録として保持し、本§14を現在の部門情報とする。
+
+**先行3条件の部門確認状況**：COND-DD-01＝開発プロセス統括係、03＝開発プロセス統括係、07＝情報システム部門。**S1の担当部門特定は3/3完了**、ただし単独Owner、実行者、最終受入者の権限確認は未完了。
+
+**状態保持**：EXIT-HO-02の仮割当方針10/10、正式任命0/10、正式41テストすべて`Not Tested`、詳細設計Exit10項目すべて`Not Evaluated`、詳細設計Gate未判定。COND-DD-08〜10の本人仮指名、Q01〜Q24その他の既承認判断、STOP-01〜06は変更なし。
+
+## まとめ / Summary（COND-DD-07部門確認）
+
+**日本語：** COND-DD-07のBox／SharePoint Online管理部門を情報システム部門として記録した。先行3条件の担当部門は特定済みだが正式任命は0/10のまま。
+
+**English:** The IT department is confirmed as the management team for Box and SharePoint Online. Teams for conditions 01, 03, and 07 are known. No formal assignments are complete.
