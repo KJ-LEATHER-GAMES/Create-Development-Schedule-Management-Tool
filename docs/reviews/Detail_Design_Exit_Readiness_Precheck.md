@@ -1,6 +1,6 @@
 # 詳細設計Exit Review — 準備状況プレチェック（非正式判定）
 
-> **文書状態**：Readiness Precheck Draft v0.3（2026-11-17）／**正式Exit Reviewではない**  
+> **文書状態**：Readiness Precheck Draft v0.4（2026-11-17）／**正式Exit Reviewではない**  
 > **プロジェクト内保存先**：`docs/reviews/Detail_Design_Exit_Readiness_Precheck.md`  
 > **判定の境界**：EXIT-DD-01〜10の正式ステータスは**すべてNot Evaluated**。基本設計EXIT-06=Not Met、基本設計Freeze未実施、詳細設計Gate未判定、Excel実装Not Started、正式41管理IDすべてNot Tested。
 
@@ -43,6 +43,26 @@
 | 追加テスト案10件 | `docs/test/DD15-02_Consolidated_Test_Plan_Draft.md` — **正規テスト台帳へ反映済み**／実施結果未記録 | **Approved Test Design Record v0.2／全件Not Tested** |
 | OPS-DD11-01手順 | `docs/operations/OPS-DD11-01_Terminal_Status_Correction_Review.md`の**A案を2026-11-17正式採用**。**OPS-TECH-01**の権限制限・外部記録・保存／表示の成立は検証が必要 | **Decision Record v0.2／A Approved（論理運用設計）・OPS-TECH-01 Open／Not Tested** |
 | 詳細設計Exit Review記録 | `docs/reviews/`へ正式Exit評価票を作成し、ユーザーがGate判断 | **未実施／全10 Not Evaluated** |
+
+
+## 5. CFG-DD-10-01／技術検証の新規レビュー資料（2026-11-17追補）
+
+> **本節は準備資料の更新であり、Exitの正式採否・既存設計判断の変更ではない。**
+
+| 資料 | 保存先 | 現在の扱い |
+|---|---|---|
+| CFG-DD-10-01マスタ初期設定レビュー | `docs/config/CFG-DD-10-01_Master_Code_Review.md` | **Review Draft v0.1／CFG10-01承認待ち**。業務コード3種の値・部門・最終承認者は未提供、Open |
+| マスタコード収集テンプレート | `docs/config/CFG-DD-10-01_Code_Catalog_Template.md` | **実コード未記入**。テスト用M1等を正規マスタと混同しない |
+| 技術検証Exit引継ぎ | `docs/reviews/Technical_Validation_Exit_Handoff.md` | **Handoff Draft v0.1**。TV-01〜09の実施ロール案、環境候補、合否案、停止条件を整理。正式テストIDではない |
+
+### 5.1 未完了事項の制御
+
+- **CFG-DD-10-01 Open**：3コード体系の一次資料・業務責任者・正式実コード値・TargetType別許可表・投入権限の記録がない。CFG10-01の方式採否と実値確定は別。
+- **OPS-TECH-01 Open／Not Tested**：管理者限定の安全な例外保守経路・外部証跡・DD14/DD15共通保存ゲートの物理成立が未証明のため、終端状態の例外訂正は依然**実行不可**。
+- **OI-DD-01／02、RISK-DD-01〜04**：環境・実施者・負荷閾値・版履歴保持／復元の実測値は未設定。詳細Exitで条件付き引継ぎの可否と停止条件を**これから判断**。
+- **全41正式テスト＝Not Tested**、OP11-T01〜05は**未承認候補**。TV-01〜09は計画タスクIDで正式テストに含めない。
+- **EXIT-DD-01〜10はすべてNot Evaluated**、基本設計EXIT-06=Not Met、基本設計Freeze未実施、詳細設計Gate未判定を維持。
+
 
 ---
 
